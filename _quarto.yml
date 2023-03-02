@@ -1,0 +1,34 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "NEON Ecological Forecasting Catalog"
+  page-navigation: true
+  repo-url: https://github.com/eco4cast/neon4cast-dashboard
+  repo-actions: [edit, issue]
+
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: aquatics-catalog.qmd
+      - href: aquatics-notebook.qmd
+
+  page-footer:
+    left: "CC-BY"
+    right:
+      - icon: github
+        href: https://github.com/eco4cast/neon4cast-dashboard
+
+format:
+  html:
+    theme: [yeti, custom.scss]
+    css: styles.css
+    title-block-style: default
+    title-block-banner: "img/2016-09_NIWO_Tower_1620x600.jpg"
+#    title-block-banner-color: white
+    page-layout: full
+    toc: true
+
+editor: visual

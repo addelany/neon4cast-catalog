@@ -1,0 +1,11 @@
+---
+title: "home"
+---
+
+Welcome the [EFI](https://ecoforecast.org) NEON Forecast Challenge Catalog
+
+Description of dataset derived from JSON STAC files goes here
+
+-----------------------------------------------------------------------
+
+This material is based upon work supported by the National Science Foundation under Grants DEB-1926388 and OAC 2209866. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.

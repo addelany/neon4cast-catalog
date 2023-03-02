@@ -1,0 +1,6 @@
+---
+title: "NEON aquatics forecasts"
+editor: visual
+---
+
+Description of dataset derived from JSON STAC files goes here
