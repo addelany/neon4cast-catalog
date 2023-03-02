@@ -13,7 +13,7 @@ website:
     search: true
     left:
       - href: aquatics-catalog.qmd
-      - href: aquatics-notebook.qmd
+      - icon: droplet
 
   page-footer:
     left: "CC-BY"
