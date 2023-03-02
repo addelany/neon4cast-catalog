@@ -3,9 +3,9 @@ project:
   output-dir: docs
 
 website:
-  title: "NEON Ecological Forecasting Catalog"
+  title: "NEON Ecological Forecasting Challenge Catalog"
   page-navigation: true
-  repo-url: https://github.com/eco4cast/neon4cast-dashboard
+  repo-url: https://github.com/eco4cast/neon4cast-catalog
   repo-actions: [edit, issue]
 
   navbar:
@@ -19,7 +19,7 @@ website:
     left: "CC-BY"
     right:
       - icon: github
-        href: https://github.com/eco4cast/neon4cast-dashboard
+        href: https://github.com/eco4cast/neon4cast-catalog
 
 format:
   html:
