@@ -11,6 +11,6 @@
     "href": "aquatics-catalog.html",
     "title": "Aquatics",
     "section": "",
-    "text": "Description of dataset\n\nDetailsNotebook\n\n\n\njsonlite::read_json(\"https://raw.githubusercontent.com/addelany/stac4cast/main/output.json\")\n\n\n\n\n\n\n\ns3 <- arrow::s3_bucket(\"neon4cast-forecasts/parquet/aquatics/model_id=flareGLM/reference_datetime=2023-02-24\", \n                       endpoint_override = \"data.ecoforecast.org\",\n                       anonymous = TRUE)\n\nd <- arrow::open_dataset(s3) |> collect()\n\n\nd |> \n  filter(site_id == \"BARC\",\n         variable == \"temperature\") |> \n  ggplot(aes(x = datetime, y = prediction, group = parameter)) +\n  geom_line()"
+    "text": "Description of dataset\n\nDetailsNotebook\n\n\n\njsonlite::read_json(\"https://raw.githubusercontent.com/addelany/stac4cast/main/output.json\")\n\n\n\n\n\n\nBinder\n\n\n\n\n\n\ns3 <- arrow::s3_bucket(\"neon4cast-forecasts/parquet/aquatics/model_id=flareGLM/reference_datetime=2023-02-24\", \n                       endpoint_override = \"data.ecoforecast.org\",\n                       anonymous = TRUE)\n\nd <- arrow::open_dataset(s3) |> collect()\n\n\nd |> \n  filter(site_id == \"BARC\",\n         variable == \"temperature\") |> \n  ggplot(aes(x = datetime, y = prediction, group = parameter)) +\n  geom_line()"
   }
 ]
