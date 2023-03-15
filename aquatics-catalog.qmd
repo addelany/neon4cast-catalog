@@ -9,13 +9,12 @@ Description of dataset
 ## Details
 
 ```{r eval=FALSE}
-jsonlite::read_json("https://raw.githubusercontent.com/addelany/stac4cast/main/output.json")
+jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/blob/main/output.json")
 ```
 
 ## Notebook
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/eco4cast/neon4cast-catalog/HEAD?urlpath=rstudio)
-
 
 ```{r echo=FALSE, message = FALSE}
 library(tidyverse)
@@ -37,5 +36,4 @@ d |>
   geom_line()
 
 ```
-
 :::
