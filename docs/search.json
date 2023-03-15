@@ -4,13 +4,13 @@
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "Welcome the EFI NEON Forecast Challenge Catalog\nDescription of dataset derived from JSON STAC files goes here\n\nThis material is based upon work supported by the National Science Foundation under Grants DEB-1926388 and OAC-2209866. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation."
+    "text": "Description of dataset derived from JSON STAC files goes here\n\nThis material is based upon work supported by the National Science Foundation under Grants DEB-1926388 and OAC-2209866. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation."
   },
   {
     "objectID": "aquatics-catalog.html",
     "href": "aquatics-catalog.html",
     "title": "Aquatics",
     "section": "",
-    "text": "Description of dataset\n\nDetailsNotebook\n\n\n\njsonlite::read_json(\"https://raw.githubusercontent.com/addelany/stac4cast/main/output.json\")\n\n\n\n\n\n\nBinder\n\n\n\n\n\n\ns3 <- arrow::s3_bucket(\"neon4cast-forecasts/parquet/aquatics/model_id=flareGLM/reference_datetime=2023-02-24\", \n                       endpoint_override = \"data.ecoforecast.org\",\n                       anonymous = TRUE)\n\nd <- arrow::open_dataset(s3) |> collect()\n\n\nd |> \n  filter(site_id == \"BARC\",\n         variable == \"temperature\") |> \n  ggplot(aes(x = datetime, y = prediction, group = parameter)) +\n  geom_line()"
+    "text": "DetailsNotebook\n\n\n\njsonlite::read_json(\"https://github.com/addelany/neon4cast-catalog/blob/main/output.json\")\n\n\n\n\n\n\nBinder\n\n\n\n\n\n\ns3 <- arrow::s3_bucket(\"neon4cast-forecasts/parquet/aquatics/model_id=flareGLM/reference_datetime=2023-02-24\", \n                       endpoint_override = \"data.ecoforecast.org\",\n                       anonymous = TRUE)\n\nd <- arrow::open_dataset(s3) |> collect()\n\n\nd |> \n  filter(site_id == \"BARC\",\n         variable == \"temperature\") |> \n  ggplot(aes(x = datetime, y = prediction, group = parameter)) +\n  geom_line()"
   }
 ]

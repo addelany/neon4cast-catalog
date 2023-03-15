@@ -9,8 +9,26 @@ Description of dataset
 ## Details
 
 ```{r eval=FALSE}
-jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/blob/main/output.json")
+#collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/blob/main/output.json")
+collection <- jsonlite::read_json("output.json")
+
 ```
+
+Dataset Description: `r collection$description`
+
+STAC collection:
+`r collection$stac_extensions`
+
+Providers:
+```{r eval=FALSE}
+for (i in seq.int(1, length(collection$providers))){
+  print(i)
+  provider_info <- c(collection$providers[[i]]$name, collection$providers[[i]]$url, c(unlist(collection$providers[[i]]$roles)))
+  print(provider_info)
+}
+```
+
+License: `r collection$license`
 
 ## Notebook
 
