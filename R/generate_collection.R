@@ -65,7 +65,7 @@ max_date_value <- max(max_dates)
 min_date_value <- min(min_dates)
 
 site_data <- readr::read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv") |>
-  filter(aquatics == 1)
+  dplyr::filter(aquatics == 1)
 
 lat_bbox <- c(min(site_data$field_latitude), max(site_data$field_latitude))
 lon_bbox <- c(min(site_data$field_longitude), max(site_data$field_longitude))
@@ -92,6 +92,9 @@ description_create <- data.frame(datetime = 'ISO 8601(ISO 2019)datetime the fore
                                  parameter = 'ensemble member',
                                  variable = 'aquatic forecast variable',
                                  prediction = 'predicted forecast value',
+                                 date = 'ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod.',
+                                 model_id = 'unique identifier for the model used in the forecast',
+                                 reference_datetime = 'ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard.',
                                  date = 'ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod.'
                                  #observation = 'observational data',
                                  #crps = 'crps forecast score',
@@ -103,8 +106,6 @@ description_create <- data.frame(datetime = 'ISO 8601(ISO 2019)datetime the fore
                                  #quantile02.5 = 'upper 2.5 percentile value of ensemble member forecasts',
                                  #quantile90 = 'upper 90 percentile value of ensemble member forecasts',
                                  #quantile10 = 'upper 10 percentile value of ensemble member forecasts',
-                                 #model_id = 'unique identifier for the model used in the forecast',
-                                 #date = 'ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod.'
 )
 
 
