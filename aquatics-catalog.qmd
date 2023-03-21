@@ -3,14 +3,20 @@ title: "Aquatics"
 editor: visual
 ---
 
+```{r message=FALSE}
+library(reactable)
+```
+
 Description of dataset
 
 ::: panel-tabset
 ## Details
 
-```{r eval=FALSE}
-#collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/blob/main/output.json")
-collection <- jsonlite::read_json("output.json")
+```{r eval=TRUE, echo=FALSE}
+home_dir <- '/home/rstudio/neon4cast-catalog'#here::here()
+setwd(home_dir)
+collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/output.json")
+#collection <- jsonlite::read_json("output.json")
 
 ```
 
@@ -24,11 +30,28 @@ Spatial Extent: `r collection$extent$spatial$bbox`
 
 Temporal Extent: `r collection$extent$temporal$interval`
 
-STAC collection:
+STAC extensions:
 `r collection$stac_extensions`
 
-Publication:
 ```{r}
+## STAC Extensions table
+library(knitr)
+
+extensions <- c()
+
+for (i in seq.int(1, length(collection$stac_extensions))){
+  extensions[i] <- collection$stac_extensions[[1]]
+}
+
+extension_df <- data.frame(extensions)
+```
+
+```{r}
+knitr::kable(extension_df)
+```
+
+Publication:
+```{r eval=TRUE, echo=FALSE}
 
 ## Publications
 pub_doi <- c()
@@ -42,7 +65,7 @@ for (i in seq.int(1, length(collection$publications))){
 pub_df <- data.frame(pub_doi,
                     pub_cite)
 
-pub_table <- reactable(pub_df,
+pub_table <- reactable::reactable(pub_df,
                            defaultColDef = colDef(
                              align = "left"),
                            columns = list(pub_doi = colDef(name='DOI'),
@@ -50,12 +73,15 @@ pub_table <- reactable(pub_df,
                            defaultPageSize = 10,
                            filterable = FALSE,
                            highlight = TRUE)
+```
 
+```{r}
+#call publication table 
 pub_table
 ```
 
 Providers:
-```{r eval=FALSE}
+```{r eval=TRUE, echo=FALSE}
 for (i in seq.int(1, length(collection$providers))){
   print(i)
   provider_info <- c(collection$providers[[i]]$name, collection$providers[[i]]$url, c(unlist(collection$providers[[i]]$roles)))
@@ -68,7 +94,7 @@ License: `r collection$license`
 STAC version: `r collection$stac_version`
 
 Columns
-```{r}
+```{r eval=TRUE, echo=FALSE}
 ## COLUMNS
 collection$table_columns
 
@@ -95,7 +121,10 @@ columns_table <- reactable(tc_df,
                          defaultPageSize = 10,
                          filterable = FALSE,
                          highlight = TRUE)
+```
 
+```{r}
+# call columns_table 
 columns_table
 ```
 
@@ -162,8 +191,9 @@ asset_table <- reactable(asset_df,
                       defaultPageSize = 10,
                       filterable = FALSE,
                       highlight = TRUE)
-
-asset_table
 ```
 
+```{r}
+asset_table
+```
 :::

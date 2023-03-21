@@ -103,3 +103,27 @@ pub_table <- reactable(pub_df,
                            highlight = TRUE)
 
 pub_table
+
+
+## STAC Extensions table
+library(knitr)
+
+extensions <- c()
+
+for (i in seq.int(1, length(collection$stac_extensions))){
+  extensions[i] <- collection$stac_extensions[[1]]
+}
+
+extension_df <- data.frame(extensions)
+
+knitr::kable(extension_df)
+
+##read json test
+install.packages('RJSONIO')
+library(RJSONIO)
+
+collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/output.json",simplifyVector = TRUE)
+
+
+
+fromJSON(readLines("output.json"), warn = F)
