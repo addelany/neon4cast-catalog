@@ -125,5 +125,20 @@ library(RJSONIO)
 collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/output.json",simplifyVector = TRUE)
 
 
-
 fromJSON(readLines("output.json"), warn = F)
+
+
+
+##providers
+provider_url <- c()
+provider_name <- c()
+provider_roles <- c()
+
+for (i in seq.int(1, length(collection$providers))){
+  provider_url[i] <- collection$providers[[i]]$url
+  provider_name[i] <- collection$providers[[i]]$name
+  provider_roles[i] <- paste0('(',toString(collection$providers[[1]]$roles),')')
+}
+
+provider_df <- data.frame(provider_name,provider_url,provider_roles)
+

@@ -124,7 +124,7 @@
     {
       "name": "variable",
       "type": "string",
-      "description": "aquatic forecast variable"
+      "description": "aquatic forecast variables: aquatic vars"
     },
     {
       "name": "prediction",

@@ -88,12 +88,14 @@ theme_df <- arrow::open_dataset(s3) %>%
 #             max = max(date)) %>%
 #   collect()
 
+data_vars <- 'aquatic vars' ##fill this in with a list of actual variable names
+
 description_create <- data.frame(target_id = 'unique identifier for target data used in the forecast',
                                  datetime = 'ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard.',
                                  site_id = 'For forecasts that are not on a spatial grid, use of a site dimension thatmaps to a more detailed geometry (points, polygons, etc.) is allowable.In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this couldbe handled by the CF Discrete Sampling Geometry data model.',
                                  family = 'For ensembles: “ensemble.” Default value if unspecifiedFor probability distributions: Name of the statistical distributionassociated with the reported statistics. The “sample” distribution issynonymous with “ensemble.”For summary statistics: “summary.”If this dimension does not vary, it is permissible to specifyfamilyas avariable attribute if the file format being used supports this (e.g.,netCDF).',
                                  parameter = 'ensemble member',
-                                 variable = 'aquatic forecast variable',
+                                 variable = paste('aquatic forecast variables:',data_vars),
                                  prediction = 'predicted forecast value',
                                  date = 'ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod.',
                                  model_id = 'unique identifier for the model used in the forecast',
@@ -145,5 +147,5 @@ collection <- stac4cast::build_collection(id = id_info,
 
 
 output_path <- 'stac/v1/collections/aquatics'
-stac4cast::write_stac(collection, file.path(lake_directory,output_path,'output.json'))
+stac4cast::write_stac(collection, file.path(lake_directory,'output.json'))
 

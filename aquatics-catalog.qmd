@@ -3,7 +3,7 @@ title: "Aquatics"
 editor: visual
 ---
 
-```{r message=FALSE}
+```{r message=FALSE, echo=FALSE}
 #library(reactable)
 library(knitr)
 
@@ -17,8 +17,8 @@ Description of dataset
 ```{r eval=TRUE, echo=FALSE}
 home_dir <- '/home/rstudio/neon4cast-catalog'#here::here()
 setwd(home_dir)
-#collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/output.json")
-collection <- jsonlite::read_json("https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/v1/collection/aquatics/output.json")
+collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/output.json")
+#collection <- jsonlite::read_json("https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/v1/collection/aquatics/output.json")
 
 ```
 
@@ -33,8 +33,6 @@ Spatial Extent: `r collection$extent$spatial$bbox`
 Temporal Extent: `r collection$extent$temporal$interval`
 
 STAC extensions:
-`r collection$stac_extensions`
-
 ```{r eval=TRUE, echo=FALSE}
 ## STAC Extensions table
 
@@ -47,7 +45,7 @@ for (i in seq.int(1, length(collection$stac_extensions))){
 extension_df <- data.frame(extensions)
 ```
 
-```{r}
+```{r echo=FALSE}
 knitr::kable(extension_df, col.names = 'STAC Extensions')
 ```
 
@@ -76,18 +74,29 @@ pub_df <- data.frame(pub_doi,
 #                            highlight = TRUE)
 ```
 
-```{r}
+```{r echo=FALSE}
 #call publication table 
 knitr::kable(pub_df, col.names = c('DOI','Citation'))
 ```
 
 Providers:
 ```{r eval=TRUE, echo=FALSE}
-#not sure if we need to print any of this -- may just be saved as metadata
+##providers
+provider_url <- c()
+provider_name <- c()
+provider_roles <- c()
+
 for (i in seq.int(1, length(collection$providers))){
-  provider_info <- c(collection$providers[[i]]$name, collection$providers[[i]]$url, c(unlist(collection$providers[[i]]$roles)))
-  #print(provider_info)
+  provider_url[i] <- collection$providers[[i]]$url
+  provider_name[i] <- collection$providers[[i]]$name
+  provider_roles[i] <- paste0('(',toString(collection$providers[[i]]$roles),')')
 }
+
+provider_df <- data.frame(provider_name,provider_url,provider_roles)
+```
+
+```{r echo=FALSE}
+knitr::kable(provider_df,col.names = c("Name","URL","Roles"))
 ```
 
 License: `r collection$license`
@@ -123,7 +132,7 @@ tc_df <- data.frame(tc_name,
 #                          highlight = TRUE)
 ```
 
-```{r}
+```{r echo=FALSE}
 # call columns_table 
 knitr::kable(tc_df, col.names = c('Name','Description','Type'))
 ```
@@ -141,11 +150,11 @@ asset_roles <- c()
 asset_description <- c()
 
 for (i in seq.int(1,length(list(collection$assets$parquet_items)))){ ## this needs to be converted to list before this step (do in build_collection)
-  asset_title[i] <- list(collection$assets$parquet_items)[[i]]$title
-  asset_href[i] <- list(collection$assets$parquet_items)[[i]]$href
-  asset_type[i] <- list(collection$assets$parquet_items)[[i]]$type
-  asset_roles[i] <- list(collection$assets$parquet_items)[[i]]$roles[[1]]
-  asset_description[i] <- list(collection$assets$parquet_items)[[i]]$description
+  asset_title[i] <- collection$assets$parquet_items[[i]]$title
+  asset_href[i] <- collection$assets$parquet_items[[i]]$href
+  asset_type[i] <- collection$assets$parquet_items[[i]]$type
+  asset_roles[i] <- collection$assets$parquet_items[[i]]$roles[[1]]
+  asset_description[i] <- collection$assets$parquet_items[[i]]$description
 
 }
 
@@ -168,8 +177,8 @@ asset_df <- data.frame(asset_title,
 #                       highlight = TRUE)
 ```
 
-```{r}
-knitr::kable(asset_table)
+```{r echo=FALSE}
+knitr::kable(asset_df, col.names = c('Title','Href','Type','Roles','Description'))
 ```
 
 ## Notebook

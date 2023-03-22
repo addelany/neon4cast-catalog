@@ -128,13 +128,6 @@ background-size: cover;
     }
     </style>
 
-<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
-<script src="site_libs/react-17.0.0/react.min.js"></script>
-<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
-<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
-<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="site_libs/reactable-binding-0.3.0/reactable.js"></script>
-
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -193,7 +186,7 @@ background-size: cover;
 
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reactable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
 <p>Description of dataset</p>
 <div class="panel-tabset">
@@ -201,87 +194,209 @@ background-size: cover;
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>home_dir <span class="ot">&lt;-</span> <span class="st">'/home/rstudio/neon4cast-catalog'</span><span class="co">#here::here()</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(home_dir)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>collection <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(<span class="st">"https://github.com/addelany/neon4cast-catalog/raw/main/output.json"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#collection &lt;- jsonlite::read_json("output.json")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
 <p>Title: Ecological Forecasting Initiative - Aquatics Forecasts</p>
 <p>Dataset Description: description placeholder</p>
 <p>Keywords: Forecasting, Data, Ecology</p>
 <p>Spatial Extent: -149.6106, 18.1135, -66.7987, 68.6698</p>
 <p>Temporal Extent: 2020-09-01, 2023-04-11</p>
-<p>STAC collection: https://stac-extensions.github.io/scientific/v1.0.0/schema.json, https://stac-extensions.github.io/item-assets/v1.0.0/schema.json, https://stac-extensions.github.io/table/v1.2.0/schema.json</p>
+<p>STAC extensions:</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">STAC Extensions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">https://stac-extensions.github.io/scientific/v1.0.0/schema.json</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">https://stac-extensions.github.io/scientific/v1.0.0/schema.json</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">https://stac-extensions.github.io/scientific/v1.0.0/schema.json</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Publication:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Publications</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pub_doi <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pub_cite <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq.int</span>(<span class="dv">1</span>, <span class="fu">length</span>(collection<span class="sc">$</span>publications))){</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  pub_doi[i] <span class="ot">&lt;-</span> collection<span class="sc">$</span>publications[[i]]<span class="sc">$</span>doi</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  pub_cite[i] <span class="ot">&lt;-</span> collection<span class="sc">$</span>publications[[i]]<span class="sc">$</span>citation</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>pub_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pub_doi,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                    pub_cite)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>pub_table <span class="ot">&lt;-</span> reactable<span class="sc">::</span><span class="fu">reactable</span>(pub_df,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                           <span class="at">defaultColDef =</span> <span class="fu">colDef</span>(</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                           <span class="at">columns =</span> <span class="fu">list</span>(<span class="at">pub_doi =</span> <span class="fu">colDef</span>(<span class="at">name=</span><span class="st">'DOI'</span>),</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">pub_cite =</span> <span class="fu">colDef</span>(<span class="at">name=</span><span class="st">'Citation'</span>)),</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                           <span class="at">defaultPageSize =</span> <span class="dv">10</span>,</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">filterable =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                           <span class="at">highlight =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>pub_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
 
-<div id="htmlwidget-82df16424f9ef2021b3a" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-82df16424f9ef2021b3a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"pub_doi":["https://www.doi.org/10.22541/essoar.167079499.99891914/v1"],"pub_cite":["Thomas, R.Q., C. Boettiger, C.C. Carey, M.C. Dietze, L.R. Johnson, M.A. Kenney, J.S. Mclachlan, J.A. Peters, E.R. Sokol, J.F. Weltzin, A. Willson, W.M. Woelmer, and Challenge Contributors. The NEON Ecological Forecasting Challenge. Accepted at Frontiers in Ecology and Environment. Pre-print"]},"columns":[{"accessor":"pub_doi","name":"DOI","type":"character","align":"left"},{"accessor":"pub_cite","name":"Citation","type":"character","align":"left"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"dataKey":"04150aefadf68f7042eb0c3c2cf0259f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">DOI</th>
+<th style="text-align: left;">Citation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">https://www.doi.org/10.22541/essoar.167079499.99891914/v1</td>
+<td style="text-align: left;">Thomas, R.Q., C. Boettiger, C.C. Carey, M.C. Dietze, L.R. Johnson, M.A.&nbsp;Kenney, J.S. Mclachlan, J.A. Peters, E.R. Sokol, J.F. Weltzin, A. Willson, W.M. Woelmer, and Challenge Contributors. The NEON Ecological Forecasting Challenge. Accepted at Frontiers in Ecology and Environment. Pre-print</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p>Providers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq.int</span>(<span class="dv">1</span>, <span class="fu">length</span>(collection<span class="sc">$</span>providers))){</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  provider_info <span class="ot">&lt;-</span> <span class="fu">c</span>(collection<span class="sc">$</span>providers[[i]]<span class="sc">$</span>name, collection<span class="sc">$</span>providers[[i]]<span class="sc">$</span>url, <span class="fu">c</span>(<span class="fu">unlist</span>(collection<span class="sc">$</span>providers[[i]]<span class="sc">$</span>roles)))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(provider_info)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 36%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">URL</th>
+<th style="text-align: left;">Roles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ecoforecast Data</td>
+<td style="text-align: left;">https://data.ecoforecst.org</td>
+<td style="text-align: left;">(producer, processor, licensor)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ecoforecast</td>
+<td style="text-align: left;">https://ecoforecst.org</td>
+<td style="text-align: left;">(host)</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <p>License: proprietary</p>
 <p>STAC version: 1.0.0</p>
 <p>Columns</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## COLUMNS</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>collection<span class="sc">$</span>table_columns</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>tc_name <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>tc_type <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>tc_description <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq.int</span>(<span class="dv">1</span>, <span class="fu">length</span>(collection<span class="sc">$</span>table_columns))){</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  tc_name[i] <span class="ot">&lt;-</span> collection<span class="sc">$</span>table_columns[[i]]<span class="sc">$</span>name</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  tc_type[i] <span class="ot">&lt;-</span> collection<span class="sc">$</span>table_columns[[i]]<span class="sc">$</span>type</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  tc_description[i] <span class="ot">&lt;-</span> collection<span class="sc">$</span>table_columns[[i]]<span class="sc">$</span>description</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>tc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(tc_name,</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                    tc_description,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                    tc_type)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>columns_table <span class="ot">&lt;-</span> <span class="fu">reactable</span>(tc_df,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                         <span class="at">defaultColDef =</span> <span class="fu">colDef</span>(</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                           <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                         <span class="at">columns =</span> <span class="fu">list</span>(<span class="at">tc_name =</span> <span class="fu">colDef</span>(<span class="at">name=</span><span class="st">'Name'</span>),</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">tc_description =</span> <span class="fu">colDef</span>(<span class="at">name=</span><span class="st">'Description'</span>),</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">tc_type =</span> <span class="fu">colDef</span>(<span class="at">name =</span> <span class="st">'Type'</span>)),</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                         <span class="at">defaultPageSize =</span> <span class="dv">10</span>,</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                         <span class="at">filterable =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                         <span class="at">highlight =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>columns_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 94%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">target_id</td>
+<td style="text-align: left;">unique identifier for target data used in the forecast</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">datetime</td>
+<td style="text-align: left;">ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard.</td>
+<td style="text-align: left;">timestamp[us]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">ensemble member</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">variable</td>
+<td style="text-align: left;">aquatic forecast variable</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prediction</td>
+<td style="text-align: left;">predicted forecast value</td>
+<td style="text-align: left;">double</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">family</td>
+<td style="text-align: left;">For ensembles: “ensemble.” Default value if unspecifiedFor probability distributions: Name of the statistical distributionassociated with the reported statistics. The “sample” distribution issynonymous with “ensemble.”For summary statistics: “summary.”If this dimension does not vary, it is permissible to specifyfamilyas avariable attribute if the file format being used supports this (e.g.,netCDF).</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">site_id</td>
+<td style="text-align: left;">For forecasts that are not on a spatial grid, use of a site dimension thatmaps to a more detailed geometry (points, polygons, etc.) is allowable.In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this couldbe handled by the CF Discrete Sampling Geometry data model.</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">model_id</td>
+<td style="text-align: left;">unique identifier for the model used in the forecast</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">reference_datetime</td>
+<td style="text-align: left;">ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard.</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod.</td>
+<td style="text-align: left;">string</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Assets The data contain the following assets:</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 36%">
+<col style="width: 14%">
+<col style="width: 7%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">Href</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Roles</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Parquet STAC Items</td>
+<td style="text-align: left;">https://data.ecoforecst.org/forecasts/parquet/aquatics</td>
+<td style="text-align: left;">application/x-parquet</td>
+<td style="text-align: left;">stac-items</td>
+<td style="text-align: left;">Placeholder description for parquet items</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
@@ -295,64 +410,20 @@ background-size: cover;
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> arrow<span class="sc">::</span><span class="fu">s3_bucket</span>(<span class="st">"neon4cast-forecasts/parquet/aquatics/model_id=flareGLM/reference_datetime=2023-02-24"</span>, </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">endpoint_override =</span> <span class="st">"data.ecoforecast.org"</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">anonymous =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> arrow<span class="sc">::</span><span class="fu">open_dataset</span>(s3) <span class="sc">|&gt;</span> <span class="fu">collect</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> arrow<span class="sc">::</span><span class="fu">s3_bucket</span>(<span class="st">"neon4cast-forecasts/parquet/aquatics/model_id=flareGLM/reference_datetime=2023-02-24"</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">endpoint_override =</span> <span class="st">"data.ecoforecast.org"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">anonymous =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> arrow<span class="sc">::</span><span class="fu">open_dataset</span>(s3) <span class="sc">|&gt;</span> <span class="fu">collect</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(site_id <span class="sc">==</span> <span class="st">"BARC"</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         variable <span class="sc">==</span> <span class="st">"temperature"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> datetime, <span class="at">y =</span> prediction, <span class="at">group =</span> parameter)) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(site_id <span class="sc">==</span> <span class="st">"BARC"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         variable <span class="sc">==</span> <span class="st">"temperature"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> datetime, <span class="at">y =</span> prediction, <span class="at">group =</span> parameter)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="aquatics-catalog_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Assets The data contain the following assets:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## assets</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>asset_title <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>asset_href <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>asset_type <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>asset_roles <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>asset_description <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq.int</span>(<span class="dv">1</span>,<span class="fu">length</span>(<span class="fu">list</span>(collection<span class="sc">$</span>assets<span class="sc">$</span>parquet_items)))){ <span class="do">## this needs to be converted to list before this step (do in build_collection)</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  asset_title[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(collection<span class="sc">$</span>assets<span class="sc">$</span>parquet_items)[[i]]<span class="sc">$</span>title</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  asset_href[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(collection<span class="sc">$</span>assets<span class="sc">$</span>parquet_items)[[i]]<span class="sc">$</span>href</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  asset_type[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(collection<span class="sc">$</span>assets<span class="sc">$</span>parquet_items)[[i]]<span class="sc">$</span>type</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  asset_roles[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(collection<span class="sc">$</span>assets<span class="sc">$</span>parquet_items)[[i]]<span class="sc">$</span>roles[[<span class="dv">1</span>]]</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  asset_description[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(collection<span class="sc">$</span>assets<span class="sc">$</span>parquet_items)[[i]]<span class="sc">$</span>description</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>asset_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(asset_title,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                       asset_href,</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                       asset_type,</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                       asset_roles,</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                       asset_description)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>asset_table <span class="ot">&lt;-</span> <span class="fu">reactable</span>(asset_df,</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                      <span class="at">defaultColDef =</span> <span class="fu">colDef</span>(</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                        <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                      <span class="at">columns =</span> <span class="fu">list</span>(<span class="at">asset_title =</span> <span class="fu">colDef</span>(<span class="at">name=</span><span class="st">'Title'</span>),</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">asset_href =</span> <span class="fu">colDef</span>(<span class="at">name=</span><span class="st">'Href'</span>),</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">asset_type =</span> <span class="fu">colDef</span>(<span class="at">name =</span> <span class="st">'Type'</span>),</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">asset_roles =</span> <span class="fu">colDef</span>(<span class="at">name =</span> <span class="st">'Roles'</span>),</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">asset_description =</span> <span class="fu">colDef</span>(<span class="at">name =</span> <span class="st">'description'</span>)),</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>                      <span class="at">defaultPageSize =</span> <span class="dv">10</span>,</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>                      <span class="at">filterable =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>                      <span class="at">highlight =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>asset_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div id="htmlwidget-96aa137cab115a5139c7" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-96aa137cab115a5139c7">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"asset_title":["Parquet STAC Items"],"asset_href":["https://data.ecoforecst.org/forecasts/parquet/aquatics"],"asset_type":["application/x-parquet"],"asset_roles":["stac-items"],"asset_description":["Placeholder description for parquet items"]},"columns":[{"accessor":"asset_title","name":"Title","type":"character","align":"left"},{"accessor":"asset_href","name":"Href","type":"character","align":"left"},{"accessor":"asset_type","name":"Type","type":"character","align":"left"},{"accessor":"asset_roles","name":"Roles","type":"character","align":"left"},{"accessor":"asset_description","name":"description","type":"character","align":"left"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"highlight":true,"dataKey":"3a7188fbbc732fddb997a257cee1e54c"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<p><img src="aquatics-catalog_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
