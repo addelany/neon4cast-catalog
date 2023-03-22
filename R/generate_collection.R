@@ -146,6 +146,9 @@ collection <- stac4cast::build_collection(id = id_info,
                                )
 
 
-output_path <- 'stac/v1/collections/aquatics'
-stac4cast::write_stac(collection, file.path(lake_directory,'output.json'))
+output_path <- 'stac/v1/collection/aquatics'
+
+stac4cast::write_stac(collection, file.path(lake_directory,output_path,'output.json'))
+
+#stac4cast::write_stac(collection, file.path(lake_directory,'output.json'))
 

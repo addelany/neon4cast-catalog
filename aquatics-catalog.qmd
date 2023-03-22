@@ -18,7 +18,7 @@ Description of dataset
 home_dir <- '/home/rstudio/neon4cast-catalog'#here::here()
 setwd(home_dir)
 collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/output.json")
-#collection <- jsonlite::read_json("https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/v1/collection/aquatics/output.json")
+collection <- jsonlite::read_json("https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/v1/collection/aquatics/output.json")
 
 ```
 
