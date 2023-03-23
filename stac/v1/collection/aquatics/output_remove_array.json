@@ -45,9 +45,9 @@
       {
         "href": "https://ecoforecast.org/wp-content/uploads/2019/12/EFI_Logo-1.jpg",
         "type": "image/JPEG",
-        "roles": {
-          "0": "thumbnail"
-        },
+        "roles": [
+          "thumbnail"
+        ],
         "title": "EFI Logo"
       },
     "parquet_items":
