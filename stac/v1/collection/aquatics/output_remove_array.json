@@ -4,7 +4,7 @@
   "links": [
     {
       "rel": "items",
-      "type": null,
+      "type": "application/json",
       "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics/api/stac/v1/collections/eco4cast/items"
     },
     {
