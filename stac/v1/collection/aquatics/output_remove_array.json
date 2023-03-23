@@ -41,7 +41,7 @@
   ],
   "title": "Ecological Forecasting Initiative - Aquatics Forecasts",
   "assets": {
-    "thumbnail": [
+    "thumbnail":
       {
         "href": "https://ecoforecast.org/wp-content/uploads/2019/12/EFI_Logo-1.jpg",
         "type": "image/JPEG",
@@ -49,8 +49,7 @@
           "0": "thumbnail"
         },
         "title": "EFI Logo"
-      }
-    ],
+      },
     "parquet_items":
       {
         "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics",
