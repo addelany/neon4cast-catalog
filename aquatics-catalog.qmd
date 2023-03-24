@@ -28,9 +28,9 @@ Dataset Description: `r collection$description`
 
 Keywords: `r unlist(collection$keywords)`
 
-Spatial Extent: `r collection$extent$spatial$bbox`
+Spatial Extent: `r collection$extent$spatial$bbox[[1]]`
 
-Temporal Extent: `r collection$extent$temporal$interval`
+Temporal Extent: `r collection$extent$temporal$interval[[1]]`
 
 STAC extensions:
 ```{r eval=TRUE, echo=FALSE}
@@ -56,9 +56,9 @@ Publication:
 pub_doi <- c()
 pub_cite <- c()
 
-for (i in seq.int(1, length(collection$publications))){
-  pub_doi[i] <- collection$publications[[i]]$doi
-  pub_cite[i] <- collection$publications[[i]]$citation
+for (i in seq.int(1, length(collection$publications$doi))){
+  pub_doi[i] <- collection$publications$doi[[i]]
+  pub_cite[i] <- collection$publications$citation[[i]]
 }
 
 pub_df <- data.frame(pub_doi,
@@ -138,7 +138,6 @@ knitr::kable(tc_df, col.names = c('Name','Description','Type'))
 ```
 
 
-Assets
 The data contain the following assets:
 ```{r eval=TRUE,echo=FALSE}
 ## assets
@@ -149,12 +148,12 @@ asset_type <- c()
 asset_roles <- c()
 asset_description <- c()
 
-for (i in seq.int(1,length(list(collection$assets$parquet_items)))){ ## this needs to be converted to list before this step (do in build_collection)
-  asset_title[i] <- collection$assets$parquet_items[[i]]$title
-  asset_href[i] <- collection$assets$parquet_items[[i]]$href
-  asset_type[i] <- collection$assets$parquet_items[[i]]$type
-  asset_roles[i] <- collection$assets$parquet_items[[i]]$roles[[1]]
-  asset_description[i] <- collection$assets$parquet_items[[i]]$description
+for (i in seq.int(1,length(list(collection$assets$parquet_items$title)))){ ## this needs to be converted to list before this step (do in build_collection)
+  asset_title[i] <- collection$assets$parquet_items$title[[i]]
+  asset_href[i] <- collection$assets$parquet_items$href[[i]]
+  asset_type[i] <- collection$assets$parquet_items$type[[i]]
+  asset_roles[i] <- collection$assets$parquet_items$roles[[i]]
+  asset_description[i] <- collection$assets$parquet_items$description[[i]]
 
 }
 
