@@ -63,8 +63,8 @@ for (i in seq.int(1,length(models))){
 
 }
 
-max_date_value <- max(max_dates)
-min_date_value <- min(min_dates)
+max_date_value <- paste0(max(max_dates),' 00:00 Z')
+min_date_value <- paste0(min(min_dates),' 00:00 Z')
 
 site_data <- readr::read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv") |>
   dplyr::filter(aquatics == 1)
@@ -146,9 +146,21 @@ collection <- stac4cast::build_collection(id = id_info,
                                )
 
 
+
 output_path <- 'stac/v1/collection/aquatics'
 
 stac4cast::write_stac(collection, file.path(lake_directory,output_path,'output.json'))
 
+
+#install.packages('jsonvalidate')
+#library(jsonvalidate)
+
+#schema_json <- jsonlite::read_json("https://github.com/radiantearth/stac-spec/raw/master/collection-spec/json-schema/collection.json")
+
+#download.file("https://github.com/radiantearth/stac-spec/raw/master/collection-spec/json-schema/collection.json","schema.json")
+
+#jsonvalidate::json_validate('output.json', "schema.json")
+
 #stac4cast::write_stac(collection, file.path(lake_directory,'output.json'))
 
+stac4cast::write_stac(extent,'extent_test.json')

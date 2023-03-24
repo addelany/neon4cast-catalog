@@ -142,3 +142,7 @@ for (i in seq.int(1, length(collection$providers))){
 
 provider_df <- data.frame(provider_name,provider_url,provider_roles)
 
+
+
+
+reticulate::py_install("stac-validator")
