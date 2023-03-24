@@ -151,6 +151,8 @@ output_path <- 'stac/v1/collection/aquatics'
 
 stac4cast::write_stac(collection, file.path(lake_directory,output_path,'output.json'))
 
+library(reticulate)
+source_python(file.path(getwd(),'R/json_validate.py'))
 
 #install.packages('jsonvalidate')
 #library(jsonvalidate)
