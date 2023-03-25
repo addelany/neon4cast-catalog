@@ -3,13 +3,181 @@ title: "Aquatics"
 editor: visual
 ---
 
+```{r message=FALSE, echo=FALSE}
+#library(reactable)
+library(knitr)
+
+```
+
 Description of dataset
 
 ::: panel-tabset
 ## Details
 
-```{r eval=FALSE}
-jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/blob/main/output.json")
+```{r eval=TRUE, echo=FALSE}
+home_dir <- '/home/rstudio/neon4cast-catalog'#here::here()
+setwd(home_dir)
+#collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/output.json")
+collection <- jsonlite::read_json("https://github.com/addelany/neon4cast-catalog/raw/main/stac/v1/collection/aquatics/output.json")
+
+```
+
+Title: `r collection$title`
+
+Dataset Description: `r collection$description`
+
+Keywords: `r unlist(collection$keywords)`
+
+Spatial Extent: `r collection$extent$spatial$bbox[[1]]`
+
+Temporal Extent: `r collection$extent$temporal$interval[[1]]`
+
+STAC extensions:
+```{r eval=TRUE, echo=FALSE}
+## STAC Extensions table
+
+extensions <- c()
+
+for (i in seq.int(1, length(collection$stac_extensions))){
+  extensions[i] <- collection$stac_extensions[[1]]
+}
+
+extension_df <- data.frame(extensions)
+```
+
+```{r echo=FALSE}
+knitr::kable(extension_df, col.names = 'STAC Extensions')
+```
+
+Publication:
+```{r eval=TRUE, echo=FALSE}
+
+## Publications
+pub_doi <- c()
+pub_cite <- c()
+
+for (i in seq.int(1, length(collection$publications$doi))){
+  pub_doi[i] <- collection$publications$doi[[i]]
+  pub_cite[i] <- collection$publications$citation[[i]]
+}
+
+pub_df <- data.frame(pub_doi,
+                    pub_cite)
+
+# pub_table <- reactable::reactable(pub_df,
+#                            defaultColDef = colDef(
+#                              align = "left"),
+#                            columns = list(pub_doi = colDef(name='DOI'),
+#                                           pub_cite = colDef(name='Citation')),
+#                            defaultPageSize = 10,
+#                            filterable = FALSE,
+#                            highlight = TRUE)
+```
+
+```{r echo=FALSE}
+#call publication table 
+knitr::kable(pub_df, col.names = c('DOI','Citation'))
+```
+
+Providers:
+```{r eval=TRUE, echo=FALSE}
+##providers
+provider_url <- c()
+provider_name <- c()
+provider_roles <- c()
+
+for (i in seq.int(1, length(collection$providers))){
+  provider_url[i] <- collection$providers[[i]]$url
+  provider_name[i] <- collection$providers[[i]]$name
+  provider_roles[i] <- paste0('(',toString(collection$providers[[i]]$roles),')')
+}
+
+provider_df <- data.frame(provider_name,provider_url,provider_roles)
+```
+
+```{r echo=FALSE}
+knitr::kable(provider_df,col.names = c("Name","URL","Roles"))
+```
+
+License: `r collection$license`
+
+STAC version: `r collection$stac_version`
+
+Columns
+```{r eval=TRUE, echo=FALSE}
+## COLUMNS
+
+tc_name <- c()
+tc_type <- c()
+tc_description <- c()
+
+for (i in seq.int(1, length(collection$table_columns))){
+  tc_name[i] <- collection$table_columns[[i]]$name
+  tc_type[i] <- collection$table_columns[[i]]$type
+  tc_description[i] <- collection$table_columns[[i]]$description
+}
+
+tc_df <- data.frame(tc_name,
+                    tc_description,
+                    tc_type)
+
+# columns_table <- reactable(tc_df,
+#                          defaultColDef = colDef(
+#                            align = "left"),
+#                          columns = list(tc_name = colDef(name='Name'),
+#                                         tc_description = colDef(name='Description'),
+#                                         tc_type = colDef(name = 'Type')),
+#                          defaultPageSize = 10,
+#                          filterable = FALSE,
+#                          highlight = TRUE)
+```
+
+```{r echo=FALSE}
+# call columns_table 
+knitr::kable(tc_df, col.names = c('Name','Description','Type'))
+```
+
+
+The data contain the following assets:
+```{r eval=TRUE,echo=FALSE}
+## assets
+
+asset_title <- c()
+asset_href <- c()
+asset_type <- c()
+asset_roles <- c()
+asset_description <- c()
+
+for (i in seq.int(1,length(list(collection$assets$parquet_items$title)))){ ## this needs to be converted to list before this step (do in build_collection)
+  asset_title[i] <- collection$assets$parquet_items$title[[i]]
+  asset_href[i] <- collection$assets$parquet_items$href[[i]]
+  asset_type[i] <- collection$assets$parquet_items$type[[i]]
+  asset_roles[i] <- collection$assets$parquet_items$roles[[i]]
+  asset_description[i] <- collection$assets$parquet_items$description[[i]]
+
+}
+
+asset_df <- data.frame(asset_title,
+                       asset_href,
+                       asset_type,
+                       asset_roles,
+                       asset_description)
+
+# asset_table <- reactable(asset_df,
+#                       defaultColDef = colDef(
+#                         align = "left"),
+#                       columns = list(asset_title = colDef(name='Title'),
+#                                      asset_href = colDef(name='Href'),
+#                                      asset_type = colDef(name = 'Type'),
+#                                      asset_roles = colDef(name = 'Roles'),
+#                                      asset_description = colDef(name = 'description')),
+#                       defaultPageSize = 10,
+#                       filterable = FALSE,
+#                       highlight = TRUE)
+```
+
+```{r echo=FALSE}
+knitr::kable(asset_df, col.names = c('Title','Href','Type','Roles','Description'))
 ```
 
 ## Notebook
@@ -36,4 +204,5 @@ d |>
   geom_line()
 
 ```
+
 :::
