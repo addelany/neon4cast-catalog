@@ -17,7 +17,7 @@
     ]
   },
   "properties": {
-    "datetime": "2020-12-11T22:38:32.125000Z"
+    "datetime": "2023-04-26T00:00:00Z"
   },
   "collection": "aquatics",
   "links": [
@@ -42,10 +42,10 @@
   ],
   "assets": {
     "parquet_items": {
-      "href": "https://data.ecoforecast.org/forecasts/parquet/aquatics",
+      "href": "https://data.ecoforecast.org/forecasts/parquet/aquatics/model_id=cb_prophet",
       "type": "application/x-parquet",
-      "title": "Parquet STAC Items",
-      "description": "Placeholder description for parquet items"
+      "title": "Trivial Forecasts using Meta's Prophet Model",
+      "description": "Python-based implementation of Meta's Prophet Model, forecasting aquatics variables using univariate timeseries only."
     }
   }
 }

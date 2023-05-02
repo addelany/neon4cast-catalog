@@ -3,9 +3,9 @@
   "type": "Collection",
   "links": [
     {
-      "rel": "items",
+      "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/forecasts/parquet/aquatics/api/stac/v1/collections/aquatics/items.json"
+      "href": "https://projects.ecoforecast.org/forecasts/parquet/aquatics/api/stac/v1/collections/aquatics/cb_prophet.json"
     },
      {
       "rel": "parent",
@@ -48,15 +48,6 @@
         "thumbnail"
       ],
       "title": "NEON Aquatics Buoy"
-    },
-    "parquet_items": {
-      "href": "https://data.ecoforecast.org/forecasts/parquet/aquatics",
-      "type": "application/x-parquet",
-      "roles": [
-        "stac-items"
-      ],
-      "title": "Parquet STAC Items",
-      "description": "Placeholder description for parquet items"
     }
   },
   "extent": {
