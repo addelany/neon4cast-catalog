@@ -5,32 +5,32 @@
     {
       "rel": "items",
       "type": "application/json",
-      "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics/api/stac/v1/collections/eco4cast/items"
+      "href": "https://projects.ecoforecast.org/forecasts/parquet/aquatics/api/stac/v1/collections/aquatics/items.json"
     },
-    {
+     {
       "rel": "parent",
       "type": "application/json",
-      "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics/api/stac/v1"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics/api/stac/v1"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics/api/stac/v1/collections/eco4cast"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/colections/aquatics.json"
     },
     {
       "rel": "cite-as",
-      "href": "https://www.doi.org/10.22541/essoar.167079499.99891914/v1"
+      "href": "https://doi.org/10.1002/fee.2616"
     },
     {
       "rel": "about",
       "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
       "type": "text/html",
-      "title": "Organization Landing Page"
+      "title": "Aquatics Forecast Challenge"
     },
     {
       "rel": "describedby",
@@ -50,7 +50,7 @@
       "title": "NEON Aquatics Buoy"
     },
     "parquet_items": {
-      "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics",
+      "href": "https://data.ecoforecast.org/forecasts/parquet/aquatics",
       "type": "application/x-parquet",
       "roles": [
         "stac-items"
@@ -87,7 +87,7 @@
   ],
   "providers": [
     {
-      "url": "https://data.ecoforecst.org",
+      "url": "https://data.ecoforecast.org",
       "name": "Ecoforecast Data",
       "roles": [
         "producer",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "url": "https://ecoforecst.org",
+      "url": "https://ecoforecast.org",
       "name": "Ecoforecast",
       "roles": [
         "host"
