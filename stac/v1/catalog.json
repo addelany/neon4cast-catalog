@@ -12,17 +12,17 @@
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/efi-catalog.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/efi-catalog.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
     {
       "rel": "data",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/efi-catalog.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
     {
       "rel": "child",
