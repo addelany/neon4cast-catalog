@@ -42,12 +42,12 @@
   "title": "Ecological Forecasting Initiative - Aquatics Forecasts",
   "assets": {
     "thumbnail": {
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/img/neon_buoy.jpg",
+      "href": "https://ecoforecast.org/wp-content/uploads/2019/12/EFI_Logo-1.jpg",
       "type": "image/JPEG",
       "roles": [
         "thumbnail"
       ],
-      "title": "NEON Aquatics Buoy"
+      "title": "EFI Logo"
     },
     "parquet_items": {
       "href": "https://data.ecoforecst.org/forecasts/parquet/aquatics",
