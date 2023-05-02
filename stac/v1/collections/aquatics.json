@@ -5,7 +5,7 @@
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/forecasts/parquet/aquatics/api/stac/v1/collections/aquatics/cb_prophet.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/aquatics/cb_prophet.json"
     },
      {
       "rel": "parent",
