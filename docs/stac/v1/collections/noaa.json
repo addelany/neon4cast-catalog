@@ -56,7 +56,7 @@
       "title": "GEFS temperature forecast thumbnail"
     },
     "parquet_items1": {
-      "href": "https://sdsc.osn.xsede.org/bio230014-bucket01/noaa/gefs-v12/stage1/",
+      "href": "s3://sdsc.osn.xsede.org/bio230014-bucket01/noaa/gefs-v12/stage1/",
       "type": "application/x-parquet",
       "roles": [
         "stac-items"
@@ -65,7 +65,7 @@
       "description": "`stage1` provides a parquet database partitioned on `reference_datetime` and `site_id` of data from the [NOAA Global Ensemble Forecast](https://registry.opendata.aws/noaa-gefs/) for [25 selected surface variables](https://github.com/eco4cast/gefs4cast/blob/main/inst/extdata/gefs-selected-bands.csv) at [NEON sites](https://www.neonscience.org/field-sites), extracted for all ensemble members. Please note that forecasts of the first 10 days (240 hours) use a 3 hr interval, while forecasts of days 11 through 35 days use a 6 hr interval (for v12).\n\n## Access\n\nUse `arrow` for quick remote access to the database. Specifying the `reference_datetime={date}` is optional but will give the best performance.\n\n### R \n\n```{r}\ndate <- \"2020-09-24\"\nstage <- \"stage1\"\npath <- \"neon4cast-drivers/noaa/gefs-v12\"\nbucket <- \"bio230014-bucket01\"\nendpoint <- \"https://sdsc.osn.xsede.org\"\n\nstage1 <- \n  glue::glue(\"{bucket}/{path}/{stage}/reference_datetime={date}\") |>\n  arrow::s3_bucket(endpoint_override = endpoint, anonymous = TRUE) |>\n  arrow::open_dataset()\n```\n\nNow we can use `dplyr` commands to subset the desired data without downloading the entire data product. \n\n```{r}\nlibrary(dplyr)\n\nq <- stage1 |> \n  filter(variable == \"TMP\",\n         site_id == \"BART\") |>\n  group_by(datetime) |>\n  summarise(temp = mean(prediction)) |>\n  arrange(datetime)\n\ndf <- q |> collect()\n```\n\n\n### Python\n\n```{python}\nimport pyarrow.dataset as ds\nfrom pyarrow import fs\n\ndate = \"2020-09-24\"\nstage = \"stage1\"\npath = \"neon4cast-drivers/noaa/gefs-v12\"\nbucket = \"bio230014-bucket01\"\nendpoint = \"https://sdsc.osn.xsede.org\"\ns3 = fs.S3FileSystem(endpoint_override = endpoint, anonymous = True)\n\ndset = ds.dataset(\n    f\"{bucket}/{path}/{stage}/reference_datetime={date}\",\n    filesystem=s3, partitioning=\"hive\")\n    \n```\n\n\n```{python}\nimport polars as pl\nq = (\n  pl.scan_pyarrow_dataset(dset)\n  .filter(pl.col(\"variable\") == \"TMP\")\n  .filter(pl.col(\"site_id\") == \"BART\")\n  .groupby(\"datetime\")\n  .agg(pl.col(\"prediction\").mean())\n  .sort(\"datetime\")\n)\ndf = q.collect()\n```\n\n"
     },
     "parquet_items2": {
-      "href": "https://sdsc.osn.xsede.org/bio230014-bucket01/noaa/gefs-v12/stage1-stats/",
+      "href": "s3://sdsc.osn.xsede.org/bio230014-bucket01/noaa/gefs-v12/stage1-stats/",
       "type": "application/x-parquet",
       "roles": [
         "stac-items"
@@ -74,7 +74,7 @@
       "description": "`stage1-stats` provides raw data from the [NOAA Global Ensemble Forecast](https://registry.opendata.aws/noaa-gefs/) for [25 selected surface variables](https://github.com/eco4cast/gefs4cast/blob/main/inst/extdata/gefs-selected-bands.csv) at [NEON sites](https://www.neonscience.org/field-sites), extracted for the ensemble mean and spread. Please note that forecasts of the first 10 days (240 hours) use a 3 hr interval, while forecasts of days 11 through 35 days use a 6 hr interval (for v12).\n\n## Access\n\nUse `arrow` for quick remote access to the database. Specifying the `reference_datetime={date}` is optional but will give the best performance.\n\n### R \n\n```{r}\ndate <- \"2020-09-24\"\nstage <- \"stage1-stats\"\npath <- \"neon4cast-drivers/noaa/gefs-v12\"\nbucket <- \"bio230014-bucket01\"\nendpoint <- \"https://sdsc.osn.xsede.org\"\n\nstage1 <- \n  glue::glue(\"{bucket}/{path}/{stage}/reference_datetime={date}\") |>\n  arrow::s3_bucket(endpoint_override = endpoint, anonymous = TRUE) |>\n  arrow::open_dataset()\n```\n\nNow we can use `dplyr` commands to subset the desired data without downloading the entire data product. \n\n```{r}\nlibrary(dplyr)\n\nq <- stage1 |> \n  filter(variable == \"TMP\",\n         site_id == \"BART\")\n\ndf <- q |> collect()\n```\n\n\n### Python\n\n```{python}\nimport pyarrow.dataset as ds\nfrom pyarrow import fs\n\ndate = \"2020-09-24\"\nstage = \"stage1-stats\"\npath = \"neon4cast-drivers/noaa/gefs-v12\"\nbucket = \"bio230014-bucket01\"\nendpoint = \"https://sdsc.osn.xsede.org\"\ns3 = fs.S3FileSystem(endpoint_override = endpoint, anonymous = True)\n\ndset = ds.dataset(\n    f\"{bucket}/{path}/{stage}/reference_datetime={date}\",\n    filesystem=s3, partitioning=\"hive\")\n    \n```\n\n\n```{python}\nimport polars as pl\nq = (\n  pl.scan_pyarrow_dataset(dset)\n  .filter(pl.col(\"variable\") == \"TMP\")\n  .filter(pl.col(\"site_id\") == \"BART\")\n)\ndf = q.collect()\n```\n\n"
     },
     "parquet_items3": {
-      "href": "https://sdsc.osn.xsede.org/bio230014-bucket01/noaa/gefs-v12/cfs/6hrly/00/",
+      "href": "s3://sdsc.osn.xsede.org/bio230014-bucket01/noaa/gefs-v12/cfs/6hrly/00/",
       "type": "application/x-parquet",
       "roles": [
         "stac-items"
