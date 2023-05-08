@@ -19,11 +19,7 @@
       "type": "application/json",
       "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
-    {
-      "rel": "data",
-      "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
-    },
+
     {
       "rel": "child",
       "type": "application/json",
