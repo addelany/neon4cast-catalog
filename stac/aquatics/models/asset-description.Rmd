@@ -1,0 +1,16 @@
+
+Use `arrow` for remote access to the database. 
+
+### R 
+
+```{r}
+model_id <- "cb_prophet"
+path <- "parquet/aquatics"
+bucket <- "neon4cast-forecasts"
+endpoint <- "https://data.ecoforecast.org"
+
+fcst <- 
+  glue::glue("{bucket}/{path}/model_id={model_id}") |>
+  arrow::s3_bucket(endpoint_override = endpoint, anonymous = TRUE) |>
+  arrow::open_dataset()
+```

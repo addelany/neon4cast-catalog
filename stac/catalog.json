@@ -5,50 +5,49 @@
   "description": "Searchable spatiotemporal metadata describing forecasts by the Ecological Forecasting Initiative",
   "stac_version": "1.0.0",
   "conformsTo": [
-    "https://api.stacspec.org/v1.0.0-rc.1/collections",
-    "https://api.stacspec.org/v1.0.0-rc.1/core"
+    "https=//api.stacspec.org/v1.0.0-rc.1/collections",
+    "https=//api.stacspec.org/v1.0.0-rc.1/core"
   ],
   "links": [
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      "href": "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      "href": "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
     },
-
     {
       "rel": "child",
       "type": "application/json",
       "title": "NOAA Global Ensemble Forecast System",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/noaa.json"
+      "href": "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/noaa.json"
     },
     {
       "rel": "child",
       "type": "application/json",
       "title": "Aquatics Forecast Challenge",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/aquatics.json"
+      "href": "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/aquatics.json"
     },
     {
       "rel": "child",
       "type": "application/json",
       "title": "Beetles Forecast Challenge",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/beetles.json"
+      "href": "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/beetles.json"
     },
     {
       "rel": "child",
       "type": "application/json",
       "title": "Terrestrial Forecast Challenge",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/terrestrial.json"
+      "href": "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/terrestrial.json"
     },
     {
       "rel": "child",
       "type": "application/json",
       "title": "Phenology Forecast Challenge",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/phenology.json"
+      "href": "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/phenology.json"
     }
   ]
 }
