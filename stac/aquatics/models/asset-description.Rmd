@@ -4,13 +4,12 @@ Use `arrow` for remote access to the database.
 ### R 
 
 ```{r}
-model_id <- "cb_prophet"
-path <- "parquet/aquatics"
-bucket <- "neon4cast-forecasts"
-endpoint <- "https://data.ecoforecast.org"
+# Copied from "URL for Amazon S3" button 
+url_for_s3 <- "s3://anonymous@neon4cast-forecasts/parquet/aquatics/model_id=cb_prophet?endpoint_override=data.ecoforecast.org"
 
-fcst <- 
-  glue::glue("{bucket}/{path}/model_id={model_id}") |>
-  arrow::s3_bucket(endpoint_override = endpoint, anonymous = TRUE) |>
-  arrow::open_dataset()
+fcst <- arrow::open_dataset(url_for_s3)
+df <- fcst |> dplyr::collect()
+
 ```
+
+Now use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.  

@@ -47,7 +47,10 @@ build_model <- function(model_id, description) {
   ),
   "assets"= list(
     "parquet_items"= list(
-      "href"= "https=//data.ecoforecast.org/neon4cast-forecasts/parquet/aquatics/model_id=cb_prophet",
+      "href"= paste0("s3://anonymous@",
+                     "bio230014-bucket01/neon4cast-forecasts/parquet/",
+                     "aquatics/model_id=", model_id,
+                     "?endpoint_override=sdsc.osn.xsede.org"),
       "type"= "application/x-parquet",
       "title"= "Trivial Forecasts using Meta's Prophet Model",
       "description"= readr::read_file("stac/aquatics/models/asset-description.Rmd")
