@@ -13,48 +13,48 @@ catalog <- list(
     list(
       "rel"= "self",
       "type"= "application/json",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
     ),
     list(
       "rel"= "root",
       "type"= "application/json",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
     ),
 
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "NOAA Global Ensemble Forecast System",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/noaa.json"
+      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/noaa.json"
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Aquatics Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/aquatics.json"
+      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json"
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Beetles Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/beetles.json"
+      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/beetles.json"
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Terrestrial Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/terrestrial.json"
+      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/terrestrial.json"
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Phenology Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/phenology.json"
+      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/phenology.json"
     )
   )
 )
 
-dest <- "../stac/v1/"
+dest <- "../stac/"
 jsonlite::write_json(catalog, file.path(dest, "catalog.json"),
                      pretty=TRUE, auto_unbox=TRUE)
 stac4cast::stac_validate("catalog.json")
