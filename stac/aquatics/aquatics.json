@@ -5,7 +5,7 @@
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/aquatics/cb_prophet.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/cb_prophet.json"
     },
      {
       "rel": "parent",
@@ -20,7 +20,7 @@
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/colections/aquatics.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json"
     },
     {
       "rel": "cite-as",
