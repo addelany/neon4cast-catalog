@@ -28,7 +28,7 @@ build_model <- function(model_id, team_name, model_description, first_name, last
   "links"= list(
     list(
       "rel"= "collection",
-      "href"= "../forecst.json",
+      "href"= "../forecast.json",
       "type"= "application/json",
       "title"= "Aquatics Forecasts"
     ),
