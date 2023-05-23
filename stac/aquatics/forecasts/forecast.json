@@ -1,0 +1,43 @@
+{
+  "id": "aquatics-forecasts",
+  "type": "Collection",
+  "links": [
+    {
+      "rel": "item",
+      "type": "application/json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/models"
+    },
+     {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
+    },
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecast.json"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.1002/fee.2616"
+    },
+    {
+      "rel": "about",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+      "type": "text/html",
+      "title": "Aquatics Forecast Challenge"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+      "title": "Organization Landing Page",
+      "type": "text/html"
+    }
+  ],
+  "title": "Ecological Forecasting Initiative - Aquatics Forecasts"
+}

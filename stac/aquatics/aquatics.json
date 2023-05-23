@@ -5,17 +5,22 @@
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/cb_prophet.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts"
+    },
+      {
+      "rel": "item",
+      "type": "application/json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/scores"
     },
      {
       "rel": "parent",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
     },
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
     },
     {
       "rel": "self",
