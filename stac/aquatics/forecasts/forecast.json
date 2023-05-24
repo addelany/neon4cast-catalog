@@ -9,10 +9,17 @@
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/Aquaers.json",
-      "rel.1": "item",
-      "type.1": "application/json",
-      "href.1": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/BBTW.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/",
+      "4": {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/Aquaers.json"
+      },
+      "5": {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/BBTW.json"
+      }
     },
     {
       "rel": "parent",

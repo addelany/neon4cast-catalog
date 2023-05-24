@@ -1,13 +1,17 @@
 generate_model_items <- function(){
 
-  full_list <- list()
+  full_list <- list(
+    "rel" = 'item',
+    'type'= 'application/json',
+    'href' = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/"
+  )
 
   for (i in aquatic_models$model.id[1:2]){
     item_list <- list(
       "rel" = 'item',
       'type'= 'application/json',
       'href' = paste0("https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/",i,'.json'))
-    full_list <- append(full_list,(item_list))
+    full_list <- append(full_list,list(item_list))
   }
 
   return(full_list)
