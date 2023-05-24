@@ -98,28 +98,50 @@ build_model <- function(model_id, team_name, model_description, first_name, last
 
 ## read in model documentation and only grab models for Aquatics theme
 library(tidyverse)
+library(arrow)
 library(stac4cast)
 library(reticulate)
 
+#get model ids
+s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
+paths <- open_dataset(s3$path("neon4cast-forecasts")) |> collect()
+models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
+
+aquatic_models <- models_df |>
+  tidyr::separate(...3, c('name','model.id'), "=")
+
+
+## READ IN MODEL METADATA
 model_docs <- read_csv('NEON_Challenge_Registration_2023-05-23.csv')
 
-aquatic_models <- model_docs |>
+model_docs <- model_docs |>
   filter(Theme == 'Aquatic Ecosystems') |>
   select(`team-name`, `First Name`, `Last Name`, `Email address`, `model-id`, `model-description`) |>
   rename(team.name = `team-name`, first.name = `First Name`, last.name = `Last Name`, email = `Email address`,
          model.id = `model-id`, model.description = `model-description`) |>
   mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
-# loop over model ids and extract components
-for (i in seq.int(1,nrow(aquatic_models))){
-  #print(aquatic_models[i,'model.description'])
 
-  build_model(model_id = aquatic_models$model.id[i],
-              team_name = aquatic_models$team.name[i],
-              model_description = aquatic_models[i,'model.description'],
-              first_name = aquatic_models$first.name[i],
-              last_name = aquatic_models$last.name[i],
-              email = aquatic_models$email[i])
+## loop over model ids and extract components if present in metadata table
+for (m in aquatic_models$model.id){
+
+  if (m %in% model_docs$model.id){
+
+    idx = which(model_docs$model.id == m)
+
+    build_model(model_id = model_docs$model.id[idx],
+                team_name = model_docs$team.name[idx],
+                model_description = model_docs[idx,'model.description'],
+                first_name = model_docs$first.name[idx],
+                last_name = model_docs$last.name[idx],
+                email = model_docs$email[idx])
+  } else{
+
+    build_model(model_id = m,
+                team_name = 'pending',
+                model_description = 'pending',
+                first_name = 'pending',
+                last_name = 'pending',
+                email = 'pending')
+  }
 }
-
-#build_model("cb_prophet", "")

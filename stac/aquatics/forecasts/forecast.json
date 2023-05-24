@@ -1,13 +1,20 @@
 {
   "id": "aquatics-forecasts",
+  "description": "pending",
+  "stac_version": "1.0.0",
+  "license": "CC0-1.0",
+  "stac_extensions": [],
   "type": "Collection",
   "links": [
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/Aquaers.json",
+      "rel.1": "item",
+      "type.1": "application/json",
+      "href.1": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/BBTW.json"
     },
-     {
+    {
       "rel": "parent",
       "type": "application/json",
       "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
@@ -39,5 +46,25 @@
       "type": "text/html"
     }
   ],
-  "title": "Ecological Forecasting Initiative - Aquatics Forecasts"
+  "title": "Ecological Forecasting Initiative - Aquatics Forecasts",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -149.6106,
+          18.1135,
+          -66.7987,
+          68.6698
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-09-01 00:00 Z",
+          "2023-04-11 00:00 Z"
+        ]
+      ]
+    }
+  }
 }
