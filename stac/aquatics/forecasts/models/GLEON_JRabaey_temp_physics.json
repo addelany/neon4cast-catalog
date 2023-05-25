@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/GLEON_JRabaey_temp_physics",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/GLEON_JRabaey_temp_physics.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

@@ -66,7 +66,7 @@
     },
     {
       "rel": "self",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/wbears_gp",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/wbears_gp.json",
       "type": "application/json",
       "title": "Model Forecast"
     }
