@@ -38,27 +38,33 @@
     ]
   },
   "properties": {
-    "datetime": "2023-04-26T00=00=00Z"
+    "datetime": "2023-04-26"
   },
   "collection": "forecast",
   "links": [
     {
       "rel": "collection",
-      "href": "../forecast.json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
     {
       "rel": "root",
-      "href": "../../../catalog.json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/",
       "type": "application/json",
       "title": "EFI Forecast Catalog"
     },
     {
       "rel": "parent",
-      "href": "../forecast.json",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/",
       "type": "application/json",
       "title": "Aquatics Forecasts"
+    },
+    {
+      "rel": "self",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/Aquaers",
+      "type": "application/json",
+      "title": "Model Forecast"
     }
   ],
   "assets": {

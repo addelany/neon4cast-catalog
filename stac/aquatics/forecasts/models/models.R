@@ -22,29 +22,34 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     )
   ),
   "properties"= list(
-    "datetime"= "2023-04-26T00=00=00Z"
+    "datetime"= "2023-04-26"
   ),
   "collection"= "forecast",
   "links"= list(
     list(
       "rel"= "collection",
-      "href"= "../forecast.json",
+      "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/",
       "type"= "application/json",
       "title"= "Aquatics Forecasts"
     ),
     list(
       "rel"= "root",
-      "href"= "../../../catalog.json",
+      "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/", #catalog json file
       "type"= "application/json",
       "title"= "EFI Forecast Catalog"
     ),
     list(
       "rel"= "parent",
-      "href"= "../forecast.json",
+      "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/", #forecast.json
       "type"= "application/json",
       "title"= "Aquatics Forecasts"
-    )
-  ),
+    ),
+    list(
+      "rel"= "self",
+      "href"= paste0('https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/',model_id),
+      "type"= "application/json",
+      "title"= "Model Forecast"
+    )),
   "assets"= list(
     "parquet_items"= list(
       "href"= paste0("s3://anonymous@",
