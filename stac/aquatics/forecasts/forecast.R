@@ -31,17 +31,17 @@ build_forecast <- function(table_schema, table_description){
     list(
     "rel" = "parent",
     "type"= "application/json",
-    "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics"
+    "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
     ),
     list(
       "rel" = "root",
       "type" = "application/json",
-      "href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics"
+      "href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
     ),
     list(
       "rel" = "self",
       "type" = "application/json",
-      "href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast"
+      "href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json"
     ),
     list(
       "rel" = "cite-as",
