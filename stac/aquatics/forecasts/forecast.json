@@ -6,11 +6,16 @@
   "stac_extensions": [],
   "type": "Collection",
   "links": [
-    {
-      "rel": "items",
-      "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecast/models"
-    },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/Aquaers.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/BBTW.json"
+      },
     {
       "rel": "parent",
       "type": "application/json",

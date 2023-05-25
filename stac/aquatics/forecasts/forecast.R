@@ -22,12 +22,12 @@ build_forecast <- function(table_schema, table_description){
     "stac_extensions"= list(),
     'type' = 'Collection',
     'links' = list(
-      #generate_model_items(),\
-    list(
-        "rel" = "items",
-        "type"= "application/json",
-        "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecast/models"
-      ),
+      generate_model_items(),
+    # list(
+    #     "rel" = "items",
+    #     "type"= "application/json",
+    #     "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecast/models"
+    #   ),
     list(
     "rel" = "parent",
     "type"= "application/json",
