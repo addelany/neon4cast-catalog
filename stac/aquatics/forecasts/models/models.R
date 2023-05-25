@@ -28,19 +28,22 @@ build_model <- function(model_id, team_name, model_description, first_name, last
   "links"= list(
     list(
       "rel"= "collection",
-      "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json",
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json",
+      'href' = '../forecast.json',
       "type"= "application/json",
       "title"= "Aquatics Forecasts"
     ),
     list(
       "rel"= "root",
-      "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json", #catalog json file
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json", #catalog json file
+      'href' = '../../../catalog.json',
       "type"= "application/json",
       "title"= "EFI Forecast Catalog"
     ),
     list(
       "rel"= "parent",
-      "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json", #forecast.json
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json", #forecast.json
+      'href' = '../forecast.json',
       "type"= "application/json",
       "title"= "Aquatics Forecasts"
     ),
