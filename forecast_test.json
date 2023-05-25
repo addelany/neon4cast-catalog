@@ -6,7 +6,6 @@
   "stac_extensions": [],
   "type": "Collection",
   "links": [
-    [
       {
         "rel": "item",
         "type": "application/json",
@@ -16,8 +15,7 @@
         "rel": "item",
         "type": "application/json",
         "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/BBTW.json"
-      }
-    ],
+      },
     {
       "rel": "parent",
       "type": "application/json",
