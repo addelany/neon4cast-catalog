@@ -48,19 +48,19 @@
   "links": [
     {
       "rel": "collection",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
     {
       "rel": "root",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json",
       "type": "application/json",
       "title": "EFI Forecast Catalog"
     },
     {
       "rel": "parent",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
