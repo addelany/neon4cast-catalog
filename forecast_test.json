@@ -9,6 +9,11 @@
       {
         "rel": "item",
         "type": "application/json",
+        "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
         "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/Aquaers.json"
       },
       {
