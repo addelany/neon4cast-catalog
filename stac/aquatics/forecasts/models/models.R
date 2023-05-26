@@ -22,7 +22,7 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     )
   ),
   "properties"= list(
-    "datetime"= "2023-04-26"
+    "datetime"= "2023-04-26T00:00:00Z"
   ),
   "collection"= "forecast",
   "links"= list(

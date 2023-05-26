@@ -25,7 +25,7 @@ build_model <- function(model_id, team_name, model_description, first_name, last
       )
     ),
     "properties"= list(
-      "datetime"= "2023-04-26 T00:00:00Z"
+      "datetime"= "2023-04-26T00:00:00Z"
     ),
     "collection"= "scores",
     "links"= list(
@@ -147,6 +147,8 @@ for (m in aquatic_models$model.id){
                 first_name = model_docs$first.name[idx],
                 last_name = model_docs$last.name[idx],
                 email = model_docs$email[idx])
+
+    print('in metadata table')
   } else{
 
     build_model(model_id = m,
