@@ -3,7 +3,7 @@ generate_model_items <- function(){
 
   model_list <- aquatic_models$model.id
 
-  x <- purrr::map(model_list[1:2], function(i)
+  x <- purrr::map(model_list, function(i)
     list(
       "rel" = 'item',
       'type'= 'application/json',

@@ -20,6 +20,496 @@
         "type": "application/json",
         "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/BBTW.json"
       },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/BTW.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/EFInull.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_Chloe_precip.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_JRabaey_mod.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_JRabaey_temp_physics.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_Kaelin.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_RW.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_SN.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_CHL_MS.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_Cayelan.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_CayelanTest.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_DaveRichardson_lag3.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_Joe_Rabaey_Wind.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_lag_1day.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_physics.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_poly3.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_temp_name.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/IW_example.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/IW_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/LSAMP_AWPC.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/Linear_regression.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/MSU_ARIMA.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/Martins_Oxy_Forecast_Test.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/NDWaterTempDO.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/USGSHABs1.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/VT_Aquaers.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/VTaquatics.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/air2waterSat.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/air2waterSat_2.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/baseline_ensemble.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/cb_TCN.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/cb_prophet.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/climatology.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/empirical.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/example_null.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/fARIMA.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/fARIMA_clim_ensemble.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/fTSLM_lag.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/fable_ARIMA.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/fable_TSLM_lagged.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flareGLM.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flareGLM_noDA.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flareGOTM.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flareGOTM_noDA.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flareSimstrat.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flareSimstrat_noDA.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flare_ensemble.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flare_ler.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flare_ler_baselines.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/humidity_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/humidity_lm_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/neon4cast_example.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/null.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/persistenceRW.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/precip_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/precip_mod.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procBlanchardMonod.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procBlanchardSteele.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procCTMIMonod.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procCTMISteele.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procEppleyNorbergMonod.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procEppleyNorbergSteele.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procHinshelwoodMonod.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/procHinshelwoodSteele.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/temp_ESR13.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/temp_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/temp_lm_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/temp_name.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_arima.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_auto_adam.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_bag_mlp.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_bag_mlp_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_ets.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_humidity_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_humidity_lm_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_lasso.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_lasso_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_precip_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_precip_lm_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_randfor.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_randfor_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_tbats.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_temp_lm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_temp_lm_all_sites.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tslm.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/wbears_gp.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/wbears_rnn.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/wtemp_RW_model.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/wtemp_clim_model.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/wtemp_lm_model.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_parallel.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_temp_oxygen.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_temp_oxygen_chla_parallel.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_temp_oxygen_chla_parallel2.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_temp_oxygen_chla_sequential.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_temp_oxygen_parallel.json"
+      },
+      {
+        "rel": "item",
+        "type": "application/json",
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_temp_oxygen_sequential.json"
+      },
     {
       "rel": "parent",
       "type": "application/json",
