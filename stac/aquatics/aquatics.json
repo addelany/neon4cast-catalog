@@ -69,8 +69,8 @@
     "temporal": {
       "interval": [
         [
-          "2017-01-01T00:00:00Z",
-          "2023-04-26T00:00:00Z"
+          "2020-09-01 T00:00:00Z",
+          "2023-04-11 T00:00:00Z"
         ]
       ]
     }
@@ -99,7 +99,7 @@
       ]
     }
   ],
-  "description": "description placeholder",
+  "description": "The [Ecological Forecasting Initiative](https://ecoforecast.org)",
   "stac_version": "1.0.0",
   "stac_extensions": [
     "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
