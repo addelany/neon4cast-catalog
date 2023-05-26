@@ -11,12 +11,12 @@
   "type": "Collection",
   "links": [
       {
-        "rel": "model",
+        "rel": "item",
         "type": "application/json",
         "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/Aquaers.json"
       },
       {
-        "rel": "model",
+        "rel": "item",
         "type": "application/json",
         "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/BBTW.json"
       },
