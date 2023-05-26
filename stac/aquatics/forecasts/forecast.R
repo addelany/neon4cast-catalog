@@ -19,7 +19,9 @@ build_forecast <- function(table_schema, table_description){
     "description" = "pending",
     "stac_version"= "1.0.0",
     "license"= "CC0-1.0",
-    "stac_extensions"= list(),
+    "stac_extensions"= list("https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+                            "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+                            "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
     'type' = 'Collection',
     'links' = list(
       generate_model_items(),
