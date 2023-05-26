@@ -13,12 +13,12 @@
       {
         "rel": "item",
         "type": "application/json",
-        "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/Aquaers.json"
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/modelsAquaers.json"
       },
       {
         "rel": "item",
         "type": "application/json",
-        "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/BBTW.json"
+        "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/modelsBBTW.json"
       },
     {
       "rel": "parent",

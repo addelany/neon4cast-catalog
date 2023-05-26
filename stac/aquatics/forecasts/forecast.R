@@ -7,7 +7,8 @@ generate_model_items <- function(){
     list(
       "rel" = 'item',
       'type'= 'application/json',
-      'href' = paste0("https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/",i,'.json'))
+      #'href' = paste0("https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/",i,'.json'))
+      'href' = paste0('https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models',i,'.json'))
   )
 
   return(x)
