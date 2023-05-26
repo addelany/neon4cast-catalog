@@ -5,27 +5,28 @@
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts"
+      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/forecast.json"
     },
-      {
+    {
       "rel": "item",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/scores"
+      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/scores.json"
     },
-     {
+    {
       "rel": "parent",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
+      "href": "../catalog.json"
     },
     {
       "rel": "root",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
+      "href": "../catalog.json"
     },
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json",
+      "href.1": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/aquatics.json"
     },
     {
       "rel": "cite-as",
@@ -101,58 +102,6 @@
   ],
   "description": "description placeholder",
   "stac_version": "1.0.0",
-  "table_columns": [
-    {
-      "name": "target_id",
-      "type": "string",
-      "description": "unique identifier for target data used in the forecast"
-    },
-    {
-      "name": "datetime",
-      "type": "timestamp[us]",
-      "description": "ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard."
-    },
-    {
-      "name": "parameter",
-      "type": "string",
-      "description": "ensemble member"
-    },
-    {
-      "name": "variable",
-      "type": "string",
-      "description": "aquatic forecast variables: aquatic vars"
-    },
-    {
-      "name": "prediction",
-      "type": "double",
-      "description": "predicted forecast value"
-    },
-    {
-      "name": "family",
-      "type": "string",
-      "description": "For ensembles: “ensemble.” Default value if unspecifiedFor probability distributions: Name of the statistical distributionassociated with the reported statistics. The “sample” distribution issynonymous with “ensemble.”For summary statistics: “summary.”If this dimension does not vary, it is permissible to specifyfamilyas avariable attribute if the file format being used supports this (e.g.,netCDF)."
-    },
-    {
-      "name": "site_id",
-      "type": "string",
-      "description": "For forecasts that are not on a spatial grid, use of a site dimension thatmaps to a more detailed geometry (points, polygons, etc.) is allowable.In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this couldbe handled by the CF Discrete Sampling Geometry data model."
-    },
-    {
-      "name": "model_id",
-      "type": "string",
-      "description": "unique identifier for the model used in the forecast"
-    },
-    {
-      "name": "reference_datetime",
-      "type": "string",
-      "description": "ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard."
-    },
-    {
-      "name": "date",
-      "type": "string",
-      "description": "ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod."
-    }
-  ],
   "stac_extensions": [
     "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
     "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
