@@ -29,7 +29,7 @@ build_aquatics <- function(){
       list(
         "rel"= "self",
         "type"= "application/json",
-        "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json",
+        #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json",
         "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/aquatics.json'
       ),
       list(
