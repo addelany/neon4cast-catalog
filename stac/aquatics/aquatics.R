@@ -93,7 +93,7 @@ build_aquatics <- function(){
         "roles" = list('host')
       )
     ),
-    "description" = "description placeholder",
+    "description" = "The [Ecological Forecasting Initiative](https://ecoforecast.org)",
     "stac_version" = "1.0.0",
     "stac_extensions" = list(
       "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
