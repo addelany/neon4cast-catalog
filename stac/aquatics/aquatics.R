@@ -67,8 +67,8 @@ build_aquatics <- function(){
       ),
       "temporal" = list(
         'interval' = list(list(
-          "2020-09-01 00:00 Z",
-          "2023-04-11 00:00 Z")
+          "2020-09-01 T00:00:00Z",
+          "2023-04-11 T00:00:00Z")
         ))
     ),
     "license" = "CC0-1.0",
