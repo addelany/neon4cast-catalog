@@ -76,8 +76,8 @@ build_forecast <- function(table_schema, table_description){
       ),
       "temporal" = list(
         'interval' = list(list(
-          "2020-09-01 00:00 Z",
-          "2023-04-11 00:00 Z")
+          "2020-09-01T00:00:00Z",
+          "2023-04-11T00:00:00Z")
       ))
     ),
     "table_columns" = stac4cast::build_table_columns(table_schema, table_description)
