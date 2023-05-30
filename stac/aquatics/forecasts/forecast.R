@@ -1,7 +1,7 @@
 generate_model_items <- function(){
 
 
-  model_list <- aquatic_models$model.id
+  model_list <- aquatic_models$model.id[1:2]
 
   x <- purrr::map(model_list, function(i)
     list(
@@ -24,7 +24,8 @@ build_forecast <- function(table_schema, table_description){
                             "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
                             "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
     'type' = 'Collection',
-    'links' = generate_model_items(),
+    'links' = c(generate_model_items(),
+        list(
     list(
     "rel" = "parent",
     "type"= "application/json",
@@ -58,7 +59,8 @@ build_forecast <- function(table_schema, table_description){
       "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
       "title" = "Organization Landing Page",
       "type" = "text/html"
-    ),
+    )
+    )),
     "title" = "Ecological Forecasting Initiative - Aquatics Forecasts",
     "extent" = list(
       "spatial" = list(

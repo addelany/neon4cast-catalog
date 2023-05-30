@@ -24,12 +24,8 @@ build_scores <- function(table_schema, table_description){
                             "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
                             "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
     'type' = 'Collection',
-    'links' = generate_model_items(),
-      # list(
-      #     "rel" = "items",
-      #     "type"= "application/json",
-      #     "href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecast/models"
-      #   ),
+    'links' = c(generate_model_items(),
+        list(
       list(
         "rel" = "parent",
         "type"= "application/json",
@@ -63,7 +59,8 @@ build_scores <- function(table_schema, table_description){
         "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
         "title" = "Organization Landing Page",
         "type" = "text/html"
-      ),
+      )
+      )),
     "title" = "Ecological Forecasting Initiative - Aquatics Scores",
     "extent" = list(
       "spatial" = list(

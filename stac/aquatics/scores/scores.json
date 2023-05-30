@@ -509,39 +509,39 @@
       "rel": "item",
       "type": "application/json",
       "href": "models/xgboost_temp_oxygen_sequential.json"
+    },
+    {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "../aquatics.json"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "../aquatics.json"
+    },
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "scores.json"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.1002/fee.2616"
+    },
+    {
+      "rel": "about",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+      "type": "text/html",
+      "title": "Aquatics Forecast Challenge"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+      "title": "Organization Landing Page",
+      "type": "text/html"
     }
   ],
-  "8": {
-    "rel": "parent",
-    "type": "application/json",
-    "href": "../aquatics.json"
-  },
-  "9": {
-    "rel": "root",
-    "type": "application/json",
-    "href": "../aquatics.json"
-  },
-  "10": {
-    "rel": "self",
-    "type": "application/json",
-    "href": "scores.json"
-  },
-  "11": {
-    "rel": "cite-as",
-    "href": "https://doi.org/10.1002/fee.2616"
-  },
-  "12": {
-    "rel": "about",
-    "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-    "type": "text/html",
-    "title": "Aquatics Forecast Challenge"
-  },
-  "13": {
-    "rel": "describedby",
-    "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-    "title": "Organization Landing Page",
-    "type": "text/html"
-  },
   "title": "Ecological Forecasting Initiative - Aquatics Scores",
   "extent": {
     "spatial": {
