@@ -1,7 +1,7 @@
 generate_model_items <- function(){
 
 
-  model_list <- aquatic_models$model.id[1:2]
+  model_list <- aquatic_models$model.id
 
   x <- purrr::map(model_list, function(i)
     list(
