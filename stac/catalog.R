@@ -1,60 +1,75 @@
 
 source("R/common.R")
 
-
+build_catalog <- function(){
 catalog <- list(
   "type"= "Catalog",
   "id"= "efi-stac",
   "title"= "Ecological Forecasting Initiative STAC API",
   "description"= "Searchable spatiotemporal metadata describing forecasts by the Ecological Forecasting Initiative",
   "stac_version"= "1.0.0",
-  "conformsTo"= conformsTo,
+  "conformsTo"= 'conformsTo',
   "links"= list(
     list(
       "rel"= "self",
       "type"= "application/json",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
+      "href" = 'catalog.json'
     ),
     list(
       "rel"= "root",
       "type"= "application/json",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/catalog.json"
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
+      "href" = 'catalog.json'
     ),
 
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "NOAA Global Ensemble Forecast System",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/noaa.json"
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/noaa.json"
+      "href" = 'noaa/noaa.json'
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Aquatics Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/aquatics.json"
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json"
+      "href" = 'aquatics/aquatics.json'
+
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Beetles Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/beetles.json"
-    ),
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/beetles.json"
+      "href" = 'beetles/beetles.json'
+
+      ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Terrestrial Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/terrestrial.json"
+      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/terrestrial.json"
+      "href" = '=terrestrial/terrestrial.json'
+
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Phenology Forecast Challenge",
-      "href"= "https=//projects.ecoforecast.org/neon4cast-catalog/stac/v1/collections/phenology.json"
+      #"href"= "https=:/projects.ecoforecast.org/neon4cast-catalog/stac/phenology.json"
+      "href" = 'pheonology/phenology.json'
+
     )
   )
 )
 
-dest <- "../stac/v1/"
+dest <- "stac/"
 jsonlite::write_json(catalog, file.path(dest, "catalog.json"),
                      pretty=TRUE, auto_unbox=TRUE)
-stac4cast::stac_validate("catalog.json")
+stac4cast::stac_validate(file.path(dest, "catalog.json"))
+
+}
+
+build_catalog()
