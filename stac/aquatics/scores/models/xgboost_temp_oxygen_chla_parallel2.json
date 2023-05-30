@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/models/xgboost_temp_oxygen_chla_parallel2.json",
+      "href": "xgboost_temp_oxygen_chla_parallel2.json",
       "type": "application/json",
       "title": "Model Scores"
     }

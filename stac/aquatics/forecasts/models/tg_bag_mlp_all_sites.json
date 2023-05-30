@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_bag_mlp_all_sites.json",
+      "href": "tg_bag_mlp_all_sites.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

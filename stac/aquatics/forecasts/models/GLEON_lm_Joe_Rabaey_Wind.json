@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_Joe_Rabaey_Wind.json",
+      "href": "GLEON_lm_Joe_Rabaey_Wind.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

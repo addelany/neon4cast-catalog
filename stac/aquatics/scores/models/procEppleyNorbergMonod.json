@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/models/procEppleyNorbergMonod.json",
+      "href": "procEppleyNorbergMonod.json",
       "type": "application/json",
       "title": "Model Scores"
     }

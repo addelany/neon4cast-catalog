@@ -8,7 +8,7 @@ generate_model_items <- function(){
       "rel" = 'item',
       'type'= 'application/json',
       #'href' = paste0("https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/",i,'.json'))
-      'href' = paste0('https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/models/',i,'.json'))
+      'href' = paste0('models/',i,'.json'))
   )
 
   return(x)
@@ -24,8 +24,7 @@ build_scores <- function(table_schema, table_description){
                             "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
                             "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
     'type' = 'Collection',
-    'links' = list(
-      generate_model_items(),
+    'links' = generate_model_items(),
       # list(
       #     "rel" = "items",
       #     "type"= "application/json",
@@ -35,19 +34,19 @@ build_scores <- function(table_schema, table_description){
         "rel" = "parent",
         "type"= "application/json",
         #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
-        "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/aquatics.json'
+        "href" = '../aquatics.json'
       ),
       list(
         "rel" = "root",
         "type" = "application/json",
         #"href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
-        "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/aquatics.json'
+        "href" = '../aquatics.json'
       ),
       list(
         "rel" = "self",
         "type" = "application/json",
         #"href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json"
-        "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/scores.json'
+        "href" = 'scores.json'
       ),
       list(
         "rel" = "cite-as",
@@ -64,8 +63,7 @@ build_scores <- function(table_schema, table_description){
         "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
         "title" = "Organization Landing Page",
         "type" = "text/html"
-      )
-    ),
+      ),
     "title" = "Ecological Forecasting Initiative - Aquatics Scores",
     "extent" = list(
       "spatial" = list(

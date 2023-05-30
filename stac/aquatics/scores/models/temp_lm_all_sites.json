@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/models/temp_lm_all_sites.json",
+      "href": "temp_lm_all_sites.json",
       "type": "application/json",
       "title": "Model Scores"
     }

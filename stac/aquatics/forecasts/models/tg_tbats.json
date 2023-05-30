@@ -66,7 +66,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/tg_tbats.json",
+      "href": "tg_tbats.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

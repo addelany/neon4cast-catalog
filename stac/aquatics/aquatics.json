@@ -5,12 +5,12 @@
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/forecast.json"
+      "href": "forecasts/forecast.json"
     },
     {
       "rel": "item",
       "type": "application/json",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/scores.json"
+      "href": "scores/scores.json"
     },
     {
       "rel": "parent",
@@ -25,7 +25,7 @@
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/aquatics.json"
+      "href": "aquatics.json"
     },
     {
       "rel": "cite-as",

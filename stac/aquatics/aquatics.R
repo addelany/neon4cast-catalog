@@ -8,13 +8,13 @@ build_aquatics <- function(){
         "rel" = "item",
         "type" = "application/json",
         #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts"
-        "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/forecast.json'
+        "href" = 'forecasts/forecast.json'
       ),
       list(
         "rel" = "item",
         "type" = "application/json",
         #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts",
-        "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/scores.json'
+        "href" = 'scores/scores.json'
       ),
       list(
         "rel"= "parent",
@@ -30,7 +30,7 @@ build_aquatics <- function(){
         "rel"= "self",
         "type"= "application/json",
         #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json",
-        "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/aquatics.json'
+        "href" = 'aquatics.json'
       ),
       list(
         "rel" ="cite-as",

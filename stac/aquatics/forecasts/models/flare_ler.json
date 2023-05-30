@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/flare_ler.json",
+      "href": "flare_ler.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

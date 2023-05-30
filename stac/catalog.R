@@ -14,13 +14,13 @@ catalog <- list(
       "rel"= "self",
       "type"= "application/json",
       #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
-      "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/catalog.json'
+      "href" = 'catalog.json'
     ),
     list(
       "rel"= "root",
       "type"= "application/json",
       #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
-      "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/catalog.json'
+      "href" = 'catalog.json'
     ),
 
     list(
@@ -28,14 +28,14 @@ catalog <- list(
       "type"= "application/json",
       "title"= "NOAA Global Ensemble Forecast System",
       #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/noaa.json"
-      "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/noaa/noaa.json'
+      "href" = 'noaa/noaa.json'
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Aquatics Forecast Challenge",
       #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json"
-      "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/aquatics.json'
+      "href" = 'aquatics/aquatics.json'
 
     ),
     list(
@@ -43,7 +43,7 @@ catalog <- list(
       "type"= "application/json",
       "title"= "Beetles Forecast Challenge",
       #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/beetles.json"
-      "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/beetles/beetles.json'
+      "href" = 'beetles/beetles.json'
 
       ),
     list(
@@ -51,7 +51,7 @@ catalog <- list(
       "type"= "application/json",
       "title"= "Terrestrial Forecast Challenge",
       #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/terrestrial.json"
-      "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/terrestrial/terrestrial.json'
+      "href" = '=terrestrial/terrestrial.json'
 
     ),
     list(
@@ -59,7 +59,7 @@ catalog <- list(
       "type"= "application/json",
       "title"= "Phenology Forecast Challenge",
       #"href"= "https=:/projects.ecoforecast.org/neon4cast-catalog/stac/phenology.json"
-      "href" = 'https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/pheonology/phenology.json'
+      "href" = 'pheonology/phenology.json'
 
     )
   )

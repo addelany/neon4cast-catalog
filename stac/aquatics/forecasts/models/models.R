@@ -50,7 +50,7 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     list(
       "rel"= "self",
       #"href"= paste0('https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/',model_id,'.json'),
-      "href" = paste0('https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/',model_id,'.json'),
+      "href" = paste0(model_id,'.json'),
       "type"= "application/json",
       "title"= "Model Forecast"
     )),

@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/xgboost_temp_oxygen_chla_parallel.json",
+      "href": "xgboost_temp_oxygen_chla_parallel.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

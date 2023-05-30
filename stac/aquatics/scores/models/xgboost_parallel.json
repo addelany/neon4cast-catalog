@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/models/xgboost_parallel.json",
+      "href": "xgboost_parallel.json",
       "type": "application/json",
       "title": "Model Scores"
     }

@@ -66,7 +66,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/wbears_rnn.json",
+      "href": "wbears_rnn.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

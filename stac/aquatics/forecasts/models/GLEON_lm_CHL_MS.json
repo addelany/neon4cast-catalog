@@ -62,7 +62,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/forecasts/models/GLEON_lm_CHL_MS.json",
+      "href": "GLEON_lm_CHL_MS.json",
       "type": "application/json",
       "title": "Model Forecast"
     }

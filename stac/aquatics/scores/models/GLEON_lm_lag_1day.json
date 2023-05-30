@@ -66,7 +66,7 @@
     },
     {
       "rel": "self",
-      "href": "https://raw.githubusercontent.com/addelany/neon4cast-catalog/main/stac/aquatics/scores/models/GLEON_lm_lag_1day.json",
+      "href": "GLEON_lm_lag_1day.json",
       "type": "application/json",
       "title": "Model Scores"
     }
