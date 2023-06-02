@@ -39,6 +39,13 @@ build_model <- function(model_id, team_name, model_description, first_name, last
         "roles"= list(
           "host"
         )
+      ),
+      "license"= "CC0-1.0",
+      "keywords"= list(
+        "Forecasting",
+        "Temperature",
+        "Oxygen",
+        "NEON"
       )
     )
   ),
@@ -82,13 +89,6 @@ build_model <- function(model_id, team_name, model_description, first_name, last
       "title"= team_name,
       "description"= readr::read_file("stac/aquatics/forecasts/models/asset-description.Rmd")
     )
-  ),
-   "license"= "CC0-1.0",
-  "keywords"= list(
-    "Forecasting",
-    "Temperature",
-    "Oxygen",
-    "NEON"
   )
 )
 
