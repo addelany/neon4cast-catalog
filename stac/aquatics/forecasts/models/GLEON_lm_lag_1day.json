@@ -42,7 +42,25 @@
     ]
   },
   "properties": {
-    "datetime": "2023-04-26T00:00:00Z"
+    "datetime": "2023-04-26T00:00:00Z",
+    "providers": [
+      {
+        "url": "camille.minaudo@ub.edu",
+        "name": "Camille Minaudo",
+        "roles": [
+          "producer",
+          "processor",
+          "licensor"
+        ]
+      },
+      {
+        "url": "https://ecoforecast.org",
+        "name": "Ecoforecast Challenge",
+        "roles": [
+          "host"
+        ]
+      }
+    ]
   },
   "collection": "forecast",
   "links": [
@@ -85,23 +103,5 @@
     "Temperature",
     "Oxygen",
     "NEON"
-  ],
-  "providers": [
-    {
-      "url": "camille.minaudo@ub.edu",
-      "name": "Camille Minaudo",
-      "roles": [
-        "producer",
-        "processor",
-        "licensor"
-      ]
-    },
-    {
-      "url": "https://ecoforecast.org",
-      "name": "Ecoforecast Challenge",
-      "roles": [
-        "host"
-      ]
-    }
   ]
 }

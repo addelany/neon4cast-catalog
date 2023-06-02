@@ -22,7 +22,25 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     )
   ),
   "properties"= list(
-    "datetime"= "2023-04-26T00:00:00Z"
+    "datetime"= "2023-04-26T00:00:00Z",
+    "providers"= list(
+      list(
+        "url"= email,
+        "name"= paste(first_name,last_name),
+        "roles"= list(
+          "producer",
+          "processor",
+          "licensor"
+        )
+      ),
+      list(
+        "url"= "https://ecoforecast.org",
+        "name"= "Ecoforecast Challenge",
+        "roles"= list(
+          "host"
+        )
+      )
+    )
   ),
   "collection"= "forecast",
   "links"= list(
@@ -71,24 +89,6 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     "Temperature",
     "Oxygen",
     "NEON"
-  ),
-  "providers"= list(
-    list(
-      "url"= email,
-      "name"= paste(first_name,last_name),
-      "roles"= list(
-        "producer",
-        "processor",
-        "licensor"
-      )
-    ),
-    list(
-      "url"= "https://ecoforecast.org",
-      "name"= "Ecoforecast Challenge",
-      "roles"= list(
-        "host"
-      )
-    )
   )
 )
 
