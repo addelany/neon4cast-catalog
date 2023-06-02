@@ -39,15 +39,14 @@ build_model <- function(model_id, team_name, model_description, first_name, last
         "roles"= list(
           "host"
         )
-      ),
-      "license"= "CC0-1.0",
-      "keywords"= list(
-        "Forecasting",
-        "Temperature",
-        "Oxygen",
-        "NEON"
       )
-    )
+    ),
+    "license"= "CC0-1.0",
+    "keywords"= list(
+      "Forecasting",
+      "Temperature",
+      "Oxygen",
+      "NEON")
   ),
   "collection"= "forecast",
   "links"= list(
@@ -135,6 +134,7 @@ model_docs <- model_docs |>
 for (m in aquatic_models$model.id){
 
   if (m %in% model_docs$model.id){
+    print('has metadata')
 
     idx = which(model_docs$model.id == m)
 

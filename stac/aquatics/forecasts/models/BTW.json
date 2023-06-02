@@ -43,8 +43,8 @@
   },
   "properties": {
     "datetime": "2023-04-26T00:00:00Z",
-    "providers": {
-      "1": {
+    "providers": [
+      {
         "url": "pchanson@wisc.edu",
         "name": "Paul Hanson",
         "roles": [
@@ -53,21 +53,21 @@
           "licensor"
         ]
       },
-      "2": {
+      {
         "url": "https://ecoforecast.org",
         "name": "Ecoforecast Challenge",
         "roles": [
           "host"
         ]
-      },
-      "license": "CC0-1.0",
-      "keywords": [
-        "Forecasting",
-        "Temperature",
-        "Oxygen",
-        "NEON"
-      ]
-    }
+      }
+    ],
+    "license": "CC0-1.0",
+    "keywords": [
+      "Forecasting",
+      "Temperature",
+      "Oxygen",
+      "NEON"
+    ]
   },
   "collection": "forecast",
   "links": [
