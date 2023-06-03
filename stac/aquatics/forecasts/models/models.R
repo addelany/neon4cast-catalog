@@ -22,7 +22,31 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     )
   ),
   "properties"= list(
-    "datetime"= "2023-04-26T00:00:00Z"
+    "datetime"= "2023-04-26T00:00:00Z",
+    "providers"= list(
+      list(
+        "url"= email,
+        "name"= paste(first_name,last_name),
+        "roles"= list(
+          "producer",
+          "processor",
+          "licensor"
+        )
+      ),
+      list(
+        "url"= "https://ecoforecast.org",
+        "name"= "Ecoforecast Challenge",
+        "roles"= list(
+          "host"
+        )
+      )
+    ),
+    "license"= "CC0-1.0",
+    "keywords"= list(
+      "Forecasting",
+      "Temperature",
+      "Oxygen",
+      "NEON")
   ),
   "collection"= "forecast",
   "links"= list(
@@ -63,31 +87,6 @@ build_model <- function(model_id, team_name, model_description, first_name, last
       "type"= "application/x-parquet",
       "title"= team_name,
       "description"= readr::read_file("stac/aquatics/forecasts/models/asset-description.Rmd")
-    )
-  ),
-   "license"= "CC0-1.0",
-  "keywords"= list(
-    "Forecasting",
-    "Temperature",
-    "Oxygen",
-    "NEON"
-  ),
-  "providers"= list(
-    list(
-      "url"= email,
-      "name"= paste(first_name,last_name),
-      "roles"= list(
-        "producer",
-        "processor",
-        "licensor"
-      )
-    ),
-    list(
-      "url"= "https://ecoforecast.org",
-      "name"= "Ecoforecast Challenge",
-      "roles"= list(
-        "host"
-      )
     )
   )
 )
@@ -135,6 +134,7 @@ model_docs <- model_docs |>
 for (m in aquatic_models$model.id){
 
   if (m %in% model_docs$model.id){
+    print('has metadata')
 
     idx = which(model_docs$model.id == m)
 
