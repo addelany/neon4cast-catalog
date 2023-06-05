@@ -16,7 +16,7 @@ generate_model_items <- function(){
 build_forecast <- function(table_schema, table_description){
   forecast <- list(
     "id" = "aquatics-forecasts",
-    "description" = "pending",
+    "description" = "Forecasts contain the raw forecast output from the Aquatics forecast theme. These forecast outputs have not been scored. Forecast scores are contained in the 'Scores' collection",
     "stac_version"= "1.0.0",
     "license"= "CC0-1.0",
     "stac_extensions"= list("https://stac-extensions.github.io/scientific/v1.0.0/schema.json",

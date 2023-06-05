@@ -5,13 +5,13 @@ build_aquatics <- function(){
     "type" = "Collection",
     "links" = list(
       list(
-        "rel" = "item",
+        "rel" = "child",
         "type" = "application/json",
         "href" = 'forecasts/collection.json',
         "title" = 'forecast item'
       ),
       list(
-        "rel" = "item",
+        "rel" = "child",
         "type" = "application/json",
         "href" = 'scores/collection.json',
         "title" = 'scores item'

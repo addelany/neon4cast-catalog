@@ -13,13 +13,11 @@ catalog <- list(
     list(
       "rel"= "self",
       "type"= "application/json",
-      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
       "href" = 'catalog.json'
     ),
     list(
       "rel"= "root",
       "type"= "application/json",
-      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/catalog.json"
       "href" = 'catalog.json'
     ),
 
@@ -27,39 +25,34 @@ catalog <- list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "NOAA Global Ensemble Forecast System",
-      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/noaa.json"
-      "href" = 'noaa/noaa.json'
+      "href" = 'noaa/collection.json'
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Aquatics Forecast Challenge",
-      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json"
-      "href" = 'aquatics/aquatics.json'
+      "href" = 'aquatics/collection.json'
 
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Beetles Forecast Challenge",
-      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/beetles.json"
-      "href" = 'beetles/beetles.json'
+      "href" = 'beetles/collection.json'
 
       ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Terrestrial Forecast Challenge",
-      #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/terrestrial.json"
-      "href" = '=terrestrial/terrestrial.json'
+      "href" = '=terrestrial/collection.json'
 
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Phenology Forecast Challenge",
-      #"href"= "https=:/projects.ecoforecast.org/neon4cast-catalog/stac/phenology.json"
-      "href" = 'pheonology/phenology.json'
+      "href" = 'pheonology/collection.json'
 
     )
   )
