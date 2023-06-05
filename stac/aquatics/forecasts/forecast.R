@@ -7,7 +7,6 @@ generate_model_items <- function(){
     list(
       "rel" = 'item',
       'type'= 'application/json',
-      #'href' = paste0("https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/",i,'.json'))
       'href' = paste0('models/',i,'.json'))
   )
 
@@ -29,20 +28,17 @@ build_forecast <- function(table_schema, table_description){
     list(
     "rel" = "parent",
     "type"= "application/json",
-    #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
-    "href" = '../aquatics.json'
+    "href" = '../collection.json'
     ),
     list(
       "rel" = "root",
       "type" = "application/json",
-      #"href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
-      "href" = '../aquatics.json'
+      "href" = '../collection.json'
     ),
     list(
       "rel" = "self",
       "type" = "application/json",
-      #"href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json"
-      "href" = 'forecast.json'
+      "href" = 'collection.json'
     ),
     list(
       "rel" = "cite-as",
@@ -80,7 +76,7 @@ build_forecast <- function(table_schema, table_description){
 
 
   dest <- "stac/aquatics/forecasts/"
-  json <- file.path(dest, "forecast.json")
+  json <- file.path(dest, "collection.json")
 
   jsonlite::write_json(forecast,
                        json,
