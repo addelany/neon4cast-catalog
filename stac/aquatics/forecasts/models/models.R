@@ -1,4 +1,4 @@
-build_model <- function(model_id, team_name, model_description, first_name, last_name, email) {
+build_model <- function(model_id, team_name, model_description, first_name, last_name, email, start_date, end_date) {
 
 
   meta <- list(
@@ -22,7 +22,9 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     )
   ),
   "properties"= list(
-    "datetime"= "2023-04-26T00:00:00Z",
+    "datetime"= NULL,
+    "start_datetime" = start_date,
+    "end_datetme" = end_date,
     "providers"= list(
       list(
         "url"= email,
@@ -100,6 +102,22 @@ build_model <- function(model_id, team_name, model_description, first_name, last
 
 }
 
+get_grouping <- function(s3_inv,
+                         theme,
+                         collapse=TRUE,
+                         endpoint="data.ecoforecast.org") {
+
+  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
+    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
+    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
+    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
+                  reference_datetime =
+                    gsub("reference_datetime=", "", reference_datetime),
+                  date = gsub("date=", "", date)) |>
+    dplyr::collect()
+
+}
+
 ## read in model documentation and only grab models for Aquatics theme
 library(tidyverse)
 library(arrow)
@@ -125,9 +143,18 @@ model_docs <- model_docs |>
          model.id = `model-id`, model.description = `model-description`) |>
   mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
+## READ S3 INVENTORY FOR DATES
+s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
+                          endpoint_override = "data.ecoforecast.org",
+                          anonymous = TRUE)
+
+s3_df <- get_grouping(s3_inventory, "aquatics")
 
 ## loop over model ids and extract components if present in metadata table
 for (m in aquatic_models$model.id){
+  model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
+  model_min_date <- model_date_range$`min(date)`
+  model_max_date <- model_date_range$`max(date)`
 
   if (m %in% model_docs$model.id){
     print('has metadata')
@@ -139,7 +166,9 @@ for (m in aquatic_models$model.id){
                 model_description = model_docs[idx,'model.description'],
                 first_name = model_docs$first.name[idx],
                 last_name = model_docs$last.name[idx],
-                email = model_docs$email[idx])
+                email = model_docs$email[idx],
+                model_min_date,
+                model_max_date)
   } else{
 
     build_model(model_id = m,
@@ -147,6 +176,8 @@ for (m in aquatic_models$model.id){
                 model_description = 'pending',
                 first_name = 'pending',
                 last_name = 'pending',
-                email = 'pending')
+                email = 'pending',
+                model_min_date,
+                model_max_date)
   }
 }
