@@ -7,7 +7,6 @@ generate_model_items <- function(){
     list(
       "rel" = 'item',
       'type'= 'application/json',
-      #'href' = paste0("https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/",i,'.json'))
       'href' = paste0('models/',i,'.json'))
   )
 
@@ -17,7 +16,7 @@ generate_model_items <- function(){
 build_scores <- function(table_schema, table_description){
   scores <- list(
     "id" = "aquatics-scores",
-    "description" = "pending",
+    "description" = "Scores contains the scored forecasts from the Aquatics forecast theme. These are summarized and scored versions of the raw forecast output. The raw forecasts are located in the 'Forecasts' collection.",
     "stac_version"= "1.0.0",
     "license"= "CC0-1.0",
     "stac_extensions"= list("https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
@@ -29,20 +28,17 @@ build_scores <- function(table_schema, table_description){
       list(
         "rel" = "parent",
         "type"= "application/json",
-        #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
-        "href" = '../aquatics.json'
+        "href" = '../collection.json'
       ),
       list(
         "rel" = "root",
         "type" = "application/json",
-        #"href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/aquatics.json"
-        "href" = '../aquatics.json'
+        "href" = '../collection.json'
       ),
       list(
         "rel" = "self",
         "type" = "application/json",
-        #"href" = "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/forecast.json"
-        "href" = 'scores.json'
+        "href" = 'collection.json'
       ),
       list(
         "rel" = "cite-as",
@@ -80,7 +76,7 @@ build_scores <- function(table_schema, table_description){
 
 
   dest <- "stac/aquatics/scores/"
-  json <- file.path(dest, "scores.json")
+  json <- file.path(dest, "collection.json")
 
   jsonlite::write_json(scores,
                        json,

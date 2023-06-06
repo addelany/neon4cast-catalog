@@ -5,36 +5,39 @@ build_aquatics <- function(){
     "type" = "Collection",
     "links" = list(
       list(
-        "rel" = "item",
+        "rel" = "child",
         "type" = "application/json",
-        #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts"
-        "href" = 'forecasts/forecast.json'
+        "href" = 'forecasts/collection.json',
+        "title" = 'forecast item'
       ),
       list(
-        "rel" = "item",
+        "rel" = "child",
         "type" = "application/json",
-        #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts",
-        "href" = 'scores/scores.json'
+        "href" = 'scores/collection.json',
+        "title" = 'scores item'
       ),
       list(
         "rel"= "parent",
         "type"= "application/json",
-        "href"= "../catalog.json"
+        "href"= "../catalog.json",
+        "title" = 'parent'
       ),
       list(
         "rel"= "root",
         "type"= "application/json",
-        "href"= "../catalog.json"
+        "href"= "../catalog.json",
+        "title" = 'root'
       ),
       list(
         "rel"= "self",
         "type"= "application/json",
-        #"href"= "https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics.json",
-        "href" = 'aquatics.json'
+        "href" = 'collection.json',
+        "title" = 'self'
       ),
       list(
         "rel" ="cite-as",
-        "href"= "https://doi.org/10.1002/fee.2616"
+        "href"= "https://doi.org/10.1002/fee.2616",
+        "title" = "citation"
       ),
       list(
         "rel"= "about",
@@ -108,7 +111,7 @@ build_aquatics <- function(){
 
 
   dest <- "stac/aquatics/"
-  json <- file.path(dest, "aquatics.json")
+  json <- file.path(dest, "collection.json")
 
   jsonlite::write_json(aquatics,
                        json,
