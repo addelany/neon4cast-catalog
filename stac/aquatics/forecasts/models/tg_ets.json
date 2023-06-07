@@ -1,9 +1,5 @@
 {
-  "description": [
-    {
-      "model.description": "ets model fit individually at all sites"
-    }
-  ],
+  "description": "ets model fit individually at all sites",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -44,7 +40,7 @@
   "properties": {
     "datetime": {},
     "start_datetime": "2022-09-21",
-    "end_datetme": "2023-07-05",
+    "end_datetme": "2023-07-06",
     "providers": [
       {
         "url": "aslewis@vt.edu",

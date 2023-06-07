@@ -1,9 +1,5 @@
 {
-  "description": [
-    {
-      "model.description": "Process-based lake temperature model that uses atmospheric driver data to project surface water temperature."
-    }
-  ],
+  "description": "Process-based lake temperature model that uses atmospheric driver data to project surface water temperature.",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",

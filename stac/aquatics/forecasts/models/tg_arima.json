@@ -1,9 +1,5 @@
 {
-  "description": [
-    {
-      "model.description": "Auto.arima() function for each variable"
-    }
-  ],
+  "description": "Auto.arima() function for each variable",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -44,7 +40,7 @@
   "properties": {
     "datetime": {},
     "start_datetime": "2021-12-18",
-    "end_datetme": "2023-07-05",
+    "end_datetme": "2023-07-06",
     "providers": [
       {
         "url": "aslewis@vt.edu",

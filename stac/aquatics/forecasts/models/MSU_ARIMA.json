@@ -1,9 +1,5 @@
 {
-  "description": [
-    {
-      "model.description": ""
-    }
-  ],
+  "description": "",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",

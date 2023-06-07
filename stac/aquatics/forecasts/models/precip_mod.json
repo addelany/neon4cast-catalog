@@ -1,9 +1,5 @@
 {
-  "description": [
-    {
-      "model.description": "I used precipitation with a lag to predict water temperature."
-    }
-  ],
+  "description": "I used precipitation with a lag to predict water temperature.",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",

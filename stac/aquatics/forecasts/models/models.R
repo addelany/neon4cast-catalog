@@ -163,7 +163,7 @@ for (m in aquatic_models$model.id){
 
     build_model(model_id = model_docs$model.id[idx],
                 team_name = model_docs$team.name[idx],
-                model_description = model_docs[idx,'model.description'],
+                model_description = model_docs[idx,'model.description'][[1]],
                 first_name = model_docs$first.name[idx],
                 last_name = model_docs$last.name[idx],
                 email = model_docs$email[idx],

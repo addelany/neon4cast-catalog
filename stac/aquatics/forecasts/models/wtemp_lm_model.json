@@ -1,9 +1,5 @@
 {
-  "description": [
-    {
-      "model.description": "Linear modeling between using forecasted air temperature values"
-    }
-  ],
+  "description": "Linear modeling between using forecasted air temperature values",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",

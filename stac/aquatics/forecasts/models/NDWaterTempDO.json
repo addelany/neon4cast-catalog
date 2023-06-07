@@ -1,9 +1,5 @@
 {
-  "description": [
-    {
-      "model.description": "Used a linear model to forecast future water temperature from NOAA air temperature, which was then used as a single driver in a previously random walk model"
-    }
-  ],
+  "description": "Used a linear model to forecast future water temperature from NOAA air temperature, which was then used as a single driver in a previously random walk model",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",

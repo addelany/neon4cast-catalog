@@ -40,7 +40,7 @@
   "properties": {
     "datetime": {},
     "start_datetime": "2022-11-26",
-    "end_datetme": "2023-06-04",
+    "end_datetme": "2023-06-06",
     "providers": [
       {
         "url": "pending",
