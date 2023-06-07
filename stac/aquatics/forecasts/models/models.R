@@ -2,7 +2,6 @@ build_model <- function(model_id, team_name, model_description, first_name, last
 
 
   meta <- list(
-  "description" = model_description,
   "stac_version"= "1.0.0",
   "stac_extensions"= list(),
   "type"= "Feature",
@@ -22,7 +21,7 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     )
   ),
   "properties"= list(
-    "datetime"= NULL,
+    'description' = model_description,
     "start_datetime" = start_date,
     "end_datetme" = end_date,
     "providers"= list(

@@ -1,5 +1,4 @@
 {
-  "description": "ets model fit individually at all sites",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "datetime": {},
+    "description": "ets model fit individually at all sites",
     "start_datetime": "2022-09-21",
     "end_datetme": "2023-07-06",
     "providers": [

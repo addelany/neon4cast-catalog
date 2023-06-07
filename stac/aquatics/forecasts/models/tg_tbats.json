@@ -1,5 +1,4 @@
 {
-  "description": "tbats model (from forecast package in R)",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "datetime": {},
+    "description": "tbats model (from forecast package in R)",
     "start_datetime": "2022-09-21",
     "end_datetme": "2023-07-06",
     "providers": [

@@ -1,5 +1,4 @@
 {
-  "description": "A linear relationship between air temperature and the variable of interest. Calculated collectively across all sites, with an additive factor for site ID",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "datetime": {},
+    "description": "A linear relationship between air temperature and the variable of interest. Calculated collectively across all sites, with an additive factor for site ID",
     "start_datetime": "2023-01-25",
     "end_datetme": "2023-07-10",
     "providers": [

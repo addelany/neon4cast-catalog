@@ -1,5 +1,4 @@
 {
-  "description": "I used precipitation with a lag to predict water temperature.",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "datetime": {},
+    "description": "I used precipitation with a lag to predict water temperature.",
     "start_datetime": "2022-12-24",
     "end_datetme": "2023-04-28",
     "providers": [

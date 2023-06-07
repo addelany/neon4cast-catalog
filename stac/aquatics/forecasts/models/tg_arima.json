@@ -1,5 +1,4 @@
 {
-  "description": "Auto.arima() function for each variable",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "datetime": {},
+    "description": "Auto.arima() function for each variable",
     "start_datetime": "2021-12-18",
     "end_datetme": "2023-07-06",
     "providers": [

@@ -1,5 +1,4 @@
 {
-  "description": "pending",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "datetime": {},
+    "description": "pending",
     "start_datetime": "2022-08-25",
     "end_datetme": "2023-07-10",
     "providers": [

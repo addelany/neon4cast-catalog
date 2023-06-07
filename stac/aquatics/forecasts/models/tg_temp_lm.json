@@ -1,5 +1,4 @@
 {
-  "description": "linear model between air temp and all response variables",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "datetime": {},
+    "description": "linear model between air temp and all response variables",
     "start_datetime": "2021-12-18",
     "end_datetme": "2023-07-10",
     "providers": [

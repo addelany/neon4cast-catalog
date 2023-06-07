@@ -1,5 +1,4 @@
 {
-  "description": "DESCRIPTION OBJECT",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "DESCRIPTION OBJECT",
+    "description": "",
     "start_datetime": "2021-05-01",
     "end_datetme": "2021-05-08",
     "providers": [
