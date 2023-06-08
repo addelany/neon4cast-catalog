@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# example title\n\n_author names in italics_\n\nFurther text with value",
     "start_datetime": "2021-05-01",
     "end_datetme": "2021-05-08",
     "providers": [

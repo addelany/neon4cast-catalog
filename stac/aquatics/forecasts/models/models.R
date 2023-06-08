@@ -21,7 +21,13 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     )
   ),
   "properties"= list(
-    'description' = model_description,
+    #'description' = model_description,
+    "description" = glue::glue('# example title
+
+_author names in italics_
+
+Further text with value
+'),
     "start_datetime" = start_date,
     "end_datetme" = end_date,
     "providers"= list(
@@ -150,7 +156,7 @@ s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
 s3_df <- get_grouping(s3_inventory, "aquatics")
 
 ## loop over model ids and extract components if present in metadata table
-for (m in aquatic_models$model.id){
+for (m in aquatic_models$model.id[1:2]){
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`
   model_max_date <- model_date_range$`max(date)`

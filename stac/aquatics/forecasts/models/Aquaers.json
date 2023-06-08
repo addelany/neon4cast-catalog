@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "pending",
+    "description": "# example title\n\n_author names in italics_\n\nFurther text with value",
     "start_datetime": "2023-04-12",
     "end_datetme": "2023-05-11",
     "providers": [
