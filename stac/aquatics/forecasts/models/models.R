@@ -24,9 +24,9 @@ build_model <- function(model_id, team_name, model_description, first_name, last
     #'description' = model_description,
     "description" = glue::glue('# {team_name}
 
-author: _{first_name} {last_name}_
+Author: _{first_name} {last_name}_
 
-description: {model_description}
+Description: {model_description}
 '),
     "start_datetime" = start_date,
     "end_datetme" = end_date,
@@ -138,15 +138,72 @@ aquatic_models <- models_df |>
   tidyr::separate(...3, c('name','model.id'), "=")
 
 
+
+new_columns <- c('first.name.one',
+                 'last.name.one',
+                 'affiliation.one',
+                 'email.one',
+                 'team.name',
+                 'first.name.two',
+                 'last.name.two',
+                 'affiliation.two',
+                 'email.two',
+                 'first.name.three',
+                 'last.name.three',
+                 'affiliation.three',
+                 'email.two.three',
+                 'first.name.four',
+                 'last.name.four',
+                 'affiliation.four',
+                 'email.four',
+                 'first.name.five',
+                 'last.name.five',
+                 'affiliation.five',
+                 'email.five',
+                 'first.name.six',
+                 'last.name.six',
+                 'affiliation.six',
+                 'email.six',
+                 'first.name.seven',
+                 'last.name.seven',
+                 'affiliation.seven',
+                 'email.seven',
+                 'first.name.eight',
+                 'last.name.eight',
+                 'affiliation.eight',
+                 'email.eight',
+                 'first.name.nine',
+                 'last.name.nine',
+                 'affiliation.nine',
+                 'email.nine',
+                 'first.name.ten',
+                 'last.name.ten',
+                 'affiliation.ten',
+                 'email.ten',
+                 'team.category',
+                 'theme',
+                 'model.id',
+                 'model.description',
+                 'model.uncertainty'
+                 )
+
+# model_docs <- model_docs |>
+#   filter(Theme == 'Aquatic Ecosystems') |>
+#   select(`team-name`, `First Name`, `Last Name`, `Email address`, `model-id`, `model-description`) |>
+#   rename(team.name = `team-name`, first.name = `First Name`, last.name = `Last Name`, email = `Email address`,
+#          model.id = `model-id`, model.description = `model-description`) |>
+#   mutate(model.description = ifelse(is.na(model.description),'',model.description))
+
 ## READ IN MODEL METADATA
 model_docs <- read_csv('NEON_Challenge_Registration_2023-05-23.csv')
 
 model_docs <- model_docs |>
-  filter(Theme == 'Aquatic Ecosystems') |>
-  select(`team-name`, `First Name`, `Last Name`, `Email address`, `model-id`, `model-description`) |>
-  rename(team.name = `team-name`, first.name = `First Name`, last.name = `Last Name`, email = `Email address`,
-         model.id = `model-id`, model.description = `model-description`) |>
-  mutate(model.description = ifelse(is.na(model.description),'',model.description))
+  select(`First Name`:`Email address`,
+         `team-name`,
+         `Team Member 2 - First Name` :`Team Member 10 - Email`,
+         Team.Category:`model-uncertainty`)
+
+names(model_docs) <- new_columns
 
 ## READ S3 INVENTORY FOR DATES
 s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
