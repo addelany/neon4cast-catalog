@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# waterbears_gp\n\nauthor: _Lin Huang_\n\ndescription: ",
     "start_datetime": "2021-05-01",
     "end_datetme": "2021-05-07",
     "providers": [

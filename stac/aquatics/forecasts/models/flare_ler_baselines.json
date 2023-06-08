@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "pending",
+    "description": "# pending\n\nauthor: _pending pending_\n\ndescription: pending",
     "start_datetime": "2023-03-28",
-    "end_datetme": "2023-07-05",
+    "end_datetme": "2023-07-06",
     "providers": [
       {
         "url": "pending",

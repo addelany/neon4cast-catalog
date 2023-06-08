@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "tbats model (from forecast package in R)",
+    "description": "# EFI Theory\n\nauthor: _Abigail Lewis_\n\ndescription: tbats model (from forecast package in R)",
     "start_datetime": "2022-09-21",
-    "end_datetme": "2023-07-06",
+    "end_datetme": "2023-07-07",
     "providers": [
       {
         "url": "aslewis@vt.edu",

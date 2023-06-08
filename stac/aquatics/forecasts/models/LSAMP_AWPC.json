@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# LSAMP REU AWPC\n\nauthor: _Alyssa Willson_\n\ndescription: ",
     "start_datetime": "2021-07-02",
     "end_datetme": "2021-08-07",
     "providers": [

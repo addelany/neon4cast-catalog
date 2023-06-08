@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "linear model between air temp and all response variables",
+    "description": "# EFI Theory\n\nauthor: _Abigail Lewis_\n\ndescription: linear model between air temp and all response variables",
     "start_datetime": "2021-12-18",
-    "end_datetme": "2023-07-10",
+    "end_datetme": "2023-07-11",
     "providers": [
       {
         "url": "aslewis@vt.edu",

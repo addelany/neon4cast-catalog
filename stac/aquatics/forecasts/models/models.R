@@ -22,11 +22,11 @@ build_model <- function(model_id, team_name, model_description, first_name, last
   ),
   "properties"= list(
     #'description' = model_description,
-    "description" = glue::glue('# example title
+    "description" = glue::glue('# {team_name}
 
-_author names in italics_
+author: _{first_name} {last_name}_
 
-Further text with value
+description: {model_description}
 '),
     "start_datetime" = start_date,
     "end_datetme" = end_date,

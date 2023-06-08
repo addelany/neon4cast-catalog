@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "ets model fit individually at all sites",
+    "description": "# EFI Theory\n\nauthor: _Abigail Lewis_\n\ndescription: ets model fit individually at all sites",
     "start_datetime": "2022-09-21",
-    "end_datetme": "2023-07-06",
+    "end_datetme": "2023-07-07",
     "providers": [
       {
         "url": "aslewis@vt.edu",

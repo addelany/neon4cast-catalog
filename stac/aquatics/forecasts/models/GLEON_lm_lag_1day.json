@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "To predict water temperature, the model uses a multilinear regression with air temperature and water temperature from the previous day.\nwater_temperature(t) ~ air_temperature(t) + water_temperature(t-1)\nFirts, the model is used to fill the gaps until day t0 = last day with air_temperature observation.\nThen we use the last water_temperature observation to predict the first day of water_temperature\nThen we use iterativelly the predictions to forecast the upcoming day.\n\nOxygen concentration is predicted assuming air-water equilibrium only.",
+    "description": "# Camille Minaudo\n\nauthor: _Camille Minaudo_\n\ndescription: To predict water temperature, the model uses a multilinear regression with air temperature and water temperature from the previous day.\nwater_temperature(t) ~ air_temperature(t) + water_temperature(t-1)\nFirts, the model is used to fill the gaps until day t0 = last day with air_temperature observation.\nThen we use the last water_temperature observation to predict the first day of water_temperature\nThen we use iterativelly the predictions to forecast the upcoming day.\n\nOxygen concentration is predicted assuming air-water equilibrium only.",
     "start_datetime": "2022-10-30",
     "end_datetme": "2023-04-14",
     "providers": [

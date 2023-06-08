@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "Process-based lake temperature model that uses atmospheric driver data to project surface water temperature.",
+    "description": "# XYRL Physics Model\n\nauthor: _Xiao Yang_\n\ndescription: Process-based lake temperature model that uses atmospheric driver data to project surface water temperature.",
     "start_datetime": "2022-11-01",
     "end_datetme": "2023-06-29",
     "providers": [

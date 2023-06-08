@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "I used precipitation with a lag to predict water temperature.",
+    "description": "# Chloe Faehndrich\n\nauthor: _Chloe Faehndrich_\n\ndescription: I used precipitation with a lag to predict water temperature.",
     "start_datetime": "2022-12-24",
     "end_datetme": "2023-04-28",
     "providers": [

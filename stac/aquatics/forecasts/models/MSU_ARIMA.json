@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# MSU ARIMA\n\nauthor: _Elizabeth Mohr_\n\ndescription: ",
     "start_datetime": "2021-07-01",
     "end_datetme": "2021-07-07",
     "providers": [

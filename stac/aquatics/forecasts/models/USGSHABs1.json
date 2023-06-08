@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# USGS HABs Proxies\n\nauthor: _Jacob Zwart_\n\ndescription: ",
     "start_datetime": "2022-09-01",
-    "end_datetme": "2023-07-09",
+    "end_datetme": "2023-07-10",
     "providers": [
       {
         "url": "jzwart@usgs.gov",

@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "Used a linear model to forecast future water temperature from NOAA air temperature, which was then used as a single driver in a previously random walk model",
+    "description": "# Notre Dame Aquatic DO\n\nauthor: _Ian Shuman_\n\ndescription: Used a linear model to forecast future water temperature from NOAA air temperature, which was then used as a single driver in a previously random walk model",
     "start_datetime": "2017-08-27",
     "end_datetme": "2023-01-15",
     "providers": [
