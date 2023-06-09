@@ -1,9 +1,4 @@
 {
-  "description": [
-    {
-      "model.description": "Linear modeling between using forecasted air temperature values"
-    }
-  ],
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -42,7 +37,9 @@
     ]
   },
   "properties": {
-    "datetime": "2023-04-26T00:00:00Z",
+    "description": "# VT Challenge Spring 2023\n\nauthor: _Austin Delany_\n\ndescription: Linear modeling between using forecasted air temperature values",
+    "start_datetime": "2023-01-09",
+    "end_datetme": "2023-02-09",
     "providers": [
       {
         "url": "addelany@vt.edu",
@@ -73,7 +70,7 @@
   "links": [
     {
       "rel": "collection",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
@@ -85,7 +82,7 @@
     },
     {
       "rel": "parent",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },

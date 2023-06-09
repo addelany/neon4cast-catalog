@@ -1,9 +1,4 @@
 {
-  "description": [
-    {
-      "model.description": "Auto.arima() function for each variable"
-    }
-  ],
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -42,7 +37,9 @@
     ]
   },
   "properties": {
-    "datetime": "2023-04-26T00:00:00Z",
+    "description": "# EFI Theory\n\nauthor: _Abigail Lewis_\n\ndescription: Auto.arima() function for each variable",
+    "start_datetime": "2021-12-18",
+    "end_datetme": "2023-07-07",
     "providers": [
       {
         "url": "aslewis@vt.edu",
@@ -73,7 +70,7 @@
   "links": [
     {
       "rel": "collection",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
@@ -85,7 +82,7 @@
     },
     {
       "rel": "parent",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },

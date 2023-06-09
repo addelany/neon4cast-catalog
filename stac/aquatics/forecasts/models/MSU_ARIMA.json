@@ -1,9 +1,4 @@
 {
-  "description": [
-    {
-      "model.description": ""
-    }
-  ],
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -42,7 +37,9 @@
     ]
   },
   "properties": {
-    "datetime": "2023-04-26T00:00:00Z",
+    "description": "# MSU ARIMA\n\nauthor: _Elizabeth Mohr_\n\ndescription: ",
+    "start_datetime": "2021-07-01",
+    "end_datetme": "2021-07-07",
     "providers": [
       {
         "url": "elizabethjmohr@gmail.com",
@@ -73,7 +70,7 @@
   "links": [
     {
       "rel": "collection",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
@@ -85,7 +82,7 @@
     },
     {
       "rel": "parent",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },

@@ -1,5 +1,4 @@
 {
-  "description": "pending",
   "stac_version": "1.0.0",
   "stac_extensions": [],
   "type": "Feature",
@@ -38,7 +37,9 @@
     ]
   },
   "properties": {
-    "datetime": "2023-04-26T00:00:00Z",
+    "description": "# pending\n\nauthor: _pending pending_\n\ndescription: pending",
+    "start_datetime": "2023-03-02",
+    "end_datetme": "2023-07-06",
     "providers": [
       {
         "url": "pending",
@@ -69,7 +70,7 @@
   "links": [
     {
       "rel": "collection",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
@@ -81,7 +82,7 @@
     },
     {
       "rel": "parent",
-      "href": "../forecast.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "Aquatics Forecasts"
     },
