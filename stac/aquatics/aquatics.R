@@ -1,4 +1,4 @@
-build_aquatics <- function(){
+build_aquatics <- function(start_date,end_date){
 
   aquatics <- list(
     "id" = 'efi-aquatics',
@@ -52,7 +52,7 @@ build_aquatics <- function(){
         "type"= "text/html"
       )
     ),
-    "title"= "Ecological Forecasting Initiative - Aquatics Forecasts",
+    "title"= "Ecological Forecasting Initiative - Aquatics",
     'assets' = list(
       'thumbnail' = list(
         "href"= "https://projects.ecoforecast.org/neon4cast-catalog/img/neon_buoy.jpg",
@@ -70,8 +70,8 @@ build_aquatics <- function(){
       ),
       "temporal" = list(
         'interval' = list(list(
-          "2020-09-01T00:00:00Z",
-          "2023-04-11T00:00:00Z")
+          paste0(start_date,'T00:00:00Z'),
+          paste0(end_date,'T00:00:00Z'))
         ))
     ),
     "license" = "CC0-1.0",
@@ -96,7 +96,7 @@ build_aquatics <- function(){
         "roles" = list('host')
       )
     ),
-    "description" = "The [Ecological Forecasting Initiative](https://ecoforecast.org)",
+    "description" = "This page contains raw forecasts and forecast scores, which are summarized forecasts with evaluation metrics",
     "stac_version" = "1.0.0",
     "stac_extensions" = list(
       "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
@@ -120,5 +120,33 @@ build_aquatics <- function(){
   stac4cast::stac_validate(json)
 }
 
+get_grouping <- function(s3_inv,
+                         theme,
+                         collapse=TRUE,
+                         endpoint="data.ecoforecast.org") {
 
-build_aquatics()
+  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
+    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
+    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
+    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
+                  reference_datetime =
+                    gsub("reference_datetime=", "", reference_datetime),
+                  date = gsub("date=", "", date)) |>
+    dplyr::collect()
+
+}
+
+## READ S3 INVENTORY FOR DATES
+s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
+                                 endpoint_override = "data.ecoforecast.org",
+                                 anonymous = TRUE)
+
+s3_df <- get_grouping(s3_inventory, "aquatics")
+
+s3_df <- s3_df |> filter(model_id != 'null')
+
+theme_max_date <- max(s3_df$date)
+theme_min_date <- min(s3_df$date)
+
+
+build_aquatics(theme_max_date, theme_min_date)

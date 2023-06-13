@@ -50,7 +50,7 @@
       "type": "text/html"
     }
   ],
-  "title": "Ecological Forecasting Initiative - Aquatics Forecasts",
+  "title": "Ecological Forecasting Initiative - Aquatics",
   "assets": {
     "thumbnail": {
       "href": "https://projects.ecoforecast.org/neon4cast-catalog/img/neon_buoy.jpg",
@@ -75,8 +75,8 @@
     "temporal": {
       "interval": [
         [
-          "2020-09-01T00:00:00Z",
-          "2023-04-11T00:00:00Z"
+          "2023-07-16T00:00:00Z",
+          "2017-08-27T00:00:00Z"
         ]
       ]
     }
