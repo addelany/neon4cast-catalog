@@ -20,7 +20,7 @@
     {
       "rel": "self",
       "type": "application/json",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/noaa.json"
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/stac/v1/collection.json"
     },
     {
       "rel": "cite-as",
