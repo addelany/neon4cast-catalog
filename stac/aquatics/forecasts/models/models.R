@@ -36,7 +36,8 @@ generate_authors <- function(metadata_available){
   return(x)
 }
 
-build_model <- function(model_id, team_name, model_description, start_date, end_date, use_metadata) {
+
+build_model <- function(model_id, team_name, model_description, start_date, end_date, use_metadata, var_values, site_values) {
 
 
   meta <- list(
@@ -59,15 +60,15 @@ build_model <- function(model_id, team_name, model_description, start_date, end_
     )
   ),
   "properties"= list(
-  'description' = model_description,
-#     "description" = glue::glue('# {team_name}
-#
-# Variables: _List of Variables_
-# Sites: _List of Sites_
-# Keywords: _List of Keywords_
-#
-# Description: {model_description}
-# '),
+  #'description' = model_description,
+    "description" = glue::glue('# {team_name}
+
+Variables: {var_values}
+Sites: {site_values}
+Keywords: "Forecasting, NEON"
+
+Description: {model_description}
+'),
     "start_datetime" = start_date,
     "end_datetime" = end_date,
     "providers"= c(generate_authors(metadata_available = use_metadata),list(
@@ -154,6 +155,18 @@ get_grouping <- function(s3_inv,
     dplyr::collect()
 
 }
+
+generate_vars_sites <- function(m_id){
+
+  # do this for each theme / model
+  info_df <- arrow::open_dataset(info_extract$path(glue::glue("aquatics/model_id={m_id}/"))) |> collect()
+
+  vars <- unique(info_df$variable)
+  sites <- unique(info_df$site_id)
+
+  output_info <- c(paste(vars, collapse = ', '),
+                   paste(sites, collapse = ', '))
+  }
 
 ## read in model documentation and only grab models for Aquatics theme
 library(tidyverse)
@@ -261,11 +274,19 @@ s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
 
 s3_df <- get_grouping(s3_inventory, "aquatics")
 
+
+info_extract <- arrow::s3_bucket("neon4cast-forecasts/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
+
 ## loop over model ids and extract components if present in metadata table
 for (m in aquatic_models$model.id){
+  print(m)
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`
   model_max_date <- model_date_range$`max(date)`
+
+  model_var_site_info <- generate_vars_sites(m_id = m)
+  # print(model_var_site_info[[1]])
+  # print(model_var_site_info[[2]])
 
   if (m %in% model_docs$model.id){
     print('has metadata')
@@ -277,7 +298,9 @@ for (m in aquatic_models$model.id){
                 model_description = model_docs[idx,'model.description'][[1]],
                 start_date =model_min_date,
                 end_date = model_max_date,
-                use_metadata = TRUE)
+                use_metadata = TRUE,
+                var_values = model_var_site_info[1],
+                site_values = model_var_site_info[2])
   } else{
 
     build_model(model_id = m,
@@ -285,6 +308,10 @@ for (m in aquatic_models$model.id){
                 model_description = 'pending',
                 model_min_date,
                 model_max_date,
-                use_metadata = FALSE)
+                use_metadata = FALSE,
+                var_values = model_var_site_info[1],
+                site_values = model_var_site_info[2])
   }
+
+  rm(model_var_site_info)
 }
