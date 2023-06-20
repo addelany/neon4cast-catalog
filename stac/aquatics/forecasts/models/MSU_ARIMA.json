@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# MSU ARIMA\n\nVariables: oxygen\nSites: POSE\nKeywords: \"Forecasting, NEON\"\n\nDescription: ",
     "start_datetime": "2021-07-01",
     "end_datetime": "2021-07-07",
     "providers": [

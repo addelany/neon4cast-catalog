@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "pending",
+    "description": "# pending\n\nVariables: temperature\nSites: BARC, CRAM, LIRO, PRLA, PRPO, SUGG, TOOK\nKeywords: \"Forecasting, NEON\"\n\nDescription: pending",
     "start_datetime": "2022-10-30",
     "end_datetime": "2023-01-26",
     "providers": [

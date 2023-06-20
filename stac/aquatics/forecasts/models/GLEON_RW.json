@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "pending",
+    "description": "# pending\n\nVariables: chla, oxygen, temperature\nSites: BARC, CRAM, LIRO, PRLA, PRPO, SUGG, TOOK\nKeywords: \"Forecasting, NEON\"\n\nDescription: pending",
     "start_datetime": "2022-10-20",
     "end_datetime": "2022-11-28",
     "providers": [

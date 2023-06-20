@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# LSAMP REU AWPC\n\nVariables: oxygen, temperature\nSites: BARC\nKeywords: \"Forecasting, NEON\"\n\nDescription: ",
     "start_datetime": "2021-07-02",
     "end_datetime": "2021-08-07",
     "providers": [

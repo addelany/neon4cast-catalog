@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "pending",
+    "description": "# pending\n\nVariables: temperature\nSites: ARIK, BARC, BIGC, BLDE, BLWA, CARI, COMO, CRAM, CUPE, FLNT, GUIL, HOPB, KING, LECO, LEWI, LIRO, MART, MAYF, MCDI, MCRA, OKSR, POSE, PRIN, PRLA, PRPO, REDB, SUGG, SYCA, TECR, TOMB, TOOK, WALK, WLOU\nKeywords: \"Forecasting, NEON\"\n\nDescription: pending",
     "start_datetime": "2022-09-28",
     "end_datetime": "2022-11-13",
     "providers": [

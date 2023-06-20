@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# Waterbears RNN\n\nVariables: oxygen, temperature\nSites: BARC, POSE\nKeywords: \"Forecasting, NEON\"\n\nDescription: ",
     "start_datetime": "2021-05-01",
     "end_datetime": "2021-06-07",
     "providers": [
