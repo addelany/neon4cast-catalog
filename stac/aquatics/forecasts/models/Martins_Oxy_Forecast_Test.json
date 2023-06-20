@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "pending",
+    "description": "# pending\n\nVariables: oxygen\nSites: BARC, CRAM, LIRO, PRLA, PRPO, SUGG, TOOK\nKeywords: \"Forecasting, NEON\"\n\nDescription: pending",
     "start_datetime": "2022-11-02",
     "end_datetime": "2022-12-06",
     "providers": [

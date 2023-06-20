@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "tbats model (from forecast package in R)",
+    "description": "# EFI Theory\n\nVariables: oxygen, chla, temperature\nSites: OKSR, TOOK, CARI, PRLA, LIRO, PRPO, CRAM, BIGC, SYCA, BLUE, GUIL, KING, MCRA, SUGG, ARIK, BARC, BLDE, BLWA, COMO, CUPE, FLNT, HOPB, LECO, LEWI, MART, MAYF, MCDI, POSE, PRIN, REDB, TECR, TOMB, WALK, WLOU\nKeywords: \"Forecasting, NEON\"\n\nDescription: tbats model (from forecast package in R)",
     "start_datetime": "2022-09-21",
-    "end_datetime": "2023-07-11",
+    "end_datetime": "2023-07-18",
     "providers": [
       {
         "url": "aslewis@vt.edu",

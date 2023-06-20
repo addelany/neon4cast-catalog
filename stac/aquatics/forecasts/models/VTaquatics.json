@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "pending",
+    "description": "# pending\n\nVariables: oxygen\nSites: BARC\nKeywords: \"Forecasting, NEON\"\n\nDescription: pending",
     "start_datetime": "2021-03-01",
     "end_datetime": "2021-04-07",
     "providers": [

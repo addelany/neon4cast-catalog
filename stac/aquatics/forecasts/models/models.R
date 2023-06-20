@@ -158,14 +158,22 @@ get_grouping <- function(s3_inv,
 
 generate_vars_sites <- function(m_id){
 
+  # if (m_id %in%  c('GLEON_JRabaey_temp_physics','GLEON_lm_lag_1day','GLEON_physics','USGSHABs1','air2waterSat_2','fARIMA')){
+  #   output_info <- c('pending','pending')
+  # } else{
+
   # do this for each theme / model
-  info_df <- arrow::open_dataset(info_extract$path(glue::glue("aquatics/model_id={m_id}/"))) |> collect()
+  info_df <- arrow::open_dataset(info_extract$path(glue::glue("aquatics/model_id={m_id}/"))) |>
+    #filter(reference_datetime == "2023-06-18")|> #just grab one EM to limit processing
+    collect()
 
   vars <- unique(info_df$variable)
   sites <- unique(info_df$site_id)
 
   output_info <- c(paste(vars, collapse = ', '),
                    paste(sites, collapse = ', '))
+  #}
+  return(output_info)
   }
 
 ## read in model documentation and only grab models for Aquatics theme
@@ -175,7 +183,7 @@ library(stac4cast)
 library(reticulate)
 
 #get model ids
-s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
+s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
 paths <- open_dataset(s3$path("neon4cast-forecasts")) |> collect()
 models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
 
@@ -268,14 +276,14 @@ model_docs <- model_docs |>
 # names(model_docs) <- new_columns
 
 ## READ S3 INVENTORY FOR DATES
-s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
-                          endpoint_override = "data.ecoforecast.org",
-                          anonymous = TRUE)
+# s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
+#                           endpoint_override = "data.ecoforecast.org",
+#                           anonymous = TRUE)
 
-s3_df <- get_grouping(s3_inventory, "aquatics")
+s3_df <- get_grouping(s3, "aquatics")
 
 
-info_extract <- arrow::s3_bucket("neon4cast-forecasts/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
+info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 ## loop over model ids and extract components if present in metadata table
 for (m in aquatic_models$model.id){

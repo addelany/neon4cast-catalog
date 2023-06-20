@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "",
+    "description": "# Beyond the Water\n\nVariables: oxygen, temperature\nSites: POSE\nKeywords: \"Forecasting, NEON\"\n\nDescription: ",
     "start_datetime": "2021-05-01",
     "end_datetime": "2021-05-08",
     "providers": [
