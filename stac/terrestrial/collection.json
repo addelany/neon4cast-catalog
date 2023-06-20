@@ -1,5 +1,5 @@
 {
-  "id": "neon4cast-phenology",
+  "id": "neon4cast-terrestrial",
   "type": "Collection",
   "links": [
     {
@@ -23,7 +23,7 @@
     },
     {
       "rel": "about",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/phenology-catalog.html",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/terrestrial-catalog.html",
       "type": "text/html",
       "title": "Organization Homepage"
     },
@@ -35,12 +35,12 @@
     },
     {
       "rel": "describedby",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/phenology-catalog.html",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/terrestrial-catalog.html",
       "title": "Example Notebook",
       "type": "text/html"
     }
   ],
-  "title": "EFI NEON Phenology Forecast Challenge",
+  "title": "EFI NEON Terrestrial Forecast Challenge",
   "extent": {
     "spatial": {
       "bbox": [
@@ -62,7 +62,8 @@
     }
   },
   "license": "CC0-1.0",
-  "keywords": ["Forecasting", "Ecology", "NEON", "Phenology"],
+  "keywords": ["Forecasting", "Ecology", "NEON", "Carbon",
+               "Latent evaporation", "Eddy Covariance", "Flux tower"],
   "providers": [
     {
       "url": "https://neonscience.org",
@@ -94,16 +95,13 @@
   },
   "assets": {
     "thumbnail": {
-      "href": "https://www.neonscience.org/sites/default/files/styles/max_1300x1300/public/image-content-images/_BFP8455.jpg",
+      "href": "https://projects.ecoforecast.org/neon4cast-catalog/img/BONA_Twr.jpg",
       "type": "image/JPEG",
       "roles": [
         "thumbnail"
       ],
-      "title": "Photo credit: USA-NPN / Brian F. Powell"
+      "title": "Terrestrial Forecast Challenge"
     }
   }
 }
-
-
-
 
