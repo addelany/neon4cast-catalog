@@ -74,12 +74,12 @@ build_forecast <- function(table_schema, table_description, start_date, end_date
     "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
     'assets' = list(
       'data' = list(
-        "href"= "https://github.com/eco4cast/neon4cast-targets/blob/main/NEON_Field_Site_Metadata_20220412.csv",
-        "type"= "text/html",
+        "href"= "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
+        "type"= "text/csv",
         "roles" = list('data'),
         "title"= "NEON Field Site Metadata"
       )
-    ),
+    )
   )
 
 
