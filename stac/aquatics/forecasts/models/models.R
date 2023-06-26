@@ -4,12 +4,9 @@ generate_authors <- function(metadata_available){
                    'first.name.eight','first.name.nine','first.name.ten')
   l_name_cols <- c('last.name.one','last.name.two','last.name.three','last.name.four','last.name.five','last.name.six','last.name.seven',
                    'last.name.eight','last.name.nine','last.name.ten')
-  #email_cols <- c('email.one','email.two','email.three','email.four','email.five','email.six','email.seven','email.eight','email.nine','email.ten')
-
 
   model_first_names <- unlist(model_docs[idx, names(model_docs) %in% f_name_cols], use.names = FALSE)[!is.na(model_docs[idx, names(model_docs) %in% f_name_cols])]
   model_last_names <- unlist(model_docs[idx, names(model_docs) %in% l_name_cols], use.names = FALSE)[!is.na(model_docs[idx, names(model_docs) %in% l_name_cols])]
-  #model_emails <- unlist(model_docs[idx, names(model_docs) %in% email_cols], use.names = FALSE)[!is.na(model_docs[idx, names(model_docs) %in% email_cols])]
 
   x <- purrr::map(seq.int(1:length(model_first_names)), function(i)
     list(
@@ -61,13 +58,9 @@ build_model <- function(model_id, team_name, model_description, start_date, end_
   ),
   "properties"= list(
   #'description' = model_description,
-    "description" = glue::glue('# {team_name}
+    "description" = glue::glue('# {model_description}
 
-Variables: {var_values}
 Sites: {site_values}
-Keywords: "Forecasting, NEON"
-
-Description: {model_description}
 '),
     "start_datetime" = start_date,
     "end_datetime" = end_date,
@@ -85,8 +78,7 @@ Description: {model_description}
     "keywords"= list(
       "Forecasting",
       "Temperature",
-      "Oxygen",
-      "NEON")
+      var_values)
   ),
   "collection"= "forecast",
   "links"= list(
