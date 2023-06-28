@@ -77,7 +77,6 @@ Sites: {site_values}
     "license"= "CC0-1.0",
     "keywords"= list(
       "Forecasting",
-      "Temperature",
       var_values)
   ),
   "collection"= "forecast",

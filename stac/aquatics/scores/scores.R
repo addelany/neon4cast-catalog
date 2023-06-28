@@ -13,7 +13,7 @@ generate_model_items <- function(){
   return(x)
 }
 
-build_scores <- function(table_schema, table_description){
+build_scores <- function(table_schema, table_description, start_date, end_date){
   scores <- list(
     "id" = "aquatics-scores",
     "description" = "Scores contains the scored forecasts from the Aquatics forecast theme. These are summarized and scored versions of the raw forecast output. The raw forecasts are located in the 'Forecasts' collection.",
@@ -67,11 +67,19 @@ build_scores <- function(table_schema, table_description){
       ),
       "temporal" = list(
         'interval' = list(list(
-          "2017-01-01T00:00:00Z",
-          "2023-04-26T00:00:00Z")
+          paste0(start_date,"T00:00:00Z"),
+          paste0(end_date,"T00:00:00Z"))
         ))
     ),
-    "table_columns" = stac4cast::build_table_columns(table_schema, table_description)
+    "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
+    'assets' = list(
+      'data' = list(
+        "href"= "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
+        "type"= "text/csv",
+        "roles" = list('data'),
+        "title"= "NEON Field Site Metadata"
+      )
+    )
   )
 
 
@@ -83,6 +91,23 @@ build_scores <- function(table_schema, table_description){
                        pretty=TRUE,
                        auto_unbox=TRUE)
   stac4cast::stac_validate(json)
+}
+
+
+get_grouping <- function(s3_inv,
+                         theme,
+                         collapse=TRUE,
+                         endpoint="data.ecoforecast.org") {
+
+  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
+    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
+    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
+    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
+                  reference_datetime =
+                    gsub("reference_datetime=", "", reference_datetime),
+                  date = gsub("date=", "", date)) |>
+    dplyr::collect()
+
 }
 
 
@@ -131,13 +156,26 @@ theme_df <- arrow::open_dataset(s3_schema) %>%
 
 ## identify model ids from bucket
 s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
-paths <- open_dataset(s3$path("neon4cast-forecasts")) |> collect()
+paths <- open_dataset(s3$path("neon4cast-scores")) |> collect()
 models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
 aquatic_models <- models_df |>
   tidyr::separate(...3, c('name','model.id'), "=")
 
+## identify model ids from bucket -- used in generate model items function
+s3_inventory <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
+paths <- open_dataset(s3_inventory$path("neon4cast-scores")) |> collect()
+models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
+aquatic_models <- models_df |>
+  tidyr::separate(...3, c('name','model.id'), "=")
 
-build_scores(theme_df, description_create)
+## use s3_inventory to access min and max dates
+s3_df <- get_grouping(s3_inventory, "aquatics")
+s3_df <- s3_df |> filter(model_id != 'null')
+
+forecast_max_date <- max(s3_df$date)
+forecast_min_date <- min(s3_df$date)
+
+build_scores(theme_df, description_create, forecast_min_date, forecast_max_date)
 
 
 
