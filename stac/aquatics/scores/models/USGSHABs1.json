@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# \n\nSites: BLWA, FLNT, TOMB",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2022-09-01",
+    "end_datetime": "2023-07-28",
     "providers": [
       {
         "url": "jzwart@usgs.gov",

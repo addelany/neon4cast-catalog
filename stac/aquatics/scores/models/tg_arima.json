@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# Auto.arima() function for each variable\n\nSites: BIGC, OKSR, TOOK, CARI, PRLA, LIRO, PRPO, CRAM, BLUE, GUIL, KING, SUGG, SYCA, TOMB, HOPB, ARIK, BARC, BLDE, BLWA, COMO, CUPE, FLNT, LECO, LEWI, MART, MAYF, MCDI, MCRA, POSE, PRIN, REDB, TECR, WALK, WLOU",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2021-12-18",
+    "end_datetime": "2023-07-28",
     "providers": [
       {
         "url": "aslewis@vt.edu",

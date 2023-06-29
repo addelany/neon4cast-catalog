@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# pending\n\nSites: BARC, POSE",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2020-09-02",
+    "end_datetime": "2021-10-07",
     "providers": [
       {
         "url": "pending",

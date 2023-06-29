@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# pending\n\nSites: BIGC, BARC, COMO, CRAM, MCDI, POSE, SYCA, OKSR, TOOK, CARI, PRLA, LIRO, PRPO, GUIL, BLUE, KING, SUGG, LECO, TECR, ARIK, BLDE, BLWA, CUPE, FLNT, HOPB, LEWI, MART, MAYF, MCRA, PRIN, REDB, TOMB, WALK, WLOU",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2021-12-18",
+    "end_datetime": "2023-07-31",
     "providers": [
       {
         "url": "pending",

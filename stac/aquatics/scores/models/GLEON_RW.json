@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# pending\n\nSites: BARC, CRAM, LIRO, PRLA, PRPO, SUGG, TOOK",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2022-10-20",
+    "end_datetime": "2022-11-28",
     "providers": [
       {
         "url": "pending",

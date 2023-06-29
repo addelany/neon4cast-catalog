@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# \n\nSites: BARC, POSE",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2021-05-01",
+    "end_datetime": "2021-05-07",
     "providers": [
       {
         "url": "lin_huang@berkeley.edu",

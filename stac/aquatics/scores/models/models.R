@@ -134,7 +134,7 @@ get_grouping <- function(s3_inv,
                          collapse=TRUE,
                          endpoint="data.ecoforecast.org") {
 
-  groups <- arrow::open_dataset(s3_inv$path("neon4cast-scores")) |>
+  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
     dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
     dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
     dplyr::mutate(model_id = gsub("model_id=", "", model_id),

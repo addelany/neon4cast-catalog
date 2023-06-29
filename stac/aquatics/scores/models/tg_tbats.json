@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# tbats model (from forecast package in R)\n\nSites: OKSR, TOOK, CARI, PRLA, LIRO, PRPO, CRAM, BIGC, SYCA, BLUE, GUIL, KING, MCRA, SUGG, ARIK, BARC, BLDE, BLWA, COMO, CUPE, FLNT, HOPB, LECO, LEWI, MART, MAYF, MCDI, POSE, PRIN, REDB, TECR, TOMB, WALK, WLOU",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2022-09-21",
+    "end_datetime": "2023-07-28",
     "providers": [
       {
         "url": "aslewis@vt.edu",

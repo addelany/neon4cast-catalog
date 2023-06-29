@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# \n\nSites: BARC",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2021-05-01",
+    "end_datetime": "2021-05-08",
     "providers": [
       {
         "url": "hondula@battelleecology.org",

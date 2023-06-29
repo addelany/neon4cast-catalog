@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# \n\nSites: BARC",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2021-07-02",
+    "end_datetime": "2021-08-07",
     "providers": [
       {
         "url": "awillso2@nd.edu",

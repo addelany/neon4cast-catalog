@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# Used a linear model to forecast future water temperature from NOAA air temperature, which was then used as a single driver in a previously random walk model\n\nSites: BARC",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2017-08-27",
+    "end_datetime": "2023-01-15",
     "providers": [
       {
         "url": "ishuman2@nd.edu",

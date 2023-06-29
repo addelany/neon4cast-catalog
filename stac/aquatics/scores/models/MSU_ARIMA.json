@@ -38,8 +38,8 @@
   },
   "properties": {
     "description": "# \n\nSites: POSE",
-    "start_datetime": "part-0.parquet",
-    "end_datetime": "part-0.parquet",
+    "start_datetime": "2021-07-01",
+    "end_datetime": "2021-07-07",
     "providers": [
       {
         "url": "elizabethjmohr@gmail.com",
