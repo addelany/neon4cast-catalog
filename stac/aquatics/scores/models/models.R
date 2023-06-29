@@ -1,12 +1,42 @@
-build_model <- function(model_id, team_name, model_description, first_name, last_name, email) {
+generate_authors <- function(metadata_available){
+  if (metadata_available == TRUE){
+    f_name_cols <- c('first.name.one','first.name.two','first.name.three','first.name.four','first.name.five','first.name.six','first.name.seven',
+                     'first.name.eight','first.name.nine','first.name.ten')
+    l_name_cols <- c('last.name.one','last.name.two','last.name.three','last.name.four','last.name.five','last.name.six','last.name.seven',
+                     'last.name.eight','last.name.nine','last.name.ten')
 
+    model_first_names <- unlist(model_docs[idx, names(model_docs) %in% f_name_cols], use.names = FALSE)[!is.na(model_docs[idx, names(model_docs) %in% f_name_cols])]
+    model_last_names <- unlist(model_docs[idx, names(model_docs) %in% l_name_cols], use.names = FALSE)[!is.na(model_docs[idx, names(model_docs) %in% l_name_cols])]
+
+    x <- purrr::map(seq.int(1:length(model_first_names)), function(i)
+      list(
+        "url" = 'not provided',
+        'name'= paste(model_first_names[i], model_last_names[i]),
+        'roles' = list("producer")
+      )
+    )
+    ## SET FIRST AUTHOR INFO
+    x[[1]]$url <- unlist(model_docs[idx,'email.one'], use.names = FALSE)
+    x[[1]]$roles <- list(
+      "producer",
+      "processor",
+      "licensor"
+    )
+  } else{
+    x <- list(list('url' = 'pending',
+                   'name' = 'pending',
+                   'roles' = list("producer",
+                                  "processor",
+                                  "licensor"))
+    )
+  }
+  return(x)
+}
+
+build_model <- function(model_id, team_name, model_description, start_date, end_date, use_metadata, var_values, site_values) {
 
   meta <- list(
-    "description" = model_description,
     "stac_version"= "1.0.0",
-    # "stac_extensions"= list("https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    #                         "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-    #                         "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
     "stac_extensions" = list(),
     "type"= "Feature",
     "id"= model_id,
@@ -25,7 +55,27 @@ build_model <- function(model_id, team_name, model_description, first_name, last
       )
     ),
     "properties"= list(
-      "datetime"= "2023-04-26T00:00:00Z"
+      #'description' = model_description,
+      "description" = glue::glue('# {model_description}
+
+Sites: {site_values}
+'),
+      "start_datetime" = start_date,
+      "end_datetime" = end_date,
+      "providers"= c(generate_authors(metadata_available = use_metadata),list(
+        list(
+          "url"= "https://ecoforecast.org",
+          "name"= "Ecoforecast Challenge",
+          "roles"= list(
+            "host"
+          )
+        )
+      )
+      ),
+      "license"= "CC0-1.0",
+      "keywords"= list(
+        "Forecasting",
+        var_values)
     ),
     "collection"= "scores",
     "links"= list(
@@ -49,7 +99,6 @@ build_model <- function(model_id, team_name, model_description, first_name, last
       ),
       list(
         "rel"= "self",
-        #"href"= paste0('https://projects.ecoforecast.org/neon4cast-catalog/stac/aquatics/forecasts/models/',model_id,'.json'),
         "href" = paste0(model_id,'.json'),
         "type"= "application/json",
         "title"= "Model Scores"
@@ -63,31 +112,6 @@ build_model <- function(model_id, team_name, model_description, first_name, last
         "type"= "application/x-parquet",
         "title"= team_name,
         "description"= readr::read_file("stac/aquatics/scores/models/asset-description.Rmd")
-      )
-    ),
-    "license"= "CC0-1.0",
-    "keywords"= list(
-      "Forecasting",
-      "Temperature",
-      "Oxygen",
-      "NEON"
-    ),
-    "providers"= list(
-      list(
-        "url"= email,
-        "name"= paste(first_name,last_name),
-        "roles"= list(
-          "producer",
-          "processor",
-          "licensor"
-        )
-      ),
-      list(
-        "url"= "https://ecoforecast.org",
-        "name"= "Ecoforecast Challenge",
-        "roles"= list(
-          "host"
-        )
       )
     )
   )
@@ -105,6 +129,42 @@ build_model <- function(model_id, team_name, model_description, first_name, last
 
 }
 
+get_grouping <- function(s3_inv,
+                         theme,
+                         collapse=TRUE,
+                         endpoint="data.ecoforecast.org") {
+
+  groups <- arrow::open_dataset(s3_inv$path("neon4cast-scores")) |>
+    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
+    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
+    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
+                  reference_datetime =
+                    gsub("reference_datetime=", "", reference_datetime),
+                  date = gsub("date=", "", date)) |>
+    dplyr::collect()
+
+}
+
+generate_vars_sites <- function(m_id){
+
+  # if (m_id %in%  c('GLEON_JRabaey_temp_physics','GLEON_lm_lag_1day','GLEON_physics','USGSHABs1','air2waterSat_2','fARIMA')){
+  #   output_info <- c('pending','pending')
+  # } else{
+
+  # do this for each theme / model
+  info_df <- arrow::open_dataset(info_extract$path(glue::glue("aquatics/model_id={m_id}/"))) |>
+    #filter(reference_datetime == "2023-06-18")|> #just grab one EM to limit processing
+    collect()
+
+  vars <- unique(info_df$variable)
+  sites <- unique(info_df$site_id)
+
+  output_info <- c(paste(vars, collapse = ', '),
+                   paste(sites, collapse = ', '))
+  #}
+  return(output_info)
+}
+
 ## read in model documentation and only grab models for Aquatics theme
 library(tidyverse)
 library(arrow)
@@ -112,7 +172,7 @@ library(stac4cast)
 library(reticulate)
 
 #get model ids
-s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
+s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
 paths <- open_dataset(s3$path("neon4cast-scores")) |> collect()
 models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
 
@@ -121,38 +181,111 @@ aquatic_models <- models_df |>
 
 
 ## READ IN MODEL METADATA
+
 model_docs <- read_csv('NEON_Challenge_Registration_2023-05-23.csv')
+
+
+new_columns <- c('first.name.one',
+                 'last.name.one',
+                 'affiliation.one',
+                 'email.one',
+                 'team.name',
+                 'first.name.two',
+                 'last.name.two',
+                 'affiliation.two',
+                 'email.two',
+                 'first.name.three',
+                 'last.name.three',
+                 'affiliation.three',
+                 'email.two.three',
+                 'first.name.four',
+                 'last.name.four',
+                 'affiliation.four',
+                 'email.four',
+                 'first.name.five',
+                 'last.name.five',
+                 'affiliation.five',
+                 'email.five',
+                 'first.name.six',
+                 'last.name.six',
+                 'affiliation.six',
+                 'email.six',
+                 'first.name.seven',
+                 'last.name.seven',
+                 'affiliation.seven',
+                 'email.seven',
+                 'first.name.eight',
+                 'last.name.eight',
+                 'affiliation.eight',
+                 'email.eight',
+                 'first.name.nine',
+                 'last.name.nine',
+                 'affiliation.nine',
+                 'email.nine',
+                 'first.name.ten',
+                 'last.name.ten',
+                 'affiliation.ten',
+                 'email.ten',
+                 'team.category',
+                 'theme',
+                 'model.id',
+                 'model.description',
+                 'model.uncertainty'
+)
 
 model_docs <- model_docs |>
   filter(Theme == 'Aquatic Ecosystems') |>
-  select(`team-name`, `First Name`, `Last Name`, `Email address`, `model-id`, `model-description`) |>
-  rename(team.name = `team-name`, first.name = `First Name`, last.name = `Last Name`, email = `Email address`,
-         model.id = `model-id`, model.description = `model-description`) |>
+  select(`First Name`:`Email address`,
+         `team-name`,
+         `Team Member 2 - First Name` :`Team Member 10 - Email`,
+         Team.Category:`model-uncertainty`)
+
+names(model_docs) <- new_columns
+
+model_docs <- model_docs |>
   mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
 
+s3_df <- get_grouping(s3, "aquatics")
+
+
+info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
+
 ## loop over model ids and extract components if present in metadata table
 for (m in aquatic_models$model.id){
+  print(m)
+  model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
+  model_min_date <- model_date_range$`min(date)`
+  model_max_date <- model_date_range$`max(date)`
+
+  model_var_site_info <- generate_vars_sites(m_id = m)
+  # print(model_var_site_info[[1]])
+  # print(model_var_site_info[[2]])
 
   if (m %in% model_docs$model.id){
+    print('has metadata')
 
     idx = which(model_docs$model.id == m)
 
     build_model(model_id = model_docs$model.id[idx],
                 team_name = model_docs$team.name[idx],
-                model_description = model_docs[idx,'model.description'],
-                first_name = model_docs$first.name[idx],
-                last_name = model_docs$last.name[idx],
-                email = model_docs$email[idx])
-
-    print('in metadata table')
+                model_description = model_docs[idx,'model.description'][[1]],
+                start_date =model_min_date,
+                end_date = model_max_date,
+                use_metadata = TRUE,
+                var_values = model_var_site_info[1],
+                site_values = model_var_site_info[2])
   } else{
 
     build_model(model_id = m,
                 team_name = 'pending',
                 model_description = 'pending',
-                first_name = 'pending',
-                last_name = 'pending',
-                email = 'pending')
+                model_min_date,
+                model_max_date,
+                use_metadata = FALSE,
+                var_values = model_var_site_info[1],
+                site_values = model_var_site_info[2])
   }
+
+  rm(model_var_site_info)
 }
