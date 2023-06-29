@@ -106,12 +106,12 @@ Sites: {site_values}
     "assets"= list(
       "parquet_items"= list(
         "href"= paste0("s3://anonymous@",
-                       "bio230014-bucket01/neon4cast-scores/parquet/",
+                       "bio230014-bucket01/neon4cast-forecasts/parquet/",
                        "aquatics/model_id=", model_id,
                        "?endpoint_override=sdsc.osn.xsede.org"),
         "type"= "application/x-parquet",
-        "title"= team_name,
-        "description"= readr::read_file("stac/aquatics/scores/models/asset-description.Rmd")
+        "title"= 'Database Access',
+        "description"= readr::read_file("stac/aquatics/forecasts/models/asset-description.Rmd")
       )
     )
   )
