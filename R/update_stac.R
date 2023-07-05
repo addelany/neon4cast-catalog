@@ -26,5 +26,5 @@ source('stac/aquatics/aquatics.R')
 ## TICKS
 # Pending
 
-### BUILD COLLECTION JSON
+### BUILD CATALOG JSON
 source('stac/catalog.R')
