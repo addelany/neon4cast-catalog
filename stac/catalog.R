@@ -45,14 +45,14 @@ catalog <- list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Terrestrial Forecast Challenge",
-      "href" = '=terrestrial/collection.json'
+      "href" = 'terrestrial/collection.json'
 
     ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Phenology Forecast Challenge",
-      "href" = 'pheonology/collection.json'
+      "href" = 'phenology/collection.json'
 
     )
   )
