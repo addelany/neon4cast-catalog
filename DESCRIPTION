@@ -33,3 +33,4 @@ Remotes:
     github::cboettig/minioclient,
     github::eco4cast/gefs4cast,
     github::cboettig/aws.s3
+    github::eco4cast/stac4cast
