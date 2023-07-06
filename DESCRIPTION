@@ -1,0 +1,35 @@
+Package: neon4cast-catalog
+Title: NEON Forecast Challenge STAC Catalog
+Version: 0.0.0.9000
+Authors@R: c(person(
+              "Carl", "Boettiger", 
+              email = "cboettig@gmail.com", 
+              role = c("aut", "cre"),
+              comment = c(ORCID = "0000-0002-1642-628X")),
+            person("Quinn", "Thomas", role = "aut",
+                   comment = c(ORCID = "0000-0003-1282-7825"))
+            )
+Description: Builds the NEON Forecast Challenge STAC Catalog
+License: MIT
+Encoding: UTF-8
+Language: en-US
+Imports: 
+    score4cast,
+    gefs4cast,
+    minioclient,
+    rmarkdown,
+    glue,
+    dplyr,
+    ggplot2,
+    arrow,
+    bslib,
+    bsicons,
+    ggiraph,
+    patchwork,
+    pak,
+    jsonlite
+Remotes: 
+    github::eco4cast/score4cast,
+    github::cboettig/minioclient,
+    github::eco4cast/gefs4cast,
+    github::cboettig/aws.s3
