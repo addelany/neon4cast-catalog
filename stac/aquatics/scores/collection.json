@@ -373,17 +373,7 @@
     {
       "rel": "item",
       "type": "application/json",
-      "href": "models/tg_auto_adam.json"
-    },
-    {
-      "rel": "item",
-      "type": "application/json",
       "href": "models/tg_bag_mlp.json"
-    },
-    {
-      "rel": "item",
-      "type": "application/json",
-      "href": "models/tg_bag_mlp_all_sites.json"
     },
     {
       "rel": "item",
@@ -424,11 +414,6 @@
       "rel": "item",
       "type": "application/json",
       "href": "models/tg_randfor.json"
-    },
-    {
-      "rel": "item",
-      "type": "application/json",
-      "href": "models/tg_randfor_all_sites.json"
     },
     {
       "rel": "item",
@@ -540,6 +525,12 @@
       "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
       "title": "Organization Landing Page",
       "type": "text/html"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://projects.ecoforecast.org/neon4cast-dashboard/",
+      "title": "NEON Forecast Scores Dashboard",
+      "type": "text/html"
     }
   ],
   "title": "Ecological Forecasting Initiative - Aquatics Scores",
@@ -557,8 +548,8 @@
     "temporal": {
       "interval": [
         [
-          "2017-01-01T00:00:00Z",
-          "2023-04-26T00:00:00Z"
+          "2017-08-27T00:00:00Z",
+          "2023-08-05T00:00:00Z"
         ]
       ]
     }
@@ -649,5 +640,15 @@
       "type": "string",
       "description": "ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod."
     }
-  ]
+  ],
+  "assets": {
+    "data": {
+      "href": "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
+      "type": "text/csv",
+      "roles": [
+        "data"
+      ],
+      "title": "NEON Field Site Metadata"
+    }
+  }
 }

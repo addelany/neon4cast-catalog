@@ -55,6 +55,12 @@ build_scores <- function(table_schema, table_description, start_date, end_date){
         "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
         "title" = "Organization Landing Page",
         "type" = "text/html"
+      ),
+      list(
+        "rel" = "describedby",
+        "href" = "https://projects.ecoforecast.org/neon4cast-dashboard/",
+        "title" = "NEON Forecast Scores Dashboard",
+        "type" = "text/html"
       )
       )),
     "title" = "Ecological Forecasting Initiative - Aquatics Scores",
