@@ -149,4 +149,4 @@ theme_max_date <- max(s3_df$date)
 theme_min_date <- min(s3_df$date)
 
 
-build_aquatics(theme_max_date, theme_min_date)
+build_aquatics(theme_min_date, theme_max_date)

@@ -277,7 +277,7 @@ s3_df <- get_grouping(s3, "aquatics")
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 ## loop over model ids and extract components if present in metadata table
-for (m in aquatic_models$model.id){
+for (m in aquatic_models$model.id[1:2]){
   print(m)
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`
