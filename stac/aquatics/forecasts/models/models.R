@@ -58,7 +58,9 @@ build_model <- function(model_id, team_name, model_description, start_date, end_
   ),
   "properties"= list(
   #'description' = model_description,
-    "description" = glue::glue('# {model_description}
+    "description" = glue::glue('
+
+    model info: {model_description}
 
     Sites: {site_values}
 
