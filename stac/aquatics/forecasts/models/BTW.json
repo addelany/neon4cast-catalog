@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "# Beyond the Water\n\nVariables: oxygen, temperature\nSites: POSE\nKeywords: \"Forecasting, NEON\"\n\nDescription: ",
+    "description": "\nmodel info: \n\nSites: POSE\n\nVariables: oxygen, temperature",
     "start_datetime": "2021-05-01",
     "end_datetime": "2021-05-08",
     "providers": [
@@ -117,9 +117,7 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
-      "Temperature",
-      "Oxygen",
-      "NEON"
+      "oxygen, temperature"
     ]
   },
   "collection": "forecast",

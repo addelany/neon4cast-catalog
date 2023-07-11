@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "# EFI Theory\n\nVariables: oxygen, chla, temperature\nSites: OKSR, TOOK, CARI, PRLA, LIRO, PRPO, CRAM, BIGC, SYCA, BLUE, GUIL, KING, MCRA, SUGG, ARIK, BARC, BLDE, BLWA, COMO, CUPE, FLNT, HOPB, LECO, LEWI, MART, MAYF, MCDI, POSE, PRIN, REDB, TECR, TOMB, WALK, WLOU\nKeywords: \"Forecasting, NEON\"\n\nDescription: ets model fit individually at all sites",
+    "description": "\nmodel info: ets model fit individually at all sites\n\nSites: OKSR, TOOK, CARI, PRLA, LIRO, PRPO, CRAM, BIGC, SYCA, BLUE, GUIL, KING, MCRA, SUGG, ARIK, BARC, BLDE, BLWA, COMO, CUPE, FLNT, HOPB, LECO, LEWI, MART, MAYF, MCDI, POSE, PRIN, REDB, TECR, TOMB, WALK, WLOU\n\nVariables: oxygen, chla, temperature",
     "start_datetime": "2022-09-21",
-    "end_datetime": "2023-07-18",
+    "end_datetime": "2023-08-09",
     "providers": [
       {
         "url": "aslewis@vt.edu",
@@ -61,9 +61,7 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
-      "Temperature",
-      "Oxygen",
-      "NEON"
+      "oxygen, chla, temperature"
     ]
   },
   "collection": "forecast",

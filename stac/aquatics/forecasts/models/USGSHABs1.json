@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "# USGS HABs Proxies\n\nVariables: chla\nSites: BLWA, FLNT, TOMB\nKeywords: \"Forecasting, NEON\"\n\nDescription: ",
+    "description": "\nmodel info: \n\nSites: BLWA, FLNT, TOMB\n\nVariables: chla",
     "start_datetime": "2022-09-01",
-    "end_datetime": "2023-07-20",
+    "end_datetime": "2023-08-11",
     "providers": [
       {
         "url": "jzwart@usgs.gov",
@@ -96,9 +96,7 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
-      "Temperature",
-      "Oxygen",
-      "NEON"
+      "chla"
     ]
   },
   "collection": "forecast",
