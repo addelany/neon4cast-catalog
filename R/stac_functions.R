@@ -1,4 +1,4 @@
-## model level functions
+## MODEL level functions
 
 generate_authors <- function(metadata_available, model_docs){
   if (metadata_available == TRUE){
@@ -149,8 +149,6 @@ build_model <- function(model_id,
 
 }
 
-
-
 get_grouping <- function(s3_inv,
                          theme,
                          collapse=TRUE,
@@ -188,3 +186,111 @@ generate_vars_sites <- function(m_id, theme){
   return(output_info)
 }
 
+
+## FORECAST LEVEL FUNCTIONS
+generate_model_items <- function(){
+
+
+  model_list <- aquatic_models$model.id
+
+  x <- purrr::map(model_list, function(i)
+    list(
+      "rel" = 'item',
+      'type'= 'application/json',
+      'href' = paste0('models/',i,'.json'))
+  )
+
+  return(x)
+}
+
+
+build_forecast <- function(table_schema,
+                           table_description,
+                           start_date,
+                           end_date,
+                           id_value,
+                           description_string,
+                           about_string,
+                           about_title,
+                           theme_title,
+                           model_documentation,
+                           destination_path
+){
+  forecast <- list(
+    "id" = id_value,
+    "description" = description_string,
+    "stac_version"= "1.0.0",
+    "license"= "CC0-1.0",
+    "stac_extensions"= list("https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+                            "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+                            "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
+    'type' = 'Collection',
+    'links' = c(generate_model_items(),
+                list(
+                  list(
+                    "rel" = "parent",
+                    "type"= "application/json",
+                    "href" = '../collection.json'
+                  ),
+                  list(
+                    "rel" = "root",
+                    "type" = "application/json",
+                    "href" = '../collection.json'
+                  ),
+                  list(
+                    "rel" = "self",
+                    "type" = "application/json",
+                    "href" = 'collection.json'
+                  ),
+                  list(
+                    "rel" = "cite-as",
+                    "href" = "https://doi.org/10.1002/fee.2616"
+                  ),
+                  list(
+                    "rel" = "about",
+                    "href" = about_string,
+                    "type" = "text/html",
+                    "title" = about_title
+                  ),
+                  list(
+                    "rel" = "describedby",
+                    "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+                    "title" = "Organization Landing Page",
+                    "type" = "text/html"
+                  )
+                )),
+    "title" = theme_title,
+    "extent" = list(
+      "spatial" = list(
+        'bbox' = list(list(-149.6106,
+                           18.1135,
+                           -66.7987,
+                           68.6698))
+      ),
+      "temporal" = list(
+        'interval' = list(list(
+          paste0(start_date,"T00:00:00Z"),
+          paste0(end_date,"T00:00:00Z"))
+        ))
+    ),
+    "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
+    'assets' = list(
+      'data' = list(
+        "href"= model_documentation,
+        "type"= "text/csv",
+        "roles" = list('data'),
+        "title"= "NEON Field Site Metadata"
+      )
+    )
+  )
+
+
+  dest <- destination_path
+  json <- file.path(dest, "collection.json")
+
+  jsonlite::write_json(forecast,
+                       json,
+                       pretty=TRUE,
+                       auto_unbox=TRUE)
+  stac4cast::stac_validate(json)
+}

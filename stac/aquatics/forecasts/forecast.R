@@ -1,120 +1,9 @@
-generate_model_items <- function(){
-
-
-  model_list <- aquatic_models$model.id
-
-  x <- purrr::map(model_list, function(i)
-    list(
-      "rel" = 'item',
-      'type'= 'application/json',
-      'href' = paste0('models/',i,'.json'))
-  )
-
-  return(x)
-}
-
-build_forecast <- function(table_schema, table_description, start_date, end_date){
-  forecast <- list(
-    "id" = "aquatics-forecasts",
-    "description" = "Forecasts contain the raw forecast output from the Aquatics forecast theme. These forecast outputs have not been scored. Forecast scores are contained in the 'Scores' collection",
-    "stac_version"= "1.0.0",
-    "license"= "CC0-1.0",
-    "stac_extensions"= list("https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-                            "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-                            "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
-    'type' = 'Collection',
-    'links' = c(generate_model_items(),
-        list(
-    list(
-    "rel" = "parent",
-    "type"= "application/json",
-    "href" = '../collection.json'
-    ),
-    list(
-      "rel" = "root",
-      "type" = "application/json",
-      "href" = '../collection.json'
-    ),
-    list(
-      "rel" = "self",
-      "type" = "application/json",
-      "href" = 'collection.json'
-    ),
-    list(
-      "rel" = "cite-as",
-      "href" = "https://doi.org/10.1002/fee.2616"
-    ),
-    list(
-      "rel" = "about",
-      "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-      "type" = "text/html",
-      "title" = "Aquatics Forecast Challenge"
-    ),
-    list(
-      "rel" = "describedby",
-      "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-      "title" = "Organization Landing Page",
-      "type" = "text/html"
-    )
-    )),
-    "title" = "Ecological Forecasting Initiative - Aquatics Forecasts",
-    "extent" = list(
-      "spatial" = list(
-        'bbox' = list(list(-149.6106,
-                    18.1135,
-                    -66.7987,
-                    68.6698))
-      ),
-      "temporal" = list(
-        'interval' = list(list(
-          paste0(start_date,"T00:00:00Z"),
-          paste0(end_date,"T00:00:00Z"))
-      ))
-    ),
-    "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
-    'assets' = list(
-      'data' = list(
-        "href"= "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
-        "type"= "text/csv",
-        "roles" = list('data'),
-        "title"= "NEON Field Site Metadata"
-      )
-    )
-  )
-
-
-  dest <- "stac/aquatics/forecasts/"
-  json <- file.path(dest, "collection.json")
-
-  jsonlite::write_json(forecast,
-                       json,
-                       pretty=TRUE,
-                       auto_unbox=TRUE)
-  stac4cast::stac_validate(json)
-}
-
-get_grouping <- function(s3_inv,
-                         theme,
-                         collapse=TRUE,
-                         endpoint="data.ecoforecast.org") {
-
-  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
-    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
-    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
-    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
-                  reference_datetime =
-                    gsub("reference_datetime=", "", reference_datetime),
-                  date = gsub("date=", "", date)) |>
-    dplyr::collect()
-
-}
-
 
 ## create item list based off of aquatic forecast model ids
 library(arrow)
 library(dplyr)
 
-
+source('R/stac_functions.R')
 ## CREATE table for column descriptions
 description_create <- data.frame(datetime = 'ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in a single file. Forecast lead time is thus datetime-reference_datetime. In a hindcast the reference_datetime will be earlier than the time the hindcast was actually produced (see pubDate in Section3). Date times are allowed to be earlier than the reference_datetime if a reanalysis/reforecast is run before the start of the forecast period. This variable was called start_time before v0.5 of the EFI standard.',
                                  site_id = 'For forecasts that are not on a spatial grid, use of a site dimension that maps to a more detailed geometry (points, polygons, etc.) is allowable. In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this could be handled by the CF Discrete Sampling Geometry data model.',
@@ -158,5 +47,15 @@ forecast_min_date <- min(s3_df$date)
 
 
 
-build_forecast(theme_df, description_create, forecast_min_date,forecast_max_date)
+build_forecast(table_schema = theme_df,
+               table_description = description_create,
+               start_date = forecast_min_date,
+               end_date = forecast_max_date,
+               id_value = "aquatics-forecasts",
+               description_string = "Forecasts contain the raw forecast output from the Aquatics forecast theme. These forecast outputs have not been scored. Forecast scores are contained in the 'Scores' collection",
+               about_string = 'https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html',
+               about_title = "Aquatics Forecast Challenge",
+               theme_title = "Ecological Forecasting Initiative - Aquatics Forecasts",
+               model_documentation ="https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
+               destination_path = "stac/aquatics/forecasts/")
 
