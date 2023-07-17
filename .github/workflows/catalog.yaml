@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    container: rocker/geospatial:latest
+    container: rocker/cuda
     steps:
       - run: git config --system --add safe.directory '*'
 
