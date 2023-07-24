@@ -5,7 +5,7 @@ source('stac/aquatics/forecasts/forecast.R')
 
 # scores
 source('stac/aquatics/scores/models/models.R')
-source('stac/aquatics/scores/forecast.R')
+source('stac/aquatics/scores/scores.R')
 
 # aquatics landing page
 source('stac/aquatics/aquatics.R')

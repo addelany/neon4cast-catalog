@@ -1,5 +1,5 @@
 
-source("R/common.R")
+source("R/catalog-common.R")
 
 build_catalog <- function(){
 catalog <- list(
