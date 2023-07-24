@@ -88,7 +88,7 @@ s3_df <- get_grouping(s3, "aquatics")
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 ## loop over model ids and extract components if present in metadata table
-for (m in aquatic_models$model.id){
+for (m in aquatic_models$model.id[1:2]){
   print(m)
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`
@@ -106,11 +106,12 @@ for (m in aquatic_models$model.id){
     build_model(model_id = neon_docs$model.id[idx],
                 team_name = neon_docs$team.name[idx],
                 model_description = neon_docs[idx,'model.description'][[1]],
-                start_date =model_min_date,
+                start_date = model_min_date,
                 end_date = model_max_date,
                 use_metadata = TRUE,
-                var_values = model_var_site_info[1],
-                site_values = model_var_site_info[2],
+                var_values = model_var_site_info[[1]],
+                var_keys = model_var_site_info[[3]][[1]],
+                site_values = model_var_site_info[[2]],
                 model_documentation = neon_docs,
                 destination_path = "stac/aquatics/forecasts/models/",
                 description_path = "stac/aquatics/forecasts/models/asset-description.Rmd",
@@ -120,11 +121,12 @@ for (m in aquatic_models$model.id){
     build_model(model_id = m,
                 team_name = 'pending',
                 model_description = 'pending',
-                model_min_date,
-                model_max_date,
+                start_date = model_min_date,
+                end_date = model_max_date,
                 use_metadata = FALSE,
-                var_values = model_var_site_info[1],
-                site_values = model_var_site_info[2],
+                var_values = model_var_site_info[[1]],
+                var_keys = model_var_site_info[[3]][[1]],
+                site_values = model_var_site_info[[2]],
                 model_documentation = neon_docs,
                 destination_path = "stac/aquatics/forecasts/models/",
                 description_path = "stac/aquatics/forecasts/models/asset-description.Rmd",

@@ -44,12 +44,17 @@ build_model <- function(model_id,
                         end_date,
                         use_metadata,
                         var_values,
+                        var_keys,
                         site_values,
                         model_documentation,
                         destination_path,
                         description_path,
                         theme_title) {
 
+
+  preset_keywords <- list("Forecasting", "NEON")
+  variables_reformat <- paste(var_values, collapse = ", ")
+  site_reformat <- paste(site_values, collapse = ", ")
 
   meta <- list(
     "stac_version"= "1.0.0",
@@ -76,9 +81,9 @@ build_model <- function(model_id,
 
     model info: {model_description}
 
-    Sites: {site_values}
+    Sites: {site_reformat}
 
-    Variables: {var_values}
+    Variables: {variables_reformat}
 '),
       "start_datetime" = start_date,
       "end_datetime" = end_date,
@@ -93,9 +98,7 @@ build_model <- function(model_id,
       )
       ),
       "license"= "CC0-1.0",
-      "keywords"= list(
-        "Forecasting",
-        var_values)
+      "keywords"= c(preset_keywords, var_keys)
     ),
     "collection"= "forecast",
     "links"= list(
@@ -177,13 +180,20 @@ generate_vars_sites <- function(m_id, theme){
     #filter(reference_datetime == "2023-06-18")|> #just grab one EM to limit processing
     collect()
 
-  vars <- sort(unique(info_df$variable))
-  sites <- sort(unique(info_df$site_id))
+  vars_vector <- sort(unique(info_df$variable))
+  sites_vector <- sort(unique(info_df$site_id))
 
-  output_info <- c(paste(vars, collapse = ', '),
-                   paste(sites, collapse = ', '))
-  #}
-  return(output_info)
+  vars_list <- as.list(sort(unique(info_df$variable)))
+  sites_list <- as.list(sort(unique(info_df$site_id)))
+
+  # output_vectors <- c(paste(vars_vector, collapse = ', '),
+  #                  paste(sites_vector, collapse = ', '))
+
+  output_list <- list(vars_list,sites_list)
+
+  full_object <- list(vars_vector, sites_vector, output_list)
+
+  return(full_object)
 }
 
 
