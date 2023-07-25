@@ -61,7 +61,10 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
-      "chla, oxygen, temperature"
+      "NEON",
+      "chla",
+      "oxygen",
+      "temperature"
     ]
   },
   "collection": "forecast",

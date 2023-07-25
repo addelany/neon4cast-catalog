@@ -117,7 +117,9 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
-      "oxygen, temperature"
+      "NEON",
+      "oxygen",
+      "temperature"
     ]
   },
   "collection": "forecast",

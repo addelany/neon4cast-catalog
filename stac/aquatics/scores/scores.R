@@ -46,13 +46,13 @@ build_scores <- function(table_schema, table_description, start_date, end_date){
       ),
       list(
         "rel" = "about",
-        "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+        "href" = "https://projects.ecoforecast.org/neon4cast-docs/",
         "type" = "text/html",
         "title" = "Aquatics Forecast Challenge"
       ),
       list(
         "rel" = "describedby",
-        "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+        "href" = "https://projects.ecoforecast.org/neon4cast-docs/",
         "title" = "Organization Landing Page",
         "type" = "text/html"
       ),
@@ -63,7 +63,7 @@ build_scores <- function(table_schema, table_description, start_date, end_date){
         "type" = "text/html"
       )
       )),
-    "title" = "Ecological Forecasting Initiative - Aquatics Scores",
+    "title" = "Aquatics Scores",
     "extent" = list(
       "spatial" = list(
         'bbox' = list(list(-149.6106,

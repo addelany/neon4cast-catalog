@@ -264,8 +264,8 @@ build_forecast <- function(table_schema,
                   ),
                   list(
                     "rel" = "describedby",
-                    "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-                    "title" = "Organization Landing Page",
+                    "href" = "https://projects.ecoforecast.org/neon4cast-dashboard/",
+                    "title" = "NEON Forecast Challenge Dashboard",
                     "type" = "text/html"
                   )
                 )),

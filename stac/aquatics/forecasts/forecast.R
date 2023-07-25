@@ -45,17 +45,17 @@ forecast_max_date <- max(s3_df$date)
 forecast_min_date <- min(s3_df$date)
 
 
-
+build_description <- "Forecasts contain the raw forecast output from the Aquatics forecast theme. These forecast outputs have not been scored. Forecast scores are contained in the 'Scores' collection"
 
 build_forecast(table_schema = theme_df,
                table_description = description_create,
                start_date = forecast_min_date,
                end_date = forecast_max_date,
                id_value = "aquatics-forecasts",
-               description_string = "Forecasts contain the raw forecast output from the Aquatics forecast theme. These forecast outputs have not been scored. Forecast scores are contained in the 'Scores' collection",
-               about_string = 'https://projects.ecoforecast.org/neon4cast-docs/Aquatics.html',
-               about_title = "Aquatics Forecast Challenge",
-               theme_title = "Ecological Forecasting Initiative - Aquatics Forecasts",
+               description_string = build_description,
+               about_string = 'https://projects.ecoforecast.org/neon4cast-docs/',
+               about_title = "NEON Ecological Forecasting Challenge",
+               theme_title = "Aquatics Forecasts",
                model_documentation ="https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
                destination_path = "stac/aquatics/forecasts/")
 

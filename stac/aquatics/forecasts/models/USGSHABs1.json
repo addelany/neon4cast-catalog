@@ -39,7 +39,7 @@
   "properties": {
     "description": "\nmodel info: \n\nSites: BLWA, FLNT, TOMB\n\nVariables: chla",
     "start_datetime": "2022-09-01",
-    "end_datetime": "2023-08-11",
+    "end_datetime": "2023-08-15",
     "providers": [
       {
         "url": "jzwart@usgs.gov",
@@ -96,6 +96,7 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
+      "NEON",
       "chla"
     ]
   },

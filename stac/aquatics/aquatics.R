@@ -52,7 +52,7 @@ build_aquatics <- function(start_date,end_date){
         "type"= "text/html"
       )
     ),
-    "title"= "Ecological Forecasting Initiative - Aquatics",
+    "title"= "Aquatics",
     'assets' = list(
       'thumbnail' = list(
         "href"= "https://projects.ecoforecast.org/neon4cast-catalog/img/neon_buoy.jpg",
