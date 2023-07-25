@@ -115,7 +115,9 @@ for (m in aquatic_models$model.id){
                 model_documentation = neon_docs,
                 destination_path = "stac/aquatics/forecasts/models/",
                 description_path = "stac/aquatics/forecasts/models/asset-description.Rmd",
-                theme_title = "Aquatics Forecasts")
+                aws_download_path = 'neon4cast-forecasts/parquet/aquatics',
+                theme_title = "Aquatics Forecasts",
+                collection_name = 'forecasts')
   } else{
 
     build_model(model_id = m,
@@ -130,7 +132,9 @@ for (m in aquatic_models$model.id){
                 model_documentation = neon_docs,
                 destination_path = "stac/aquatics/forecasts/models/",
                 description_path = "stac/aquatics/forecasts/models/asset-description.Rmd",
-                theme_title = "Aquatics Forecasts")
+                aws_download_path = 'neon4cast-forecasts/parquet/aquatics',
+                theme_title = "Aquatics Forecasts",
+                collection_name = 'forecasts')
   }
 
   rm(model_var_site_info)

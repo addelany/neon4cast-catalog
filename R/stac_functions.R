@@ -49,12 +49,19 @@ build_model <- function(model_id,
                         model_documentation,
                         destination_path,
                         description_path,
-                        theme_title) {
+                        aws_download_path,
+                        theme_title,
+                        collection_name) {
 
 
   preset_keywords <- list("Forecasting", "NEON")
   variables_reformat <- paste(var_values, collapse = ", ")
   site_reformat <- paste(site_values, collapse = ", ")
+
+  aws_asset_link <- paste0("s3://anonymous@bio230014-bucket01/",
+                           aws_download_path,
+         "/model_id=", model_id,
+         "?endpoint_override=sdsc.osn.xsede.org")
 
   meta <- list(
     "stac_version"= "1.0.0",
@@ -100,7 +107,7 @@ build_model <- function(model_id,
       "license"= "CC0-1.0",
       "keywords"= c(preset_keywords, var_keys)
     ),
-    "collection"= "forecast",
+    "collection"= collection_name,
     "links"= list(
       list(
         "rel"= "collection",
@@ -128,10 +135,7 @@ build_model <- function(model_id,
       )),
     "assets"= list(
       "parquet_items"= list(
-        "href"= paste0("s3://anonymous@",
-                       "bio230014-bucket01/neon4cast-forecasts/parquet/",
-                       "aquatics/model_id=", model_id,
-                       "?endpoint_override=sdsc.osn.xsede.org"),
+        "href"= aws_asset_link,
         "type"= "application/x-parquet",
         "title"= 'Database Access',
         "description"= readr::read_file(description_path)
@@ -214,7 +218,7 @@ generate_model_items <- function(){
 }
 
 
-build_forecast <- function(table_schema,
+build_forecast_scores <- function(table_schema,
                            table_description,
                            start_date,
                            end_date,
@@ -224,9 +228,16 @@ build_forecast <- function(table_schema,
                            about_title,
                            theme_title,
                            model_documentation,
-                           destination_path
+                           destination_path,
+                           description_path,
+                           aws_download_path
 ){
-  forecast <- list(
+
+  aws_asset_link <- paste0("s3://anonymous@bio230014-bucket01/",
+                           aws_download_path,
+                           "?endpoint_override=sdsc.osn.xsede.org")
+
+  forecast_score <- list(
     "id" = id_value,
     "description" = description_string,
     "stac_version"= "1.0.0",
@@ -265,7 +276,7 @@ build_forecast <- function(table_schema,
                   list(
                     "rel" = "describedby",
                     "href" = "https://projects.ecoforecast.org/neon4cast-dashboard/",
-                    "title" = "NEON Forecast Challenge Dashboard",
+                    "title" = "NEON Ecological Forecast Challenge Dashboard",
                     "type" = "text/html"
                   )
                 )),
@@ -290,6 +301,12 @@ build_forecast <- function(table_schema,
         "type"= "text/csv",
         "roles" = list('data'),
         "title"= "NEON Field Site Metadata"
+      ),
+      'data' = list(
+        "href" = aws_asset_link,
+        "type"= "application/x-parquet",
+        "title"= 'Database Access',
+        "description"= readr::read_file(description_path)
       )
     )
   )
@@ -298,7 +315,130 @@ build_forecast <- function(table_schema,
   dest <- destination_path
   json <- file.path(dest, "collection.json")
 
-  jsonlite::write_json(forecast,
+  jsonlite::write_json(forecast_score,
+                       json,
+                       pretty=TRUE,
+                       auto_unbox=TRUE)
+  stac4cast::stac_validate(json)
+}
+
+
+build_theme <- function(start_date,end_date, id_value, theme_description, theme_title, destination_path, thumbnail_link, thumbnail_title){
+
+  theme <- list(
+    "id" = id_value,
+    "type" = "Collection",
+    "links" = list(
+      list(
+        "rel" = "child",
+        "type" = "application/json",
+        "href" = 'forecasts/collection.json',
+        "title" = 'forecast item'
+      ),
+      list(
+        "rel" = "child",
+        "type" = "application/json",
+        "href" = 'scores/collection.json',
+        "title" = 'scores item'
+      ),
+      list(
+        "rel"= "parent",
+        "type"= "application/json",
+        "href"= "../catalog.json",
+        "title" = 'parent'
+      ),
+      list(
+        "rel"= "root",
+        "type"= "application/json",
+        "href"= "../catalog.json",
+        "title" = 'root'
+      ),
+      list(
+        "rel"= "self",
+        "type"= "application/json",
+        "href" = 'collection.json',
+        "title" = 'self'
+      ),
+      list(
+        "rel" ="cite-as",
+        "href"= "https://doi.org/10.1002/fee.2616",
+        "title" = "citation"
+      ),
+      list(
+        "rel"= "about",
+        "href"= "https://projects.ecoforecast.org/neon4cast-docs/",
+        "type"= "text/html",
+        "title"= "NEON Forecast Challenge Documentation"
+      ),
+      list(
+        "rel"= "describedby",
+        "href"= "https://projects.ecoforecast.org/neon4cast-dashboard/",
+        "title"= "NEON Forecast Challenge Dashboard",
+        "type"= "text/html"
+      )
+    ),
+    "title"= theme_title,
+    'assets' = list(
+      'thumbnail' = list(
+        "href"= thumbnail_link,
+        "type"= "image/JPEG",
+        "roles" = list('thumbnail'),
+        "title"= thumbnail_title
+      )
+    ),
+    "extent" = list(
+      "spatial" = list(
+        'bbox' = list(list(-149.6106,
+                           18.1135,
+                           -66.7987,
+                           68.6698))
+      ),
+      "temporal" = list(
+        'interval' = list(list(
+          paste0(start_date,'T00:00:00Z'),
+          paste0(end_date,'T00:00:00Z'))
+        ))
+    ),
+    "license" = "CC0-1.0",
+    "keywords" = list(
+      "Forecasting",
+      "Data",
+      "Ecology"
+    ),
+    "providers" = list(
+      list(
+        "url"= "https://data.ecoforecast.org",
+        "name"= "Ecoforecast Data",
+        "roles" = list(
+          "producer",
+          "processor",
+          "licensor"
+        )
+      ),
+      list(
+        "url"= "https://ecoforecast.org",
+        "name"= "Ecoforecast",
+        "roles" = list('host')
+      )
+    ),
+    "description" = theme_description,
+    "stac_version" = "1.0.0",
+    "stac_extensions" = list(
+      "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+      "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+      "https://stac-extensions.github.io/table/v1.2.0/schema.json"
+    ),
+    "publications" = list(
+      "doi" = "https://www.doi.org/10.22541/essoar.167079499.99891914/v1",
+      "citation"= "Thomas, R.Q., C. Boettiger, C.C. Carey, M.C. Dietze, L.R. Johnson, M.A. Kenney, J.S. Mclachlan, J.A. Peters, E.R. Sokol, J.F. Weltzin, A. Willson, W.M. Woelmer, and Challenge Contributors. The NEON Ecological Forecasting Challenge. Accepted at Frontiers in Ecology and Environment. Pre-print"
+    )
+  )
+
+
+  dest <- destination_path
+  json <- file.path(dest, "collection.json")
+
+  jsonlite::write_json(theme,
                        json,
                        pretty=TRUE,
                        auto_unbox=TRUE)

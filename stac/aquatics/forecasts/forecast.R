@@ -1,9 +1,8 @@
-
-## create item list based off of aquatic forecast model ids
 library(arrow)
 library(dplyr)
 
 source('R/stac_functions.R')
+
 ## CREATE table for column descriptions
 description_create <- data.frame(datetime = 'ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in a single file. Forecast lead time is thus datetime-reference_datetime. In a hindcast the reference_datetime will be earlier than the time the hindcast was actually produced (see pubDate in Section3). Date times are allowed to be earlier than the reference_datetime if a reanalysis/reforecast is run before the start of the forecast period. This variable was called start_time before v0.5 of the EFI standard.',
                                  site_id = 'For forecasts that are not on a spatial grid, use of a site dimension that maps to a more detailed geometry (points, polygons, etc.) is allowable. In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this could be handled by the CF Discrete Sampling Geometry data model.',
@@ -45,7 +44,7 @@ forecast_max_date <- max(s3_df$date)
 forecast_min_date <- min(s3_df$date)
 
 
-build_description <- "Forecasts contain the raw forecast output from the Aquatics forecast theme. These forecast outputs have not been scored. Forecast scores are contained in the 'Scores' collection"
+build_description <- "The catalog contains forecasts and scores for the NEON Ecological Forecasting aquatics theme.  The forecasts are the raw forecasts that include all ensemble members (if a forecast represents uncertainty using an ensemble).  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). Due to the size of the raw forecasts, we recommend accessing the scores to analyze forecasts (unless you need the individual ensemble members).\nYou can access the forecasts or the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available.  The code to access the entire dataset is provided as an asset in the forecast or scores catalog. Given the size of the forecast catalog, it can be time-consuming to access the data at the full dataset level.  For quicker access to the forecasts and scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model."
 
 build_forecast(table_schema = theme_df,
                table_description = description_create,
@@ -54,8 +53,10 @@ build_forecast(table_schema = theme_df,
                id_value = "aquatics-forecasts",
                description_string = build_description,
                about_string = 'https://projects.ecoforecast.org/neon4cast-docs/',
-               about_title = "NEON Ecological Forecasting Challenge",
+               about_title = "NEON Ecological Forecasting Challenge Documentation",
                theme_title = "Aquatics Forecasts",
                model_documentation ="https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
-               destination_path = "stac/aquatics/forecasts/")
+               destination_path = "stac/aquatics/forecasts/",
+               description_path = 'stac/aquatics/forecasts/asset-description.Rmd',
+               aws_download_path = 'neon4cast-scores/forecasts/aquatics')
 

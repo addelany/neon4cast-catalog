@@ -1,175 +1,9 @@
-generate_authors <- function(metadata_available){
-  if (metadata_available == TRUE){
-    f_name_cols <- c('first.name.one','first.name.two','first.name.three','first.name.four','first.name.five','first.name.six','first.name.seven',
-                     'first.name.eight','first.name.nine','first.name.ten')
-    l_name_cols <- c('last.name.one','last.name.two','last.name.three','last.name.four','last.name.five','last.name.six','last.name.seven',
-                     'last.name.eight','last.name.nine','last.name.ten')
-
-    model_first_names <- unlist(model_docs[idx, names(model_docs) %in% f_name_cols], use.names = FALSE)[!is.na(model_docs[idx, names(model_docs) %in% f_name_cols])]
-    model_last_names <- unlist(model_docs[idx, names(model_docs) %in% l_name_cols], use.names = FALSE)[!is.na(model_docs[idx, names(model_docs) %in% l_name_cols])]
-
-    x <- purrr::map(seq.int(1:length(model_first_names)), function(i)
-      list(
-        "url" = 'not provided',
-        'name'= paste(model_first_names[i], model_last_names[i]),
-        'roles' = list("producer")
-      )
-    )
-    ## SET FIRST AUTHOR INFO
-    x[[1]]$url <- unlist(model_docs[idx,'email.one'], use.names = FALSE)
-    x[[1]]$roles <- list(
-      "producer",
-      "processor",
-      "licensor"
-    )
-  } else{
-    x <- list(list('url' = 'pending',
-                   'name' = 'pending',
-                   'roles' = list("producer",
-                                  "processor",
-                                  "licensor"))
-    )
-  }
-  return(x)
-}
-
-build_model <- function(model_id, team_name, model_description, start_date, end_date, use_metadata, var_values, site_values) {
-
-  meta <- list(
-    "stac_version"= "1.0.0",
-    "stac_extensions" = list(),
-    "type"= "Feature",
-    "id"= model_id,
-    "bbox"=
-      list(-156.6194, 17.9696, -66.7987,  71.2824),
-    "geometry"= list(
-      "type"= "Polygon",
-      "coordinates"= list(
-        list(
-          list(-156.6194, 17.9696),
-          list(-66.7987, 17.9696),
-          list(-66.7987, 71.2824),
-          list(-156.6194, 71.2824),
-          list(-156.6194, 17.9696)
-        )
-      )
-    ),
-    "properties"= list(
-      #'description' = model_description,
-      "description" = glue::glue('# {model_description}
-
-Sites: {site_values}
-'),
-      "start_datetime" = start_date,
-      "end_datetime" = end_date,
-      "providers"= c(generate_authors(metadata_available = use_metadata),list(
-        list(
-          "url"= "https://ecoforecast.org",
-          "name"= "Ecoforecast Challenge",
-          "roles"= list(
-            "host"
-          )
-        )
-      )
-      ),
-      "license"= "CC0-1.0",
-      "keywords"= list(
-        "Forecasting",
-        var_values)
-    ),
-    "collection"= "scores",
-    "links"= list(
-      list(
-        "rel"= "collection",
-        'href' = '../collection.json',
-        "type"= "application/json",
-        "title"= "Aquatics Scores"
-      ),
-      list(
-        "rel"= "root",
-        'href' = '../../../catalog.json',
-        "type"= "application/json",
-        "title"= "EFI Forecast Catalog"
-      ),
-      list(
-        "rel"= "parent",
-        'href' = '../collection.json',
-        "type"= "application/json",
-        "title"= "Aquatics Scores"
-      ),
-      list(
-        "rel"= "self",
-        "href" = paste0(model_id,'.json'),
-        "type"= "application/json",
-        "title"= "Model Scores"
-      )),
-    "assets"= list(
-      "parquet_items"= list(
-        "href"= paste0("s3://anonymous@",
-                       "bio230014-bucket01/neon4cast-forecasts/parquet/",
-                       "aquatics/model_id=", model_id,
-                       "?endpoint_override=sdsc.osn.xsede.org"),
-        "type"= "application/x-parquet",
-        "title"= 'Database Access',
-        "description"= readr::read_file("stac/aquatics/forecasts/models/asset-description.Rmd")
-      )
-    )
-  )
-
-
-  dest <- "stac/aquatics/scores/models/"
-  json <- file.path(dest, paste0(model_id, ".json"))
-
-  jsonlite::write_json(meta,
-                       json,
-                       pretty=TRUE,
-                       auto_unbox=TRUE)
-  stac4cast::stac_validate(json)
-
-
-}
-
-get_grouping <- function(s3_inv,
-                         theme,
-                         collapse=TRUE,
-                         endpoint="data.ecoforecast.org") {
-
-  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
-    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
-    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
-    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
-                  reference_datetime =
-                    gsub("reference_datetime=", "", reference_datetime),
-                  date = gsub("date=", "", date)) |>
-    dplyr::collect()
-
-}
-
-generate_vars_sites <- function(m_id){
-
-  # if (m_id %in%  c('GLEON_JRabaey_temp_physics','GLEON_lm_lag_1day','GLEON_physics','USGSHABs1','air2waterSat_2','fARIMA')){
-  #   output_info <- c('pending','pending')
-  # } else{
-
-  # do this for each theme / model
-  info_df <- arrow::open_dataset(info_extract$path(glue::glue("aquatics/model_id={m_id}/"))) |>
-    #filter(reference_datetime == "2023-06-18")|> #just grab one EM to limit processing
-    collect()
-
-  vars <- unique(info_df$variable)
-  sites <- unique(info_df$site_id)
-
-  output_info <- c(paste(vars, collapse = ', '),
-                   paste(sites, collapse = ', '))
-  #}
-  return(output_info)
-}
-
-## read in model documentation and only grab models for Aquatics theme
 library(tidyverse)
 library(arrow)
 library(stac4cast)
 library(reticulate)
+
+source('R/stac_functions.R')
 
 #get model ids
 s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
@@ -251,6 +85,7 @@ s3_df <- get_grouping(s3, "aquatics")
 
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
+
 ## loop over model ids and extract components if present in metadata table
 for (m in aquatic_models$model.id){
   print(m)
@@ -258,33 +93,47 @@ for (m in aquatic_models$model.id){
   model_min_date <- model_date_range$`min(date)`
   model_max_date <- model_date_range$`max(date)`
 
-  model_var_site_info <- generate_vars_sites(m_id = m)
+  model_var_site_info <- generate_vars_sites(m_id = m, theme = 'aquatics')
   # print(model_var_site_info[[1]])
   # print(model_var_site_info[[2]])
 
-  if (m %in% model_docs$model.id){
+  if (m %in% neon_docs$model.id){
     print('has metadata')
 
-    idx = which(model_docs$model.id == m)
+    idx = which(neon_docs$model.id == m)
 
-    build_model(model_id = model_docs$model.id[idx],
-                team_name = model_docs$team.name[idx],
-                model_description = model_docs[idx,'model.description'][[1]],
-                start_date =model_min_date,
+    build_model(model_id = neon_docs$model.id[idx],
+                team_name = neon_docs$team.name[idx],
+                model_description = neon_docs[idx,'model.description'][[1]],
+                start_date = model_min_date,
                 end_date = model_max_date,
                 use_metadata = TRUE,
-                var_values = model_var_site_info[1],
-                site_values = model_var_site_info[2])
+                var_values = model_var_site_info[[1]],
+                var_keys = model_var_site_info[[3]][[1]],
+                site_values = model_var_site_info[[2]],
+                model_documentation = neon_docs,
+                destination_path = "stac/aquatics/scores/models/",
+                description_path = "stac/aquatics/scores/models/asset-description.Rmd",
+                aws_download_path = 'neon4cast-scores/parquet/aquatics',
+                theme_title = "Aquatics Scores",
+                collection_name = 'scores')
   } else{
 
     build_model(model_id = m,
                 team_name = 'pending',
                 model_description = 'pending',
-                model_min_date,
-                model_max_date,
+                start_date = model_min_date,
+                end_date = model_max_date,
                 use_metadata = FALSE,
-                var_values = model_var_site_info[1],
-                site_values = model_var_site_info[2])
+                var_values = model_var_site_info[[1]],
+                var_keys = model_var_site_info[[3]][[1]],
+                site_values = model_var_site_info[[2]],
+                model_documentation = neon_docs,
+                destination_path = "stac/aquatics/scores/models/",
+                description_path = "stac/aquatics/scores/models/asset-description.Rmd",
+                aws_download_path = 'neon4cast-scores/parquet/aquatics',
+                theme_title = "Aquatics Scores",
+                collection_name = 'scores')
   }
 
   rm(model_var_site_info)
