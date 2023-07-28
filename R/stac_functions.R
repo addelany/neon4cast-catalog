@@ -153,6 +153,8 @@ build_model <- function(model_id,
                        auto_unbox=TRUE)
   stac4cast::stac_validate(json)
 
+  rm(meta)
+
 
 }
 
@@ -230,7 +232,8 @@ build_forecast_scores <- function(table_schema,
                            model_documentation,
                            destination_path,
                            description_path,
-                           aws_download_path
+                           aws_download_path,
+                           model_metadata_path
 ){
 
   aws_asset_link <- paste0("s3://anonymous@bio230014-bucket01/",
@@ -296,16 +299,18 @@ build_forecast_scores <- function(table_schema,
     ),
     "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
     'assets' = list(
-      'data' = list(
-        "href"= model_documentation,
-        "type"= "text/csv",
-        "roles" = list('data'),
-        "title"= "NEON Field Site Metadata"
-      ),
+      # 'data' = list(
+      #   "href"= model_documentation,
+      #   "type"= "text/csv",
+      #   "roles" = list('data'),
+      #   "title"= "NEON Field Site Metadata",
+      #   "description"= readr::read_file(model_metadata_path)
+      # ),
       'data' = list(
         "href" = aws_asset_link,
         "type"= "application/x-parquet",
         "title"= 'Database Access',
+        "roles" = list('data'),
         "description"= readr::read_file(description_path)
       )
     )

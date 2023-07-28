@@ -86,7 +86,7 @@
       "oxygen"
     ]
   },
-  "collection": "forecast",
+  "collection": "forecasts",
   "links": [
     {
       "rel": "collection",

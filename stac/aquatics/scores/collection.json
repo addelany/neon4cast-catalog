@@ -1,6 +1,6 @@
 {
   "id": "aquatics-scores",
-  "description": "Scores contains the scored forecasts from the Aquatics forecast theme. These are summarized and scored versions of the raw forecast output. The raw forecasts are located in the 'Forecasts' collection.",
+  "description": "The catalog contains forecasts and scores for the NEON Ecological Forecasting aquatics theme.  The forecasts are the raw forecasts that include all ensemble members (if a forecast represents uncertainty using an ensemble).  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). Due to the size of the raw forecasts, we recommend accessing the scores to analyze forecasts (unless you need the individual ensemble members).\nYou can access the forecasts or the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available.  The code to access the entire dataset is provided as an asset in the forecast or scores catalog. Given the size of the forecast catalog, it can be time-consuming to access the data at the full dataset level.  For quicker access to the forecasts and scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model.",
   "stac_version": "1.0.0",
   "license": "CC0-1.0",
   "stac_extensions": [
@@ -516,24 +516,18 @@
     },
     {
       "rel": "about",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+      "href": "https://projects.ecoforecast.org/neon4cast-docs/",
       "type": "text/html",
-      "title": "Aquatics Forecast Challenge"
-    },
-    {
-      "rel": "describedby",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-      "title": "Organization Landing Page",
-      "type": "text/html"
+      "title": "NEON Ecological Forecasting Challenge Documentation"
     },
     {
       "rel": "describedby",
       "href": "https://projects.ecoforecast.org/neon4cast-dashboard/",
-      "title": "NEON Forecast Scores Dashboard",
+      "title": "NEON Ecological Forecast Challenge Dashboard",
       "type": "text/html"
     }
   ],
-  "title": "Ecological Forecasting Initiative - Aquatics Scores",
+  "title": "Aquatics Scores",
   "extent": {
     "spatial": {
       "bbox": [
@@ -549,7 +543,7 @@
       "interval": [
         [
           "2017-08-27T00:00:00Z",
-          "2023-08-05T00:00:00Z"
+          "2023-08-30T00:00:00Z"
         ]
       ]
     }
@@ -563,17 +557,17 @@
     {
       "name": "site_id",
       "type": "string",
-      "description": "For forecasts that are not on a spatial grid, use of a site dimension thatmaps to a more detailed geometry (points, polygons, etc.) is allowable.In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this couldbe handled by the CF Discrete Sampling Geometry data model."
+      "description": "For forecasts that are not on a spatial grid, use of a site dimension that maps to a more detailed geometry (points, polygons, etc.) is allowable. In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this could be handled by the CF Discrete Sampling Geometry data model."
     },
     {
       "name": "datetime",
       "type": "timestamp[us, tz=UTC]",
-      "description": "ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard."
+      "description": "ISO 8601(ISO 2019) datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in a single file. Forecast lead time is thus datetime-reference_datetime. In a hindcast the reference_date time will be earlier than the time the hindcast was actually produced (see pubDate in Section 3). Datetimes are allowed to be earlier than the reference_datetime if analysis/reforecast is run before the start of the forecast period. This variable was called start_time before v0.5 of the EFI standard."
     },
     {
       "name": "family",
       "type": "string",
-      "description": "For ensembles: “ensemble.” Default value if unspecifiedFor probability distributions: Name of the statistical distributionassociated with the reported statistics. The “sample” distribution issynonymous with “ensemble.”For summary statistics: “summary.”If this dimension does not vary, it is permissible to specifyfamilyas avariable attribute if the file format being used supports this (e.g.,netCDF)."
+      "description": "For ensembles: “ensemble.” Default value if unspecified For probability distributions: Name of the statistical distribution associated with the reported statistics. The “sample” distribution is synonymous with “ensemble.” For summary statistics: “summary.”If this dimension does not vary, it is permissible to specify family as a variable attribute if the file format being used supports this (e.g.,netCDF)."
     },
     {
       "name": "variable",
@@ -638,17 +632,18 @@
     {
       "name": "date",
       "type": "string",
-      "description": "ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod."
+      "description": "ISO 8601 (ISO 2019) datetime being predicted; follows CF convention http://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFI convention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify the start_datetime and end_datetime as two variables, instead of the single datetime. If this is not provided the datetime is assumed to be the MIDPOINT of the integration period."
     }
   ],
   "assets": {
     "data": {
-      "href": "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
-      "type": "text/csv",
+      "href": "s3://anonymous@bio230014-bucket01/neon4cast-scores/parquet/aquatics?endpoint_override=sdsc.osn.xsede.org",
+      "type": "application/x-parquet",
+      "title": "Database Access",
       "roles": [
         "data"
       ],
-      "title": "NEON Field Site Metadata"
+      "description": "Use `arrow` for remote access to the database. This will return all scored forecasts for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Copy URL from \"URL for Amazon S3\" button above and save as object named \"url_for_s3\" \n# Use in code below\n\nall_scores <- arrow::open_dataset(url_for_s3)\ndf <- all_scores |> dplyr::collect()\n\n```\n\nNow use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.\n\n"
     }
   }
 }

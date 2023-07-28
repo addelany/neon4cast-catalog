@@ -30,14 +30,14 @@ theme_df <- arrow::open_dataset(s3_schema) %>%
   filter(variable == variable_name, site_id == site_id)
 
 ## identify model ids from bucket -- used in generate model items function
-s3_inventory <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
-paths <- open_dataset(s3_inventory$path("neon4cast-forecasts")) |> collect()
+s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
+paths <- open_dataset(s3$path("neon4cast-forecasts")) |> collect()
 models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
 aquatic_models <- models_df |>
   tidyr::separate(...3, c('name','model.id'), "=")
 
 ## use s3_inventory to access min and max dates
-s3_df <- get_grouping(s3_inventory, "aquatics")
+s3_df <- get_grouping(s3, "aquatics")
 s3_df <- s3_df |> filter(model_id != 'null')
 
 forecast_max_date <- max(s3_df$date)
@@ -46,7 +46,7 @@ forecast_min_date <- min(s3_df$date)
 
 build_description <- "The catalog contains forecasts and scores for the NEON Ecological Forecasting aquatics theme.  The forecasts are the raw forecasts that include all ensemble members (if a forecast represents uncertainty using an ensemble).  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). Due to the size of the raw forecasts, we recommend accessing the scores to analyze forecasts (unless you need the individual ensemble members).\nYou can access the forecasts or the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available.  The code to access the entire dataset is provided as an asset in the forecast or scores catalog. Given the size of the forecast catalog, it can be time-consuming to access the data at the full dataset level.  For quicker access to the forecasts and scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model."
 
-build_forecast(table_schema = theme_df,
+build_forecast_scores(table_schema = theme_df,
                table_description = description_create,
                start_date = forecast_min_date,
                end_date = forecast_max_date,

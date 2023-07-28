@@ -1,4 +1,4 @@
-Use `arrow` for remote access to the database. This will return all raw forecasts for the NEON Ecological Forecasting Aquatics theme..
+Use `arrow` for remote access to the database. This will return all raw forecasts for the NEON Ecological Forecasting Aquatics theme.
 
 ### R
 

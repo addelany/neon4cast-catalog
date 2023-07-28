@@ -1,6 +1,6 @@
 {
   "id": "aquatics-forecasts",
-  "description": "Forecasts contain the raw forecast output from the Aquatics forecast theme. These forecast outputs have not been scored. Forecast scores are contained in the 'Scores' collection",
+  "description": "The catalog contains forecasts and scores for the NEON Ecological Forecasting aquatics theme.  The forecasts are the raw forecasts that include all ensemble members (if a forecast represents uncertainty using an ensemble).  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). Due to the size of the raw forecasts, we recommend accessing the scores to analyze forecasts (unless you need the individual ensemble members).\nYou can access the forecasts or the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available.  The code to access the entire dataset is provided as an asset in the forecast or scores catalog. Given the size of the forecast catalog, it can be time-consuming to access the data at the full dataset level.  For quicker access to the forecasts and scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model.",
   "stac_version": "1.0.0",
   "license": "CC0-1.0",
   "stac_extensions": [
@@ -123,6 +123,11 @@
     {
       "rel": "item",
       "type": "application/json",
+      "href": "models/JorritsCrystalBall.json"
+    },
+    {
+      "rel": "item",
+      "type": "application/json",
       "href": "models/LSAMP_AWPC.json"
     },
     {
@@ -144,6 +149,11 @@
       "rel": "item",
       "type": "application/json",
       "href": "models/NDWaterTempDO.json"
+    },
+    {
+      "rel": "item",
+      "type": "application/json",
+      "href": "models/StreamDO_lm.json"
     },
     {
       "rel": "item",
@@ -194,6 +204,11 @@
       "rel": "item",
       "type": "application/json",
       "href": "models/empirical.json"
+    },
+    {
+      "rel": "item",
+      "type": "application/json",
+      "href": "models/example_ID.json"
     },
     {
       "rel": "item",
@@ -511,6 +526,11 @@
       "href": "models/xgboost_temp_oxygen_sequential.json"
     },
     {
+      "rel": "item",
+      "type": "application/json",
+      "href": "models/your_model_id.json"
+    },
+    {
       "rel": "parent",
       "type": "application/json",
       "href": "../collection.json"
@@ -531,18 +551,18 @@
     },
     {
       "rel": "about",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
+      "href": "https://projects.ecoforecast.org/neon4cast-docs/",
       "type": "text/html",
-      "title": "Aquatics Forecast Challenge"
+      "title": "NEON Ecological Forecasting Challenge Documentation"
     },
     {
       "rel": "describedby",
-      "href": "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-      "title": "Organization Landing Page",
+      "href": "https://projects.ecoforecast.org/neon4cast-dashboard/",
+      "title": "NEON Ecological Forecast Challenge Dashboard",
       "type": "text/html"
     }
   ],
-  "title": "Ecological Forecasting Initiative - Aquatics Forecasts",
+  "title": "Aquatics Forecasts",
   "extent": {
     "spatial": {
       "bbox": [
@@ -558,7 +578,7 @@
       "interval": [
         [
           "2017-08-27T00:00:00Z",
-          "2023-07-29T00:00:00Z"
+          "2023-08-30T00:00:00Z"
         ]
       ]
     }
@@ -607,12 +627,13 @@
   ],
   "assets": {
     "data": {
-      "href": "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
-      "type": "text/csv",
+      "href": "s3://anonymous@bio230014-bucket01/neon4cast-scores/forecasts/aquatics?endpoint_override=sdsc.osn.xsede.org",
+      "type": "application/x-parquet",
+      "title": "Database Access",
       "roles": [
         "data"
       ],
-      "title": "NEON Field Site Metadata"
+      "description": "Use `arrow` for remote access to the database. This will return all raw forecasts for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Copy URL from \"URL for Amazon S3\" button above and save as object named \"url_for_s3\" \n# Use in code below\n\nall_forecasts <- arrow::open_dataset(url_for_s3)\ndf <- all_forecasts |> dplyr::collect()\n\n```\n\nNow use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.\n\n\n"
     }
   }
 }
