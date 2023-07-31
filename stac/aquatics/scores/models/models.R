@@ -16,7 +16,7 @@ aquatic_models <- models_df |>
 
 ## READ IN MODEL METADATA
 
-model_docs <- read_csv('NEON_Challenge_Registration_2023-05-23.csv')
+neon_docs <- read_csv('NEON_Challenge_Registration_2023-05-23.csv')
 
 
 new_columns <- c('first.name.one',
@@ -79,6 +79,17 @@ names(model_docs) <- new_columns
 model_docs <- model_docs |>
   mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
+neon_docs <- neon_docs |>
+  filter(Theme == 'Aquatic Ecosystems') |>
+  select(`First Name`:`Email address`,
+         `team-name`,
+         `Team Member 2 - First Name` :`Team Member 10 - Email`,
+         Team.Category:`model-uncertainty`)
+
+names(neon_docs) <- new_columns
+
+neon_docs <- neon_docs |>
+  mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
 s3_df <- get_grouping(s3, "aquatics")
 
@@ -87,7 +98,7 @@ info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override 
 
 
 ## loop over model ids and extract components if present in metadata table
-for (m in aquatic_models$model.id){
+for (m in aquatic_models$model.id[1:2]){
   print(m)
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`
