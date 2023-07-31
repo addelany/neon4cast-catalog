@@ -67,18 +67,6 @@ new_columns <- c('first.name.one',
                  'model.uncertainty'
 )
 
-model_docs <- model_docs |>
-  filter(Theme == 'Aquatic Ecosystems') |>
-  select(`First Name`:`Email address`,
-         `team-name`,
-         `Team Member 2 - First Name` :`Team Member 10 - Email`,
-         Team.Category:`model-uncertainty`)
-
-names(model_docs) <- new_columns
-
-model_docs <- model_docs |>
-  mutate(model.description = ifelse(is.na(model.description),'',model.description))
-
 neon_docs <- neon_docs |>
   filter(Theme == 'Aquatic Ecosystems') |>
   select(`First Name`:`Email address`,
@@ -126,7 +114,7 @@ for (m in aquatic_models$model.id[1:2]){
                 destination_path = "stac/aquatics/scores/models/",
                 description_path = "stac/aquatics/scores/models/asset-description.Rmd",
                 aws_download_path = 'neon4cast-scores/parquet/aquatics',
-                theme_title = "Aquatics Scores",
+                theme_title = "Scores",
                 collection_name = 'scores')
   } else{
 
@@ -143,7 +131,7 @@ for (m in aquatic_models$model.id[1:2]){
                 destination_path = "stac/aquatics/scores/models/",
                 description_path = "stac/aquatics/scores/models/asset-description.Rmd",
                 aws_download_path = 'neon4cast-scores/parquet/aquatics',
-                theme_title = "Aquatics Scores",
+                theme_title = "Scores",
                 collection_name = 'scores')
   }
 

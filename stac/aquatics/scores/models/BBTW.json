@@ -128,7 +128,7 @@
       "rel": "collection",
       "href": "../collection.json",
       "type": "application/json",
-      "title": "Aquatics Scores"
+      "title": "Scores"
     },
     {
       "rel": "root",
@@ -140,7 +140,7 @@
       "rel": "parent",
       "href": "../collection.json",
       "type": "application/json",
-      "title": "Aquatics Scores"
+      "title": "Scores"
     },
     {
       "rel": "self",

@@ -527,7 +527,7 @@
       "type": "text/html"
     }
   ],
-  "title": "Aquatics Scores",
+  "title": "Scores",
   "extent": {
     "spatial": {
       "bbox": [
@@ -543,7 +543,7 @@
       "interval": [
         [
           "2017-08-27T00:00:00Z",
-          "2023-08-30T00:00:00Z"
+          "2023-09-02T00:00:00Z"
         ]
       ]
     }
