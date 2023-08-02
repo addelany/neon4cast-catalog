@@ -156,10 +156,10 @@
       "title": "Database Access",
       "description": "Use `arrow` for remote access to the database.\n\n### R\n\n```{r}\n# Copy URL from \"URL for Amazon S3\" button above and save as object named \"url_for_s3\" \n# Use in code below\n\nfcst <- arrow::open_dataset(url_for_s3)\ndf <- fcst |> dplyr::collect()\n\n```\n\nNow use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.\n"
     },
-    "test_items": {
-      "href": "test_path",
+    "2": {
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/BBTW/BARC/latest_forecast.png",
       "type": "application/x-parquet",
-      "title": "Latest Image",
+      "title": "Latest Results for BARC",
       "description": "Image from s3 storage"
     }
   }
