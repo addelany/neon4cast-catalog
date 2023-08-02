@@ -139,7 +139,8 @@ build_model <- function(model_id,
         "type"= "application/x-parquet",
         "title"= 'Database Access',
         "description"= readr::read_file(description_path)
-      )
+      ),
+      pull_images('aquatics',model_id,'latest_forecast.png')
     )
   )
 
@@ -219,6 +220,27 @@ generate_model_items <- function(){
   return(x)
 }
 
+pull_images <- function(theme, m_id, image_name){
+
+  info_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
+    collect()
+
+  sites_vector <- sort(unique(info_df$site_id))
+
+  base_path <- 'https://data.ecoforest.org/neon4cast-catalog/latest/scores/'
+
+  image_assets <- purrr::map(sites_vector, function(i)
+    list("parquet_items"= list(
+      "href"= file.path(base_path,theme,m_id,i,image_name),
+      "type"= "application/x-parquet",
+      "title"= 'Database Access',
+      "description"= 'Image from s3 storage'
+    )
+    )
+  )
+  return(image_assets)
+
+}
 
 build_forecast_scores <- function(table_schema,
                            table_description,

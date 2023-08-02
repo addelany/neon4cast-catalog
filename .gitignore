@@ -31,6 +31,9 @@ vignettes/*.pdf
 *_cache/
 /cache/
 
+# directories for storing images locally
+/thumbnail_store/
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
