@@ -133,12 +133,13 @@ build_model <- function(model_id,
         "type"= "application/json",
         "title"= "Model Forecast"
       )),
-    "assets"= list(
-      "parquet_items"= list(
+    "assets"= c(list(
+        "parquet_items"= list(
         "href"= aws_asset_link,
         "type"= "application/x-parquet",
         "title"= 'Database Access',
         "description"= readr::read_file(description_path)
+      )
       ),
       pull_images('aquatics',model_id,'latest_forecast.png')
     )
@@ -230,14 +231,14 @@ pull_images <- function(theme, m_id, image_name){
   base_path <- 'https://data.ecoforest.org/neon4cast-catalog/latest/scores/'
 
   image_assets <- purrr::map(sites_vector, function(i)
-    list("parquet_items"= list(
+    list(
       "href"= file.path(base_path,theme,m_id,i,image_name),
       "type"= "application/x-parquet",
-      "title"= 'Database Access',
+      "title"= paste0('Latest Results for ', i),
       "description"= 'Image from s3 storage'
     )
-    )
   )
+
   return(image_assets)
 
 }
