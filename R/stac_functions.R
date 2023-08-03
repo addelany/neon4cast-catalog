@@ -72,17 +72,21 @@ build_model <- function(model_id,
     "bbox"=
       list(-156.6194, 17.9696, -66.7987,  71.2824),
     "geometry"= list(
-      "type"= "Polygon",
-      "coordinates"= list(
-        list(
-          list(-156.6194, 17.9696),
-          list(-66.7987, 17.9696),
-          list(-66.7987, 71.2824),
-          list(-156.6194, 71.2824),
-          list(-156.6194, 17.9696)
-        )
-      )
+      "type"= "Point",
+      "coordinates"= c(17.9696,66.7987)
     ),
+    # "geometry"= list(
+    #   "type"= "Polygon",
+    #   "coordinates"= list(
+    #     list(
+    #       list(-156.6194, 17.9696),
+    #       list(-66.7987, 17.9696),
+    #       list(-66.7987, 71.2824),
+    #       list(-156.6194, 71.2824),
+    #       list(-156.6194, 17.9696)
+    #     )
+    #   )
+    # ),
     "properties"= list(
       #'description' = model_description,
       "description" = glue::glue('
