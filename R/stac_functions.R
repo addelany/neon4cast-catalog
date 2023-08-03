@@ -228,7 +228,7 @@ pull_images <- function(theme, m_id, image_name){
 
   sites_vector <- sort(unique(info_df$site_id))
 
-  base_path <- 'https://data.ecoforest.org/neon4cast-catalog/latest/scores/'
+  base_path <- 'https://data.ecoforest.org/neon4cast-catalog/latest/scores'
 
   image_assets <- purrr::map(sites_vector, function(i)
     list(

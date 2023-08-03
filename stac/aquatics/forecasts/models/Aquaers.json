@@ -102,7 +102,7 @@
       "description": "Use `arrow` for remote access to the database. This will return all raw forecasts for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Copy URL from \"URL for Amazon S3\" button above and save as object named \"url_for_s3\" \n# Use in code below\n\nall_forecasts <- arrow::open_dataset(url_for_s3)\ndf <- all_forecasts |> dplyr::collect()\n\n```\n\nNow use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.\n\n\n"
     },
     "2": {
-      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/BARC/latest_forecast.png",
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores/aquatics/Aquaers/BARC/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for BARC",
       "description": "Image from s3 storage",
@@ -111,7 +111,7 @@
       ]
     },
     "3": {
-      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/CRAM/latest_forecast.png",
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores/aquatics/Aquaers/CRAM/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for CRAM",
       "description": "Image from s3 storage",
@@ -120,7 +120,7 @@
       ]
     },
     "4": {
-      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/LIRO/latest_forecast.png",
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores/aquatics/Aquaers/LIRO/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for LIRO",
       "description": "Image from s3 storage",
@@ -129,7 +129,7 @@
       ]
     },
     "5": {
-      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/PRLA/latest_forecast.png",
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores/aquatics/Aquaers/PRLA/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for PRLA",
       "description": "Image from s3 storage",
@@ -138,7 +138,7 @@
       ]
     },
     "6": {
-      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/PRPO/latest_forecast.png",
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores/aquatics/Aquaers/PRPO/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for PRPO",
       "description": "Image from s3 storage",
@@ -147,7 +147,7 @@
       ]
     },
     "7": {
-      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/SUGG/latest_forecast.png",
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores/aquatics/Aquaers/SUGG/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for SUGG",
       "description": "Image from s3 storage",
@@ -156,7 +156,7 @@
       ]
     },
     "8": {
-      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/TOOK/latest_forecast.png",
+      "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores/aquatics/Aquaers/TOOK/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for TOOK",
       "description": "Image from s3 storage",
