@@ -228,12 +228,12 @@ pull_images <- function(theme, m_id, image_name){
 
   sites_vector <- sort(unique(info_df$site_id))
 
-  base_path <- 'https://data.ecoforest.org/neon4cast-catalog/latest/scores'
+  base_path <- 'https://data.ecoforecast.org/neon4cast-catalog'
 
   image_assets <- purrr::map(sites_vector, function(i)
     list(
       "href"= file.path(base_path,theme,m_id,i,image_name),
-      "type"= "application/x-parquet",
+      "type"= "image/png",
       "title"= paste0('Latest Results for ', i),
       "description"= 'Image from s3 storage',
       "roles" = list('thumbnail')

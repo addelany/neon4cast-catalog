@@ -60,7 +60,11 @@ for (m_id in aquatic_models$model.id[1:2]){
       next
     }
 
-    latest_site_df <- info_df |>
+    latest_forecast_df <- info_df |>
+      filter(site_id == site,
+             reference_datetime == max(reference_datetime))
+
+    latest_scores_df <- info_df |>
       filter(site_id == site,
              reference_datetime == latest_scores_site$reference_datetime) |>
       right_join(clim_site_df, by = c('datetime','variable'))
@@ -74,10 +78,10 @@ for (m_id in aquatic_models$model.id[1:2]){
     }
 
     # Forecast Plot -- uses scores data. Raw forecasts might not be useful
-    forecast_plot <- ggplot(data = latest_site_df, aes(datetime, mean)) +
+    forecast_plot <- ggplot(data = latest_forecast_df, aes(datetime, mean)) +
       geom_line(color = "steelblue", linewidth = 1) +
       ggplot2::geom_ribbon(aes(ymin = quantile10, ymax = quantile90), alpha = 0.2) +
-      labs(title = paste0("Latest Forecast for ", site," (",latest_scores_site$reference_datetime,')'),
+      labs(title = paste0("Latest Forecast for ", site," (",unique(latest_forecast_df$reference_datetime),')'),
            subtitle = "(plots include the mean and the +- 90% CI)",
            y = "Forecast value", x = "Date") +
       facet_grid(variable ~ ., scales = "free_y") +
@@ -89,14 +93,14 @@ for (m_id in aquatic_models$model.id[1:2]){
 
     ggsave(filename = forecast_img_path, plot = forecast_plot,height = 6, width = 8)
 
-    mc_cp(forecast_img_path, "efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_forecast.png/")
+    mc_cp(forecast_img_path, glue::glue("efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_forecast.png"))
 
 
 
     #mc_cp(forecast_img_path, "efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_forecast.png")
 
     # Scores plot
-    scores_plot <- ggplot(data = latest_site_df, aes(datetime, crps)) +
+    scores_plot <- ggplot(data = latest_scores_df, aes(datetime, crps)) +
       geom_line(color = "steelblue", linewidth = 1) +
       geom_line(aes(y = clim_crps), color = 'darkred', linetype = 'dashed') +
       labs(title = paste0("Latest Scores for ", site," (",latest_scores_site$reference_datetime,')'),
@@ -112,7 +116,7 @@ for (m_id in aquatic_models$model.id[1:2]){
 
     ggsave(filename = scores_img_path, plot = scores_plot, height = 6, width = 8)
 
-    mc_cp(scores_img_path, "efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_scores.png/")
+    mc_cp(scores_img_path, glue::glue("efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_scores.png"))
 
     print('--- done ---')
 
