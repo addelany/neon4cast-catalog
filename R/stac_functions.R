@@ -135,7 +135,7 @@ build_model <- function(model_id,
         "title"= "Model Forecast"
       )),
     "assets"= c(list(
-        "parquet_items"= list(
+        "1"= list(
         "href"= aws_asset_link,
         "type"= "application/x-parquet",
         "title"= 'Database Access',

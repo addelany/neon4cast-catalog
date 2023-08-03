@@ -95,7 +95,7 @@
     }
   ],
   "assets": {
-    "parquet_items": {
+    "1": {
       "href": "s3://anonymous@bio230014-bucket01/neon4cast-scores/parquet/aquatics/model_id=Aquaers?endpoint_override=sdsc.osn.xsede.org",
       "type": "application/x-parquet",
       "title": "Database Access",
