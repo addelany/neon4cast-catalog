@@ -235,7 +235,8 @@ pull_images <- function(theme, m_id, image_name){
       "href"= file.path(base_path,theme,m_id,i,image_name),
       "type"= "application/x-parquet",
       "title"= paste0('Latest Results for ', i),
-      "description"= 'Image from s3 storage'
+      "description"= 'Image from s3 storage',
+      "roles" = list('thumbnail')
     )
   )
 

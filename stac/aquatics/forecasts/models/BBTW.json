@@ -160,7 +160,10 @@
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/BBTW/BARC/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for BARC",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     }
   }
 }

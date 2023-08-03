@@ -105,43 +105,64 @@
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/BARC/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for BARC",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     },
     "3": {
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/CRAM/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for CRAM",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     },
     "4": {
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/LIRO/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for LIRO",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     },
     "5": {
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/PRLA/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for PRLA",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     },
     "6": {
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/PRPO/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for PRPO",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     },
     "7": {
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/SUGG/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for SUGG",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     },
     "8": {
       "href": "https://data.ecoforest.org/neon4cast-catalog/latest/scores//aquatics/Aquaers/TOOK/latest_forecast.png",
       "type": "application/x-parquet",
       "title": "Latest Results for TOOK",
-      "description": "Image from s3 storage"
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     }
   }
 }
