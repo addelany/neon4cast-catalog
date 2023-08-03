@@ -115,7 +115,8 @@ for (m in aquatic_models$model.id[1:2]){
                 description_path = "stac/aquatics/scores/models/asset-description.Rmd",
                 aws_download_path = 'neon4cast-scores/parquet/aquatics',
                 theme_title = "Scores",
-                collection_name = 'scores')
+                collection_name = 'scores',
+                thumbnail_image_name = 'latest_scores.png')
   } else{
 
     build_model(model_id = m,
@@ -132,7 +133,8 @@ for (m in aquatic_models$model.id[1:2]){
                 description_path = "stac/aquatics/scores/models/asset-description.Rmd",
                 aws_download_path = 'neon4cast-scores/parquet/aquatics',
                 theme_title = "Scores",
-                collection_name = 'scores')
+                collection_name = 'scores',
+                thumbnail_image_name = 'latest_scores.png')
   }
 
   rm(model_var_site_info)

@@ -155,6 +155,15 @@
       "type": "application/x-parquet",
       "title": "Database Access",
       "description": "Use `arrow` for remote access to the database.\n\n### R\n\n```{r}\n# Copy URL from \"URL for Amazon S3\" button above and save as object named \"url_for_s3\" \n# Use in code below\n\nscores <- arrow::open_dataset(url_for_s3)\ndf <- scores |> dplyr::collect()\n\n```\n\nNow use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.\n"
+    },
+    "2": {
+      "href": "https://data.ecoforecast.org/neon4cast-catalog/aquatics/BBTW/BARC/latest_scores.png",
+      "type": "image/png",
+      "title": "Latest Results for BARC",
+      "description": "Image from s3 storage",
+      "roles": [
+        "thumbnail"
+      ]
     }
   }
 }

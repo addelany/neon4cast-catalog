@@ -51,7 +51,8 @@ build_model <- function(model_id,
                         description_path,
                         aws_download_path,
                         theme_title,
-                        collection_name) {
+                        collection_name,
+                        thumbnail_image_name) {
 
 
   preset_keywords <- list("Forecasting", "NEON")
@@ -141,7 +142,7 @@ build_model <- function(model_id,
         "description"= readr::read_file(description_path)
       )
       ),
-      pull_images('aquatics',model_id,'latest_forecast.png')
+      pull_images('aquatics',model_id,thumbnail_image_name)
     )
   )
 
