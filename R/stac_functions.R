@@ -38,6 +38,7 @@ generate_authors <- function(metadata_available, model_docs){
 
 
 build_model <- function(model_id,
+                        theme_id,
                         team_name,
                         model_description,
                         start_date,
@@ -73,8 +74,7 @@ build_model <- function(model_id,
       list(-156.6194, 17.9696, -66.7987,  71.2824),
     "geometry"= list(
       "type"= "MultiPoint",
-      "coordinates"= list(c(17.9696,66.7987),
-                          c(18.962, 65.789))
+      "coordinates"= get_site_coords(theme_id, model_id)
     ),
     # "geometry"= list(
     #   "type"= "Polygon",
@@ -248,6 +248,26 @@ pull_images <- function(theme, m_id, image_name){
 
   return(image_assets)
 
+}
+
+get_site_coords <- function(theme, m_id){
+
+  theme_select <- glue::glue('{theme}')
+
+  theme_sites <- read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv", col_types = cols()) |>
+    dplyr::filter(UQ(sym(theme_select)) == 1)
+
+  model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
+    collect() |>
+    distinct(site_id)
+
+  site_coords <- theme_sites |>
+    filter(field_site_id %in% model_sites$site_id) |>
+    distinct(field_site_id, field_longitude, field_latitude)
+
+  site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
+
+  return(list(site_coords$site_lat_lon))
 }
 
 build_forecast_scores <- function(table_schema,
