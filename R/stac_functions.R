@@ -74,7 +74,7 @@ build_model <- function(model_id,
       list(-156.6194, 17.9696, -66.7987,  71.2824),
     "geometry"= list(
       "type"= "MultiPoint",
-      "coordinates"= get_site_coords(theme_id, model_id)
+      "coordinates"= get_site_coords(theme_id, model_id)[[1]]
     ),
     "properties"= list(
       #'description' = model_description,
@@ -150,8 +150,6 @@ build_model <- function(model_id,
   stac4cast::stac_validate(json)
 
   rm(meta)
-
-
 }
 
 get_grouping <- function(s3_inv,
@@ -238,7 +236,7 @@ pull_images <- function(theme, m_id, image_name){
 
 }
 
-get_site_coords <- function(theme, m_id){
+get_site_coords <- function(theme, m_id, site_build_object){
 
   theme_select <- glue::glue('{theme}')
 
@@ -247,16 +245,14 @@ get_site_coords <- function(theme, m_id){
 
   if (is.null(m_id)){
 
+    bucket_sites <- read_csv('stac/aquatics/forecasts/all_forecast_sites.csv')
+
     site_coords <- theme_sites |>
+      filter(field_site_id %in% bucket_sites$site_id) |>
       distinct(field_site_id, field_longitude, field_latitude)
 
     site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
 
-    ## eventually grab sites from bucket -- takes too long for now
-    # model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/"))) |>
-    #   distinct(site_id) |>
-    #   collect() #|>
-    #   #distinct(site_id)
 
   }else{
     model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
@@ -270,7 +266,7 @@ get_site_coords <- function(theme, m_id){
     site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
   }
 
-  return(site_coords$site_lat_lon)
+  return(list(site_coords$site_lat_lon, model_sites$site_id))
 }
 
 build_forecast_scores <- function(table_schema,
@@ -346,7 +342,7 @@ build_forecast_scores <- function(table_schema,
                            68.6698)),
         "geometry"= list(
           "type"= "MultiPoint",
-          "coordinates"= get_site_coords(theme = theme_id, m_id = NULL)
+          "coordinates"= get_site_coords(theme = theme_id, m_id = NULL)[[1]]
         )
       ),
       "temporal" = list(

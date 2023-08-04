@@ -88,6 +88,9 @@ s3_df <- get_grouping(s3, "aquatics")
 
 info_extract <- arrow::s3_bucket("neon4cast-forecasts/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
+
+forecast_sites <- c()
+
 ## loop over model ids and extract components if present in metadata table
 for (m in aquatic_models$model.id[1:2]){
   print(m)
@@ -98,6 +101,8 @@ for (m in aquatic_models$model.id[1:2]){
   model_var_site_info <- generate_vars_sites(m_id = m, theme = 'aquatics')
   # print(model_var_site_info[[1]])
   # print(model_var_site_info[[2]])
+
+  forecast_sites <- append(forecast_sites,  get_site_coords('aquatics', m)[[2]])
 
   if (m %in% neon_docs$model.id){
     print('has metadata')
@@ -144,3 +149,8 @@ for (m in aquatic_models$model.id[1:2]){
 
   rm(model_var_site_info)
 }
+
+forecast_sites <- unique(forecast_sites)
+forecast_sites_df <- data.frame(site_id = forecast_sites)
+
+write.csv(forecast_sites_df, 'stac/aquatics/forecasts/all_forecast_sites.csv', row.names = FALSE)
