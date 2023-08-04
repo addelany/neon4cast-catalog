@@ -10,8 +10,11 @@
     71.2824
   ],
   "geometry": {
-    "type": "Point",
-    "coordinates": [66.7987, 17.9696]
+    "type": "MultiPoint",
+    "coordinates": [
+      [17.9696, 66.7987],
+      [18.962, 65.789]
+    ]
   },
   "properties": {
     "description": "\nmodel info: pending\n\nSites: BARC, CRAM, LIRO, PRLA, PRPO, SUGG, TOOK\n\nVariables: chla, oxygen, temperature",

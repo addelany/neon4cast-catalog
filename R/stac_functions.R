@@ -72,8 +72,9 @@ build_model <- function(model_id,
     "bbox"=
       list(-156.6194, 17.9696, -66.7987,  71.2824),
     "geometry"= list(
-      "type"= "Point",
-      "coordinates"= c(17.9696,66.7987)
+      "type"= "MultiPoint",
+      "coordinates"= list(c(17.9696,66.7987),
+                          c(18.962, 65.789))
     ),
     # "geometry"= list(
     #   "type"= "Polygon",
