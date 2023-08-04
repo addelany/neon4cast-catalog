@@ -12,9 +12,7 @@
   "geometry": {
     "type": "MultiPoint",
     "coordinates": [
-      [
-        [-82.0084, 29.676]
-      ]
+      [-82.0084, 29.676]
     ]
   },
   "properties": {

@@ -267,7 +267,7 @@ get_site_coords <- function(theme, m_id){
 
   site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
 
-  return(list(site_coords$site_lat_lon))
+  return(site_coords$site_lat_lon)
 }
 
 build_forecast_scores <- function(table_schema,
