@@ -343,17 +343,17 @@ build_forecast_scores <- function(table_schema,
         'bbox' = list(list(-149.6106,
                            18.1135,
                            -66.7987,
-                           68.6698))
+                           68.6698)),
+        "geometry"= list(
+          "type"= "MultiPoint",
+          "coordinates"= get_site_coords(theme = theme_id, m_id = NULL)
+        )
       ),
       "temporal" = list(
         'interval' = list(list(
           paste0(start_date,"T00:00:00Z"),
           paste0(end_date,"T00:00:00Z"))
         ))
-    ),
-    "geometry"= list(
-      "type"= "MultiPoint",
-      "coordinates"= get_site_coords(theme = theme_id, m_id = NULL)
     ),
     "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
     'assets' = list(
