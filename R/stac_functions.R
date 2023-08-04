@@ -76,18 +76,6 @@ build_model <- function(model_id,
       "type"= "MultiPoint",
       "coordinates"= get_site_coords(theme_id, model_id)
     ),
-    # "geometry"= list(
-    #   "type"= "Polygon",
-    #   "coordinates"= list(
-    #     list(
-    #       list(-156.6194, 17.9696),
-    #       list(-66.7987, 17.9696),
-    #       list(-66.7987, 71.2824),
-    #       list(-156.6194, 71.2824),
-    #       list(-156.6194, 17.9696)
-    #     )
-    #   )
-    # ),
     "properties"= list(
       #'description' = model_description,
       "description" = glue::glue('
@@ -257,20 +245,36 @@ get_site_coords <- function(theme, m_id){
   theme_sites <- read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv", col_types = cols()) |>
     dplyr::filter(UQ(sym(theme_select)) == 1)
 
-  model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
-    collect() |>
-    distinct(site_id)
+  if (is.null(m_id)){
 
-  site_coords <- theme_sites |>
-    filter(field_site_id %in% model_sites$site_id) |>
-    distinct(field_site_id, field_longitude, field_latitude)
+    site_coords <- theme_sites |>
+      distinct(field_site_id, field_longitude, field_latitude)
 
-  site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
+    site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
+
+    ## eventually grab sites from bucket -- takes too long for now
+    # model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/"))) |>
+    #   distinct(site_id) |>
+    #   collect() #|>
+    #   #distinct(site_id)
+
+  }else{
+    model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
+      collect() |>
+      distinct(site_id)
+
+    site_coords <- theme_sites |>
+      filter(field_site_id %in% model_sites$site_id) |>
+      distinct(field_site_id, field_longitude, field_latitude)
+
+    site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
+  }
 
   return(site_coords$site_lat_lon)
 }
 
 build_forecast_scores <- function(table_schema,
+                                  theme_id,
                            table_description,
                            start_date,
                            end_date,
@@ -346,6 +350,10 @@ build_forecast_scores <- function(table_schema,
           paste0(start_date,"T00:00:00Z"),
           paste0(end_date,"T00:00:00Z"))
         ))
+    ),
+    "geometry"= list(
+      "type"= "MultiPoint",
+      "coordinates"= get_site_coords(theme = theme_id, m_id = NULL)
     ),
     "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
     'assets' = list(

@@ -65,6 +65,7 @@ forecast_min_date <- min(s3_df$date)
 build_description <- "The catalog contains scores for the NEON Ecological Forecasting aquatics theme.  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). You can access the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available. The code to access the entire dataset is provided as an asset. Given the size of the scores catalog, it can be time-consuming to access the data at the full dataset level. For quicker access to the scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model."
 
 build_forecast_scores(table_schema = theme_df,
+                      theme_id = theme,
                table_description = description_create,
                start_date = forecast_min_date,
                end_date = forecast_max_date,

@@ -102,6 +102,7 @@ for (m in aquatic_models$model.id[1:2]){
     idx = which(neon_docs$model.id == m)
 
     build_model(model_id = neon_docs$model.id[idx],
+                theme_id = 'aquatics',
                 team_name = neon_docs$team.name[idx],
                 model_description = neon_docs[idx,'model.description'][[1]],
                 start_date = model_min_date,
@@ -120,6 +121,7 @@ for (m in aquatic_models$model.id[1:2]){
   } else{
 
     build_model(model_id = m,
+                theme_id = 'aquatics',
                 team_name = 'pending',
                 model_description = 'pending',
                 start_date = model_min_date,
