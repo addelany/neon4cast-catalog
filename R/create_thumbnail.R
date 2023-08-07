@@ -38,36 +38,10 @@ for (m_id in aquatic_models$model.id[1:2]){
   for (site in unique(info_df$site_id)){
     print(site)
 
-    latest_scores_site <- info_df |>
-      filter(site_id == site,
-             reference_datetime < (as.Date(Sys.Date()) - days(30))) |>
-      group_by(reference_datetime) |>
-      mutate(max_horizon = max(as.Date(datetime)) - as.Date(reference_datetime)) |>
-      ungroup() |>
-      distinct(reference_datetime, .keep_all = TRUE) |>
-      filter(max_horizon == max(max_horizon)) |>
-      filter(reference_datetime == max(reference_datetime))
-
-    clim_site_df <- climatology_df |>
-      filter(site_id == site) |>
-      filter(reference_datetime == latest_scores_site$reference_datetime) |>
-      #filter(datetime %in% latest_scores_site$date) |>
-      rename(clim_crps = crps) |>
-      select(datetime,variable, clim_crps)
-
-    if (nrow(clim_site_df) == 0){
-      print(paste0('no climatology forecast for ',{site}, ' on ', {latest_scores_site$reference_datetime}))
-      next
-    }
-
+    ## FORECAST
     latest_forecast_df <- info_df |>
       filter(site_id == site,
              reference_datetime == max(reference_datetime))
-
-    latest_scores_df <- info_df |>
-      filter(site_id == site,
-             reference_datetime == latest_scores_site$reference_datetime) |>
-      right_join(clim_site_df, by = c('datetime','variable'))
 
     ## check if path for image exists locally
     img_save_path <- file.path("thumbnail_store",m_id,site)
@@ -96,8 +70,34 @@ for (m_id in aquatic_models$model.id[1:2]){
     mc_cp(forecast_img_path, glue::glue("efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_forecast.png"))
 
 
+    ## SCORES --  CHECK TO SEE IF CLIMATOLOGY EXISTS
 
-    #mc_cp(forecast_img_path, "efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_forecast.png")
+    latest_scores_site <- info_df |>
+      filter(site_id == site,
+             reference_datetime < (as.Date(Sys.Date()) - days(30))) |>
+      group_by(reference_datetime) |>
+      mutate(max_horizon = max(as.Date(datetime)) - as.Date(reference_datetime)) |>
+      ungroup() |>
+      distinct(reference_datetime, .keep_all = TRUE) |>
+      filter(max_horizon == max(max_horizon)) |>
+      filter(reference_datetime == max(reference_datetime))
+
+    clim_site_df <- climatology_df |>
+      filter(site_id == site) |>
+      filter(reference_datetime == latest_scores_site$reference_datetime) |>
+      #filter(datetime %in% latest_scores_site$date) |>
+      rename(clim_crps = crps) |>
+      select(datetime,variable, clim_crps)
+
+    if (nrow(clim_site_df) == 0){
+      print(paste0('no climatology forecast for ',{site}, ' on ', {latest_scores_site$reference_datetime}))
+      next
+    }
+
+    latest_scores_df <- info_df |>
+      filter(site_id == site,
+             reference_datetime == latest_scores_site$reference_datetime) |>
+      right_join(clim_site_df, by = c('datetime','variable'))
 
     # Scores plot
     scores_plot <- ggplot(data = latest_scores_df, aes(datetime, crps)) +

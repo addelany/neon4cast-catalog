@@ -10,30 +10,15 @@
     71.2824
   ],
   "geometry": {
-    "type": "Polygon",
+    "type": "MultiPoint",
     "coordinates": [
-      [
-        [
-          -156.6194,
-          17.9696
-        ],
-        [
-          -66.7987,
-          17.9696
-        ],
-        [
-          -66.7987,
-          71.2824
-        ],
-        [
-          -156.6194,
-          71.2824
-        ],
-        [
-          -156.6194,
-          17.9696
-        ]
-      ]
+      [-82.0084, 29.676],
+      [-89.4737, 46.2097],
+      [-89.7048, 45.9983],
+      [-99.1139, 47.1591],
+      [-99.2531, 47.1298],
+      [-82.0177, 29.6878],
+      [-149.6106, 68.6307]
     ]
   },
   "properties": {
@@ -150,15 +135,6 @@
       "href": "https://data.ecoforecast.org/neon4cast-catalog/aquatics/Aquaers/SUGG/latest_scores.png",
       "type": "image/png",
       "title": "Latest Results for SUGG",
-      "description": "Image from s3 storage",
-      "roles": [
-        "thumbnail"
-      ]
-    },
-    "8": {
-      "href": "https://data.ecoforecast.org/neon4cast-catalog/aquatics/Aquaers/TOOK/latest_scores.png",
-      "type": "image/png",
-      "title": "Latest Results for TOOK",
       "description": "Image from s3 storage",
       "roles": [
         "thumbnail"

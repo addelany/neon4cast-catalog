@@ -223,6 +223,7 @@ pull_images <- function(theme, m_id, image_name){
   base_path <- 'https://data.ecoforecast.org/neon4cast-catalog'
 
   image_assets <- purrr::map(sites_vector, function(i)
+    #url_validator <- Rcurl::url.exists(file.path(base_path,theme,m_id,i,image_name))
     list(
       "href"= file.path(base_path,theme,m_id,i,image_name),
       "type"= "image/png",
@@ -231,6 +232,17 @@ pull_images <- function(theme, m_id, image_name){
       "roles" = list('thumbnail')
     )
   )
+
+  ## check if image rendered successfully on bucket. If not remove from assets
+  if (image_name == 'latest_scores.png'){
+    for (item in seq.int(1:length(image_assets))){
+      url_validator = RCurl::url.exists(image_assets[[item]]$href)
+      if(url_validator == FALSE){
+        print(paste0('Removing ', image_assets[[item]]$title))
+        image_assets <- image_assets[-item]
+      }
+    }
+  }
 
   return(image_assets)
 

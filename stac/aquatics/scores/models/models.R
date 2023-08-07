@@ -2,6 +2,7 @@ library(tidyverse)
 library(arrow)
 library(stac4cast)
 library(reticulate)
+library(RCurl)
 
 source('R/stac_functions.R')
 
