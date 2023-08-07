@@ -248,7 +248,7 @@ pull_images <- function(theme, m_id, image_name){
 
 }
 
-get_site_coords <- function(theme, m_id, site_build_object){
+get_site_coords <- function(theme, m_id){
 
   theme_select <- glue::glue('{theme}')
 
@@ -263,8 +263,11 @@ get_site_coords <- function(theme, m_id, site_build_object){
       filter(field_site_id %in% bucket_sites$site_id) |>
       distinct(field_site_id, field_longitude, field_latitude)
 
-    site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
+    #site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
 
+    bbox_object <- c(min(site_coords$field_longitude), min(site_coords$field_latitude), max(site_coords$field_longitude), max(site_coords$field_latitude))
+
+    return(bbox_object)
 
   }else{
     model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
@@ -276,9 +279,10 @@ get_site_coords <- function(theme, m_id, site_build_object){
       distinct(field_site_id, field_longitude, field_latitude)
 
     site_coords$site_lat_lon <- lapply(1:nrow(site_coords), function(i) c(site_coords$field_longitude[i], site_coords$field_latitude[i]))
+
+    return(list(site_coords$site_lat_lon, model_sites$site_id))
   }
 
-  return(list(site_coords$site_lat_lon, model_sites$site_id))
 }
 
 build_forecast_scores <- function(table_schema,
@@ -348,15 +352,7 @@ build_forecast_scores <- function(table_schema,
     "title" = theme_title,
     "extent" = list(
       "spatial" = list(
-        'bbox' = list(list(-149.6106,
-                           18.1135,
-                           -66.7987,
-                           68.6698)),
-        "geometry"= list(
-          "type"= "MultiPoint",
-          "coordinates"= get_site_coords(theme = theme_id, m_id = NULL)[[1]]
-        )
-      ),
+        'bbox' = list(get_site_coords(theme_id, m_id = NULL))),
       "temporal" = list(
         'interval' = list(list(
           paste0(start_date,"T00:00:00Z"),
