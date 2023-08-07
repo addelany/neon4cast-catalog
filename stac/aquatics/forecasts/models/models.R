@@ -103,7 +103,7 @@ for (m in aquatic_models$model.id[1:2]){
   # print(model_var_site_info[[1]])
   # print(model_var_site_info[[2]])
 
-  forecast_sites <- append(forecast_sites,  get_site_coords('aquatics', m)[[2]])
+  forecast_sites <- append(forecast_sites,  get_site_coords(theme = 'aquatics', bucket = NULL, m_id = m)[[2]])
 
   if (m %in% neon_docs$model.id){
     print('has metadata')

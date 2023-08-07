@@ -74,7 +74,7 @@ build_model <- function(model_id,
       list(-156.6194, 17.9696, -66.7987,  71.2824),
     "geometry"= list(
       "type"= "MultiPoint",
-      "coordinates"= get_site_coords(theme_id, model_id)[[1]]
+      "coordinates"= get_site_coords(theme_id, bucket = NULL, model_id)[[1]]
     ),
     "properties"= list(
       #'description' = model_description,
@@ -248,7 +248,7 @@ pull_images <- function(theme, m_id, image_name){
 
 }
 
-get_site_coords <- function(theme, m_id){
+get_site_coords <- function(theme, bucket, m_id){
 
   theme_select <- glue::glue('{theme}')
 
@@ -257,7 +257,11 @@ get_site_coords <- function(theme, m_id){
 
   if (is.null(m_id)){
 
-    bucket_sites <- read_csv('stac/aquatics/forecasts/all_forecast_sites.csv')
+    if (bucket == 'Forecasts'){
+      bucket_sites <- read_csv('stac/aquatics/forecasts/all_forecast_sites.csv')
+    } else{
+      bucket_sites <- read_csv('stac/aquatics/scores/all_scores_sites.csv')
+    }
 
     site_coords <- theme_sites |>
       filter(field_site_id %in% bucket_sites$site_id) |>
@@ -352,7 +356,7 @@ build_forecast_scores <- function(table_schema,
     "title" = theme_title,
     "extent" = list(
       "spatial" = list(
-        'bbox' = list(get_site_coords(theme_id, m_id = NULL))),
+        'bbox' = list(get_site_coords(theme_id, theme_title, m_id = NULL))),
       "temporal" = list(
         'interval' = list(list(
           paste0(start_date,"T00:00:00Z"),
