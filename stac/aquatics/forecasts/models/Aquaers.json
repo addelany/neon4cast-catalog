@@ -55,274 +55,44 @@
     ],
     "table:columns": [
       {
-        "name": "field_domain_id",
-        "description": "domain identifier",
-        "type": "character"
+        "name": "datetime",
+        "type": "timestamp[us, tz=UTC]",
+        "description": "ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in a single file. Forecast lead time is thus datetime-reference_datetime. In a hindcast the reference_datetime will be earlier than the time the hindcast was actually produced (see pubDate in Section3). Date times are allowed to be earlier than the reference_datetime if a reanalysis/reforecast is run before the start of the forecast period. This variable was called start_time before v0.5 of the EFI standard."
       },
       {
-        "name": "field_site_id",
-        "description": "site identifier",
-        "type": "character"
+        "name": "site_id",
+        "type": "string",
+        "description": "For forecasts that are not on a spatial grid, use of a site dimension that maps to a more detailed geometry (points, polygons, etc.) is allowable. In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this could be handled by the CF Discrete Sampling Geometry data model."
       },
       {
-        "name": "field_site_name",
-        "description": "site name",
-        "type": "character"
+        "name": "family",
+        "type": "string",
+        "description": "For ensembles: “ensemble.” Default value if unspecified for probability distributions: Name of the statistical distribution associated with the reported statistics. The “sample” distribution is synonymous with “ensemble.”For summary statistics: “summary.”If this dimension does not vary, it is permissible to specify family as avariable attribute if the file format being used supports this (e.g.,netCDF)."
       },
       {
-        "name": "terrestrial",
-        "description": "terrestrial theme indicator for site",
-        "type": "numeric"
+        "name": "parameter",
+        "type": "string",
+        "description": "ensemble member"
       },
       {
-        "name": "aquatics",
-        "description": "aquatics theme indicator for site",
-        "type": "numeric"
+        "name": "variable",
+        "type": "string",
+        "description": "aquatic forecast variable"
       },
       {
-        "name": "phenology",
-        "description": "phenology theme indicator for site",
-        "type": "numeric"
+        "name": "prediction",
+        "type": "double",
+        "description": "predicted forecast value"
       },
       {
-        "name": "ticks",
-        "description": "ticks theme indicator for site",
-        "type": "numeric"
+        "name": "pubDate",
+        "type": "string",
+        "description": "date of publication"
       },
       {
-        "name": "beetles",
-        "description": "beetles theme indicator for site",
-        "type": "numeric"
-      },
-      {
-        "name": "phenocam_code",
-        "description": "code for phenocam",
-        "type": "character"
-      },
-      {
-        "name": "phenocam_roi",
-        "description": "phenocam region of interest",
-        "type": "character"
-      },
-      {
-        "name": "phenocam_vegetation",
-        "description": "phenocam vegetation identifier",
-        "type": "character"
-      },
-      {
-        "name": "field_site_type",
-        "description": "site theme type",
-        "type": "character"
-      },
-      {
-        "name": "field_site_subtype",
-        "description": "site theme subtype",
-        "type": "character"
-      },
-      {
-        "name": "field_colocated_site",
-        "description": "colocated field site",
-        "type": "character"
-      },
-      {
-        "name": "field_site_host",
-        "description": "site host organization",
-        "type": "character"
-      },
-      {
-        "name": "field_site_url",
-        "description": "site host organization URL",
-        "type": "character"
-      },
-      {
-        "name": "field_nonneon_research_allowed",
-        "description": "indicate whether non-NEON research is allowed at this site",
-        "type": "character"
-      },
-      {
-        "name": "field_access_details",
-        "description": "details for accessing the field site",
-        "type": "character"
-      },
-      {
-        "name": "field_neon_field_operations_office",
-        "description": "NEON field operations office",
-        "type": "character"
-      },
-      {
-        "name": "field_latitude",
-        "description": "field site latitude",
-        "type": "numeric"
-      },
-      {
-        "name": "field_longitude",
-        "description": "field site longitude",
-        "type": "numeric"
-      },
-      {
-        "name": "field_geodetic_datum",
-        "description": "geodetic datum for the field site",
-        "type": "character"
-      },
-      {
-        "name": "field_utm_northing",
-        "description": "northing UTM coordinates",
-        "type": "numeric"
-      },
-      {
-        "name": "field_utm_easting",
-        "description": "easting UTM coordinates",
-        "type": "numeric"
-      },
-      {
-        "name": "field_utm_zone",
-        "description": "UTM zone for field site",
-        "type": "character"
-      },
-      {
-        "name": "field_site_county",
-        "description": "county where field site is located",
-        "type": "character"
-      },
-      {
-        "name": "field_site_state",
-        "description": "state where field site is located",
-        "type": "character"
-      },
-      {
-        "name": "field_site_country",
-        "description": "country where field site is located",
-        "type": "character"
-      },
-      {
-        "name": "field_mean_elevation_m",
-        "description": "mean elevation of field site in meters",
-        "type": "numeric"
-      },
-      {
-        "name": "field_minimum_elevation_m",
-        "description": "minimum elevation of field site in meters",
-        "type": "numeric"
-      },
-      {
-        "name": "field_maximum_elevation_m",
-        "description": "maximum elevation of field site in meters",
-        "type": "numeric"
-      },
-      {
-        "name": "field_mean_annual_temperature_C",
-        "description": "mean annual temperaure of field site in degC",
-        "type": "numeric"
-      },
-      {
-        "name": "field_mean_annual_precipitation_mm",
-        "description": "mean annual precipitation of field site in mm",
-        "type": "numeric"
-      },
-      {
-        "name": "field_dominant_wind_direction",
-        "description": "the dominant wind direction at the field site",
-        "type": "character"
-      },
-      {
-        "name": "field_mean_canopy_height_m",
-        "description": "mean canpoy height at the field site in meters",
-        "type": "character"
-      },
-      {
-        "name": "field_dominant_nlcd_classes",
-        "description": "National Land Cover Database Class for field site",
-        "type": "character"
-      },
-      {
-        "name": "field_domint_plant_species",
-        "description": "dominant plant species at field site",
-        "type": "character"
-      },
-      {
-        "name": "field_usgs_huc",
-        "description": "USGS Hydrologic Unit Code for the field site",
-        "type": "character"
-      },
-      {
-        "name": "field_watershed_name",
-        "description": "watershed name for the field site",
-        "type": "character"
-      },
-      {
-        "name": "field_watershed_size_km2",
-        "description": "watershed size of field site in square kilometers",
-        "type": "numeric"
-      },
-      {
-        "name": "field_lake_depth_mean_m",
-        "description": "mean lake depth of field site in meters",
-        "type": "numeric"
-      },
-      {
-        "name": "field_lake_depth_max_m",
-        "description": "max lake depth of field site in meters",
-        "type": "numeric"
-      },
-      {
-        "name": "field_tower_height_m",
-        "description": "height of tower at field site in meters",
-        "type": "numeric"
-      },
-      {
-        "name": "field_usgs_geology_unit",
-        "description": "USGS geology unit for field site",
-        "type": "character"
-      },
-      {
-        "name": "field_megapit_soil_family",
-        "description": "megapit soil family for field site",
-        "type": "character"
-      },
-      {
-        "name": "field_soil_subgroup",
-        "description": "soild subgroup of field site",
-        "type": "character"
-      },
-      {
-        "name": "field_avg_number_of_green_days",
-        "description": "average number of green days at field site",
-        "type": "numeric"
-      },
-      {
-        "name": "field_avg_grean_increase_doy",
-        "description": "day of year for average green increase at field site",
-        "type": "character"
-      },
-      {
-        "name": "field_avg_green_max_doy",
-        "description": "average day of year with maximum green at field site",
-        "type": "character"
-      },
-      {
-        "name": "field_avg_green_decrease_doy",
-        "description": "avergae day of year of green decrease at field site",
-        "type": "character"
-      },
-      {
-        "name": "field_avg_green_min_doy",
-        "description": "average day of year with minimum green at field site",
-        "type": "character"
-      },
-      {
-        "name": "field_phenocams",
-        "description": "details about phenocams located at each field site",
-        "type": "character"
-      },
-      {
-        "name": "field_number_tower_levels",
-        "description": "number of tower levels at field site",
-        "type": "numeric"
-      },
-      {
-        "name": "neon_url",
-        "description": "NEON URL for field site",
-        "type": "character"
+        "name": "date",
+        "type": "string",
+        "description": "ISO 8601 (ISO 2019) datetime being predicted; follows CF convention http://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5 of the EFI convention. For time-integrated variables (e.g., cumulative net primary productivity), one should specify the start_datetime and end_datetime as two variables, instead of the single datetime. If this is not provided the datetime is assumed to be the MIDPOINT of the integration period."
       }
     ]
   },
