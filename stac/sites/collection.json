@@ -4,7 +4,7 @@
     "https://stac-extensions.github.io/table/v1.2.0/schema.json"
   ],
   "type": "Feature",
-  "id": "sites",
+  "id": "Sites",
   "bbox": [
     -156.6194,
     17.9696,
@@ -388,7 +388,7 @@
       }
     ]
   },
-  "collection": "sites",
+  "collection": "Sites",
   "links": [
     {
       "rel": "catalog",
