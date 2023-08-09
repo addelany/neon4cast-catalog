@@ -628,7 +628,7 @@
       "roles": [
         "data"
       ],
-      "description": "Use `arrow` for remote access to the database. This will return results\n       for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Use code below\n\nall_results <- arrow::open_dataset(s3://anonymous@bio230014-bucket01/neon4cast-scores/forecasts/aquatics?endpoint_override=sdsc.osn.xsede.org)\ndf <- all_forecasts |> dplyr::collect()\n\n```\n       \n\nNow use dplyr operations to\n       summarise or subset (if necessary), followed by `dplyr::collect()` to\n       bring this data into R as a `data.frame`.\n\n\n"
+      "description": "Use `arrow` for remote access to the database. This R code will return results for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Use code below\n\nall_results <- arrow::open_dataset(s3://anonymous@bio230014-bucket01/neon4cast-scores/forecasts/aquatics?endpoint_override=sdsc.osn.xsede.org)\ndf <- all_results |> dplyr::collect()\n\n```\n       \n\nYou can use dplyr operations before calling `dplyr::collect()` to `summarise`, `select` columns, and/or `filter` rows prior to pulling the data into a local `data.frame`. Reducing the data that is pulled locally will speed up the data download speed and reduce your memory usage.\n\n\n"
     }
   }
 }
