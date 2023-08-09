@@ -25,7 +25,7 @@ build_site_item(theme_id = 'sites',
                     end_date = Sys.Date(),
                     destination_path = 'stac/sites',
                     theme_title = 'NEON Sites',
-                    collection_name = 'sites',
+                    collection_name = 'Sites',
                     thumbnail_link = 'https://projects.ecoforecast.org/neon4cast-catalog/img/BONA_Twr.jpg',
                     site_coords = theme_sites$site_lat_lon)
 
