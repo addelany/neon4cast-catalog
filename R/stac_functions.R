@@ -371,7 +371,7 @@ build_forecast_scores <- function(table_schema,
           paste0(end_date,"T00:00:00Z"))
         ))
     ),
-    "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
+    "table:columns" = stac4cast::build_table_columns(table_schema, table_description),
     'assets' = list(
       # 'data' = list(
       #   "href"= model_documentation,
@@ -525,77 +525,77 @@ build_theme <- function(start_date,end_date, id_value, theme_description, theme_
 }
 
 
-# build_site_metadata <- function(){
-#   site_test <- read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv", col_types = cols())
-#
-#   schema_info <- sapply(site_test, class)
-#
-#   description_create <- data.frame(field_domain_id = 'domain identifier',
-#                                    field_site_id = 'site identifier',
-#                                    field_site_name = 'site name',
-#                                    terrestrial = 'terrestrial theme indicator for site',
-#                                    aquatics = 'aquatics theme indicator for site',
-#                                    phenology = 'phenology theme indicator for site',
-#                                    ticks = 'ticks theme indicator for site',
-#                                    beetles = 'beetles theme indicator for site',
-#                                    phenocam_code = 'code for phenocam',
-#                                    phenocam_roi = 'phenocam region of interest',
-#                                    phenocam_vegetation = 'phenocam vegetation identifier',
-#                                    field_site_type = 'site theme type',
-#                                    field_site_subtype = 'site theme subtype',
-#                                    field_colocated_site = 'colocated field site',
-#                                    field_site_host = 'site host organization',
-#                                    field_site_url = 'site host organization URL',
-#                                    field_nonneon_research_allowed = 'indicate whether non-NEON research is allowed at this site',
-#                                    field_access_details = 'details for accessing the field site',
-#                                    field_neon_field_operations_office = 'NEON field operations office',
-#                                    field_latitude = 'field site latitude',
-#                                    field_longitude = 'field site longitude',
-#                                    field_geodetic_datum = 'geodetic datum for the field site',
-#                                    field_utm_northing = 'northing UTM coordinates',
-#                                    field_utm_easting = 'easting UTM coordinates',
-#                                    field_utm_zone = 'UTM zone for field site',
-#                                    field_site_county = 'county where field site is located',
-#                                    field_site_state = 'state where field site is located',
-#                                    field_site_country = 'country where field site is located',
-#                                    field_mean_elevation_m = 'mean elevation of field site in meters',
-#                                    field_minimum_elevation_m = 'minimum elevation of field site in meters',
-#                                    field_maximum_elevation_m = 'maximum elevation of field site in meters',
-#                                    field_mean_annual_temperature_C = 'mean annual temperaure of field site in degC',
-#                                    field_mean_annual_precipitation_mm= 'mean annual precipitation of field site in mm',
-#                                    field_dominant_wind_direction = 'the dominant wind direction at the field site',
-#                                    field_mean_canopy_height_m = 'mean canpoy height at the field site in meters',
-#                                    field_dominant_nlcd_classes = 'National Land Cover Database Class for field site',
-#                                    field_dominant_plant_species = 'dominant plant species at field site',
-#                                    field_usgs_huc = 'USGS Hydrologic Unit Code for the field site',
-#                                    field_watershed_name = 'watershed name for the field site',
-#                                    field_watershed_size_km2 = 'watershed size of field site in square kilometers',
-#                                    field_lake_depth_mean_m = 'mean lake depth of field site in meters',
-#                                    field_lake_depth_max_m = 'max lake depth of field site in meters',
-#                                    field_tower_height_m = 'height of tower at field site in meters',
-#                                    field_usgs_geology_unit = 'USGS geology unit for field site',
-#                                    field_megapit_soil_family = 'megapit soil family for field site',
-#                                    field_soil_subgroup = 'soild subgroup of field site',
-#                                    field_avg_number_of_green_days = 'average number of green days at field site',
-#                                    field_avg_green_increase_doy = 'day of year for average green increase at field site',
-#                                    field_avg_green_max_doy = 'average day of year with maximum green at field site',
-#                                    field_avg_green_decrease_doy = 'avergae day of year of green decrease at field site',
-#                                    field_avg_green_min_doy = 'average day of year with minimum green at field site',
-#                                    field_phenocams = 'details about phenocams located at each field site',
-#                                    field_number_tower_levels = 'number of tower levels at field site',
-#                                    neon_url = 'NEON URL for field site')
-#
-#
-#
-#
-#
-#   x <- purrr::map(seq.int(1:ncol(site_test)), function(i)
-#     list(
-#       "name" = names(site_test)[i],
-#       'description'= description_create[,i],
-#       'type' = schema_info[[i]]
-#     )
-#   )
-#
-#   return(x)
-# }
+build_site_metadata <- function(){
+  site_test <- read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv", col_types = cols())
+
+  schema_info <- sapply(site_test, class)
+
+  description_create <- data.frame(field_domain_id = 'domain identifier',
+                                   field_site_id = 'site identifier',
+                                   field_site_name = 'site name',
+                                   terrestrial = 'terrestrial theme indicator for site',
+                                   aquatics = 'aquatics theme indicator for site',
+                                   phenology = 'phenology theme indicator for site',
+                                   ticks = 'ticks theme indicator for site',
+                                   beetles = 'beetles theme indicator for site',
+                                   phenocam_code = 'code for phenocam',
+                                   phenocam_roi = 'phenocam region of interest',
+                                   phenocam_vegetation = 'phenocam vegetation identifier',
+                                   field_site_type = 'site theme type',
+                                   field_site_subtype = 'site theme subtype',
+                                   field_colocated_site = 'colocated field site',
+                                   field_site_host = 'site host organization',
+                                   field_site_url = 'site host organization URL',
+                                   field_nonneon_research_allowed = 'indicate whether non-NEON research is allowed at this site',
+                                   field_access_details = 'details for accessing the field site',
+                                   field_neon_field_operations_office = 'NEON field operations office',
+                                   field_latitude = 'field site latitude',
+                                   field_longitude = 'field site longitude',
+                                   field_geodetic_datum = 'geodetic datum for the field site',
+                                   field_utm_northing = 'northing UTM coordinates',
+                                   field_utm_easting = 'easting UTM coordinates',
+                                   field_utm_zone = 'UTM zone for field site',
+                                   field_site_county = 'county where field site is located',
+                                   field_site_state = 'state where field site is located',
+                                   field_site_country = 'country where field site is located',
+                                   field_mean_elevation_m = 'mean elevation of field site in meters',
+                                   field_minimum_elevation_m = 'minimum elevation of field site in meters',
+                                   field_maximum_elevation_m = 'maximum elevation of field site in meters',
+                                   field_mean_annual_temperature_C = 'mean annual temperaure of field site in degC',
+                                   field_mean_annual_precipitation_mm= 'mean annual precipitation of field site in mm',
+                                   field_dominant_wind_direction = 'the dominant wind direction at the field site',
+                                   field_mean_canopy_height_m = 'mean canpoy height at the field site in meters',
+                                   field_dominant_nlcd_classes = 'National Land Cover Database Class for field site',
+                                   field_dominant_plant_species = 'dominant plant species at field site',
+                                   field_usgs_huc = 'USGS Hydrologic Unit Code for the field site',
+                                   field_watershed_name = 'watershed name for the field site',
+                                   field_watershed_size_km2 = 'watershed size of field site in square kilometers',
+                                   field_lake_depth_mean_m = 'mean lake depth of field site in meters',
+                                   field_lake_depth_max_m = 'max lake depth of field site in meters',
+                                   field_tower_height_m = 'height of tower at field site in meters',
+                                   field_usgs_geology_unit = 'USGS geology unit for field site',
+                                   field_megapit_soil_family = 'megapit soil family for field site',
+                                   field_soil_subgroup = 'soild subgroup of field site',
+                                   field_avg_number_of_green_days = 'average number of green days at field site',
+                                   field_avg_green_increase_doy = 'day of year for average green increase at field site',
+                                   field_avg_green_max_doy = 'average day of year with maximum green at field site',
+                                   field_avg_green_decrease_doy = 'avergae day of year of green decrease at field site',
+                                   field_avg_green_min_doy = 'average day of year with minimum green at field site',
+                                   field_phenocams = 'details about phenocams located at each field site',
+                                   field_number_tower_levels = 'number of tower levels at field site',
+                                   neon_url = 'NEON URL for field site')
+
+
+
+
+
+  x <- purrr::map(seq.int(1:ncol(site_test)), function(i)
+    list(
+      "name" = names(site_test)[i],
+      'description'= description_create[,i],
+      'type' = schema_info[[i]]
+    )
+  )
+
+  return(x)
+}

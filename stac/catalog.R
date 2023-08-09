@@ -1,5 +1,6 @@
 
 source("R/catalog-common.R")
+source('R/stac_functions.R')
 
 build_catalog <- function(){
 catalog <- list(
@@ -55,6 +56,9 @@ catalog <- list(
       "href" = 'phenology/collection.json'
 
     )
+  ),
+  "properties" = list(
+    "table:columns" = build_site_metadata()
   )
 )
 
