@@ -525,6 +525,126 @@ build_theme <- function(start_date,end_date, id_value, theme_description, theme_
 }
 
 
+build_site_theme <- function(start_date, end_date, id_value, theme_description, theme_title, destination_path, thumbnail_link, thumbnail_title){
+
+  theme <- list(
+    "id" = id_value,
+    "type" = "Collection",
+    "links" = list(
+      list(
+        "rel"= "parent",
+        "type"= "application/json",
+        "href"= "../catalog.json",
+        "title" = 'parent'
+      ),
+      list(
+        "rel"= "root",
+        "type"= "application/json",
+        "href"= "../catalog.json",
+        "title" = 'root'
+      ),
+      list(
+        "rel"= "self",
+        "type"= "application/json",
+        "href" = 'collection.json',
+        "title" = 'self'
+      ),
+      list(
+        "rel" ="cite-as",
+        "href"= "https://doi.org/10.1002/fee.2616",
+        "title" = "citation"
+      ),
+      list(
+        "rel"= "about",
+        "href"= "https://projects.ecoforecast.org/neon4cast-docs/",
+        "type"= "text/html",
+        "title"= "NEON Forecast Challenge Documentation"
+      ),
+      list(
+        "rel"= "describedby",
+        "href"= "https://www.neonscience.org/field-sites/explore-field-sites",
+        "title"= "Explore the NEON Field Sites",
+        "type"= "text/html"
+      )
+    ),
+    "title"= theme_title,
+    'assets' = list(
+      'thumbnail' = list(
+        "href"= thumbnail_link,
+        "type"= "image/JPEG",
+        "roles" = list('thumbnail'),
+        "title"= thumbnail_title
+      ),
+      'data' = list(
+        "href" = "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
+        "type"= "text/plain",
+        "title"= 'NEON Sites Table',
+        "roles" = list('data'),
+        "description"= 'Table that includes information for all NEON sites'
+      )
+    ),
+    "properties" = list(
+      "table:columns" = build_site_metadata()
+    ),
+    "extent" = list(
+      "spatial" = list(
+        'bbox' = list(list(-149.6106,
+                           18.1135,
+                           -66.7987,
+                           68.6698))
+      ),
+      "temporal" = list(
+        'interval' = list(list(
+          paste0(start_date,'T00:00:00Z'),
+          paste0(end_date,'T00:00:00Z'))
+        ))
+    ),
+    "license" = "CC0-1.0",
+    "keywords" = list(
+      "Forecasting",
+      "Data",
+      "Ecology"
+    ),
+    "providers" = list(
+      list(
+        "url"= "https://data.ecoforecast.org",
+        "name"= "Ecoforecast Data",
+        "roles" = list(
+          "producer",
+          "processor",
+          "licensor"
+        )
+      ),
+      list(
+        "url"= "https://ecoforecast.org",
+        "name"= "Ecoforecast",
+        "roles" = list('host')
+      )
+    ),
+    "description" = theme_description,
+    "stac_version" = "1.0.0",
+    "stac_extensions" = list(
+      "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+      "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+      "https://stac-extensions.github.io/table/v1.2.0/schema.json"
+    ),
+    "publications" = list(
+      "doi" = "https://www.doi.org/10.22541/essoar.167079499.99891914/v1",
+      "citation"= "Thomas, R.Q., C. Boettiger, C.C. Carey, M.C. Dietze, L.R. Johnson, M.A. Kenney, J.S. Mclachlan, J.A. Peters, E.R. Sokol, J.F. Weltzin, A. Willson, W.M. Woelmer, and Challenge Contributors. The NEON Ecological Forecasting Challenge. Accepted at Frontiers in Ecology and Environment. Pre-print"
+    )
+  )
+
+
+  dest <- destination_path
+  json <- file.path(dest, "collection.json")
+
+  jsonlite::write_json(theme,
+                       json,
+                       pretty=TRUE,
+                       auto_unbox=TRUE)
+  stac4cast::stac_validate(json)
+}
+
 build_site_metadata <- function(){
   site_test <- read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv", col_types = cols())
 
