@@ -1,3 +1,5 @@
+
+
 source('R/stac_functions.R')
 
 
@@ -13,13 +15,25 @@ s3_df <- s3_df |> filter(model_id != 'null')
 theme_max_date <- max(s3_df$date)
 theme_min_date <- min(s3_df$date)
 
+theme_sites <- read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv", col_types = cols())
+theme_sites$site_lat_lon <- lapply(1:nrow(theme_sites), function(i) c(theme_sites$field_longitude[i], theme_sites$field_latitude[i]))
+
 build_description <- "This collection contains information to describe the NEON sites included in the forecasting challenge"
 
-build_site_theme(start_date = '2000-01-01',
-                 end_date = sys.Date(),
-                 id_value = 'efi-sites',
-            theme_description = build_description,
-            theme_title = 'NEON Sites',
-            destination_path = "stac/sites/",
-            thumbnail_link = 'https://www.neonscience.org/sites/default/files/styles/max_1300x1300/public/2021-04/2021_04_Graphic_Domain_Map%20Field%20sites_w_rivers_png.png?itok=0_oMxQB8',
-            thumbnail_title = 'NEON Sites')
+build_site_item(theme_id = 'sites',
+                    start_date = '2000-01-01',
+                    end_date = Sys.Date(),
+                    destination_path = 'stac/sites',
+                    theme_title = 'NEON Sites',
+                    collection_name = 'sites',
+                    thumbnail_link = 'https://projects.ecoforecast.org/neon4cast-catalog/img/BONA_Twr.jpg',
+                    site_coords = theme_sites$site_lat_lon)
+
+# build_site_theme(start_date = '2000-01-01',
+#                  end_date = Sys.Date(),
+#                  id_value = 'efi-sites',
+#             theme_description = build_description,
+#             theme_title = 'NEON Sites',
+#             destination_path = "stac/sites/",
+#             thumbnail_link = "https://projects.ecoforecast.org/neon4cast-catalog/img/BONA_Twr.jpg",
+#             thumbnail_title = 'NEON Sites')

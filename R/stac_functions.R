@@ -645,6 +645,106 @@ build_site_theme <- function(start_date, end_date, id_value, theme_description, 
   stac4cast::stac_validate(json)
 }
 
+
+build_site_item <- function(theme_id,
+                        start_date,
+                        end_date,
+                        destination_path,
+                        theme_title,
+                        collection_name,
+                        thumbnail_link,
+                        site_coords) {
+
+
+  preset_keywords <- list("Forecasting", "NEON")
+
+  meta <- list(
+    "stac_version"= "1.0.0",
+    "stac_extensions"= list('https://stac-extensions.github.io/table/v1.2.0/schema.json'),
+    "type"= "Feature",
+    "id"= collection_name,
+    "bbox"=
+      list(-156.6194, 17.9696, -66.7987,  71.2824),
+    "geometry"= list(
+      "type"= "MultiPoint",
+      "coordinates"= site_coords
+    ),
+    "properties"= list(
+      #'description' = model_description,
+      "description" = 'NEON Site Information',
+      "start_datetime" = start_date,
+      "end_datetime" = end_date,
+      "providers"= list(
+        list(
+          "url"= "https://ecoforecast.org",
+          "name"= "Ecoforecast Challenge",
+          "roles"= list(
+            "host"
+          )
+        )
+      ),
+      "license"= "CC0-1.0",
+      "keywords"= c(preset_keywords),
+      "table:columns" = build_site_metadata()
+    ),
+    "collection"= collection_name,
+    "links"= list(
+      list(
+        "rel"= "catalog",
+        'href' = '../catalog.json',
+        "type"= "application/json",
+        "title"= theme_title
+      ),
+      list(
+        "rel"= "root",
+        'href' = '../catalog.json',
+        "type"= "application/json",
+        "title"= "EFI Forecast Catalog"
+      ),
+      list(
+        "rel"= "parent",
+        'href' = '../catalog.json',
+        "type"= "application/json",
+        "title"= theme_title
+      ),
+      list(
+        "rel"= "self",
+        "href" = 'collection.json',
+        "type"= "application/json",
+        "title"= "NEON Sites"
+      )),
+    "assets"= list(
+      'data' = list(
+        "href" = "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
+        "type"= "text/plain",
+        "title"= 'NEON Sites Table',
+        "roles" = list('data'),
+        "description"= 'Table that includes information for all NEON sites'
+      ),
+      "thumbnail" = list(
+        "href"= thumbnail_link,
+        "type"= "image/png",
+        "title"= 'NEON Sites Image',
+        "description"= 'Image describing the NEON sites',
+        "roles" = list('thumbnail')
+      )
+    )
+  )
+
+
+  dest <- destination_path
+  json <- file.path(dest, "collection.json")
+
+  jsonlite::write_json(meta,
+                       json,
+                       pretty=TRUE,
+                       auto_unbox=TRUE)
+  stac4cast::stac_validate(json)
+
+  rm(meta)
+}
+
+
 build_site_metadata <- function(){
   site_test <- read_csv("https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv", col_types = cols())
 
