@@ -712,6 +712,23 @@ build_site_item <- function(theme_id,
         "href" = 'collection.json',
         "type"= "application/json",
         "title"= "NEON Sites"
+      ),
+      list(
+        "rel" ="cite-as",
+        "href"= "https://doi.org/10.1002/fee.2616",
+        "title" = "citation"
+      ),
+      list(
+        "rel"= "about",
+        "href"= "https://projects.ecoforecast.org/neon4cast-docs/",
+        "type"= "text/html",
+        "title"= "NEON Forecast Challenge Documentation"
+      ),
+      list(
+        "rel"= "describedby",
+        "href"= "https://www.neonscience.org/field-sites/explore-field-sites",
+        "title"= "Explore the NEON Field Sites",
+        "type"= "text/html"
       )),
     "assets"= list(
       'data' = list(
