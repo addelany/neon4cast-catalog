@@ -67,6 +67,13 @@ build_model <- function(model_id,
          "/model_id=", model_id,
          "?endpoint_override=sdsc.osn.xsede.org")
 
+  aws_asset_description <- paste0("Use `arrow` for remote access to the database. This will return all raw forecasts
+       for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n#
+       Use code below\n\nall_forecasts <- arrow::open_dataset(",aws_asset_link,")\ndf <-
+       all_forecasts |> dplyr::collect()\n\n```\n\nNow use dplyr operations to
+       summarise or subset (if necessary), followed by `dplyr::collect()` to
+       bring this data into R as a `data.frame`.\n\n\n")
+
   meta <- list(
     "stac_version"= "1.0.0",
     "stac_extensions"= list('https://stac-extensions.github.io/table/v1.2.0/schema.json'),
@@ -135,7 +142,7 @@ build_model <- function(model_id,
         "href"= aws_asset_link,
         "type"= "application/x-parquet",
         "title"= 'Database Access',
-        "description"= readr::read_file(description_path)
+        "description"= aws_asset_description
       )
       ),
       pull_images('aquatics',model_id,thumbnail_image_name)
