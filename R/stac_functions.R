@@ -68,8 +68,8 @@ build_model <- function(model_id,
          "?endpoint_override=sdsc.osn.xsede.org")
 
   aws_asset_description <- paste0("Use `arrow` for remote access to the database. This will return all raw forecasts
-       for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Use code below\n\nall_forecasts <- arrow::open_dataset(",aws_asset_link,")\ndf <-
-       all_forecasts |> dplyr::collect()\n\n```\n\nNow use dplyr operations to
+       for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Use code below\n\nall_forecasts <- arrow::open_dataset(",aws_asset_link,")\ndf <- all_forecasts |> dplyr::collect()\n\n```
+       \n\nNow use dplyr operations to
        summarise or subset (if necessary), followed by `dplyr::collect()` to
        bring this data into R as a `data.frame`.\n\n\n")
 
