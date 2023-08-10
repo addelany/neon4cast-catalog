@@ -26,7 +26,8 @@ build_site_item(theme_id = 'sites',
                     destination_path = 'stac/sites',
                     theme_title = 'NEON Sites',
                     collection_name = 'NEON Sites',
-                    thumbnail_link = 'https://projects.ecoforecast.org/neon4cast-catalog/img/BONA_Twr.jpg',
+                    #thumbnail_link = 'https://projects.ecoforecast.org/neon4cast-catalog/img/BONA_Twr.jpg',
+                    thumbnail_link = 'https://www.neonscience.org/sites/default/files/styles/max_2600x2600/public/2021-04/2021_04_graphic_Domain_Map_no-Titles-png.png?itok=7MsHPigZ',
                     site_coords = theme_sites$site_lat_lon)
 
 # build_site_theme(start_date = '2000-01-01',
