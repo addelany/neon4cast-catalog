@@ -1,140 +1,5 @@
-build_aquatics <- function(start_date,end_date){
+source('R/stac_functions.R')
 
-  aquatics <- list(
-    "id" = 'efi-aquatics',
-    "type" = "Collection",
-    "links" = list(
-      list(
-        "rel" = "child",
-        "type" = "application/json",
-        "href" = 'forecasts/collection.json',
-        "title" = 'forecast item'
-      ),
-      list(
-        "rel" = "child",
-        "type" = "application/json",
-        "href" = 'scores/collection.json',
-        "title" = 'scores item'
-      ),
-      list(
-        "rel"= "parent",
-        "type"= "application/json",
-        "href"= "../catalog.json",
-        "title" = 'parent'
-      ),
-      list(
-        "rel"= "root",
-        "type"= "application/json",
-        "href"= "../catalog.json",
-        "title" = 'root'
-      ),
-      list(
-        "rel"= "self",
-        "type"= "application/json",
-        "href" = 'collection.json',
-        "title" = 'self'
-      ),
-      list(
-        "rel" ="cite-as",
-        "href"= "https://doi.org/10.1002/fee.2616",
-        "title" = "citation"
-      ),
-      list(
-        "rel"= "about",
-        "href"= "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-        "type"= "text/html",
-        "title"= "Aquatics Forecast Challenge"
-      ),
-      list(
-        "rel"= "describedby",
-        "href"= "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-        "title"= "Organization Landing Page",
-        "type"= "text/html"
-      )
-    ),
-    "title"= "Ecological Forecasting Initiative - Aquatics",
-    'assets' = list(
-      'thumbnail' = list(
-        "href"= "https://projects.ecoforecast.org/neon4cast-catalog/img/neon_buoy.jpg",
-        "type"= "image/JPEG",
-        "roles" = list('thumbnail'),
-        "title"= "NEON Aquatics Buoy"
-      )
-    ),
-    "extent" = list(
-      "spatial" = list(
-        'bbox' = list(list(-149.6106,
-                           18.1135,
-                           -66.7987,
-                           68.6698))
-      ),
-      "temporal" = list(
-        'interval' = list(list(
-          paste0(start_date,'T00:00:00Z'),
-          paste0(end_date,'T00:00:00Z'))
-        ))
-    ),
-    "license" = "CC0-1.0",
-    "keywords" = list(
-      "Forecasting",
-      "Data",
-      "Ecology"
-    ),
-    "providers" = list(
-      list(
-        "url"= "https://data.ecoforecast.org",
-        "name"= "Ecoforecast Data",
-        "roles" = list(
-          "producer",
-          "processor",
-          "licensor"
-        )
-      ),
-      list(
-        "url"= "https://ecoforecast.org",
-        "name"= "Ecoforecast",
-        "roles" = list('host')
-      )
-    ),
-    "description" = "This page contains raw forecasts and forecast scores, which are summarized forecasts with evaluation metrics",
-    "stac_version" = "1.0.0",
-    "stac_extensions" = list(
-      "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-      "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-      "https://stac-extensions.github.io/table/v1.2.0/schema.json"
-    ),
-    "publications" = list(
-      "doi" = "https://www.doi.org/10.22541/essoar.167079499.99891914/v1",
-      "citation"= "Thomas, R.Q., C. Boettiger, C.C. Carey, M.C. Dietze, L.R. Johnson, M.A. Kenney, J.S. Mclachlan, J.A. Peters, E.R. Sokol, J.F. Weltzin, A. Willson, W.M. Woelmer, and Challenge Contributors. The NEON Ecological Forecasting Challenge. Accepted at Frontiers in Ecology and Environment. Pre-print"
-    )
-  )
-
-
-  dest <- "stac/aquatics/"
-  json <- file.path(dest, "collection.json")
-
-  jsonlite::write_json(aquatics,
-                       json,
-                       pretty=TRUE,
-                       auto_unbox=TRUE)
-  stac4cast::stac_validate(json)
-}
-
-get_grouping <- function(s3_inv,
-                         theme,
-                         collapse=TRUE,
-                         endpoint="data.ecoforecast.org") {
-
-  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
-    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
-    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
-    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
-                  reference_datetime =
-                    gsub("reference_datetime=", "", reference_datetime),
-                  date = gsub("date=", "", date)) |>
-    dplyr::collect()
-
-}
 
 ## READ S3 INVENTORY FOR DATES
 s3_inventory <- arrow::s3_bucket("neon4cast-inventory",
@@ -148,5 +13,13 @@ s3_df <- s3_df |> filter(model_id != 'null')
 theme_max_date <- max(s3_df$date)
 theme_min_date <- min(s3_df$date)
 
+build_description <- "The catalog contains forecasts and scores for the NEON Ecological Forecasting aquatics theme.  The forecasts are the raw forecasts that include all ensemble members (if a forecast represents uncertainty using an ensemble).  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). Due to the size of the raw forecasts, we recommend accessing the scores to analyze forecasts (unless you need the individual ensemble members).\nYou can access the forecasts or the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available.  The code to access the entire dataset is provided as an asset in the forecast or scores catalog. Given the size of the forecast catalog, it can be time-consuming to access the data at the full dataset level.  For quicker access to the forecasts and scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model."
 
-build_aquatics(theme_max_date, theme_min_date)
+build_theme(start_date = theme_min_date,
+               end_date = theme_max_date,
+               id_value = 'efi-aquatics',
+               theme_description = build_description,
+               theme_title = 'Aquatics',
+               destination_path = "stac/aquatics/",
+               thumbnail_link = 'https://projects.ecoforecast.org/neon4cast-catalog/img/neon_buoy.jpg',
+               thumbnail_title = 'NEON Aquatics Buoy')

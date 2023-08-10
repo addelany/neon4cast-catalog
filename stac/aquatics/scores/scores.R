@@ -1,143 +1,27 @@
-generate_model_items <- function(){
-
-
-  model_list <- aquatic_models$model.id
-
-  x <- purrr::map(model_list, function(i)
-    list(
-      "rel" = 'item',
-      'type'= 'application/json',
-      'href' = paste0('models/',i,'.json'))
-  )
-
-  return(x)
-}
-
-build_scores <- function(table_schema, table_description, start_date, end_date){
-  scores <- list(
-    "id" = "aquatics-scores",
-    "description" = "Scores contains the scored forecasts from the Aquatics forecast theme. These are summarized and scored versions of the raw forecast output. The raw forecasts are located in the 'Forecasts' collection.",
-    "stac_version"= "1.0.0",
-    "license"= "CC0-1.0",
-    "stac_extensions"= list("https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-                            "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-                            "https://stac-extensions.github.io/table/v1.2.0/schema.json"),
-    'type' = 'Collection',
-    'links' = c(generate_model_items(),
-        list(
-      list(
-        "rel" = "parent",
-        "type"= "application/json",
-        "href" = '../collection.json'
-      ),
-      list(
-        "rel" = "root",
-        "type" = "application/json",
-        "href" = '../collection.json'
-      ),
-      list(
-        "rel" = "self",
-        "type" = "application/json",
-        "href" = 'collection.json'
-      ),
-      list(
-        "rel" = "cite-as",
-        "href" = "https://doi.org/10.1002/fee.2616"
-      ),
-      list(
-        "rel" = "about",
-        "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-        "type" = "text/html",
-        "title" = "Aquatics Forecast Challenge"
-      ),
-      list(
-        "rel" = "describedby",
-        "href" = "https://projects.ecoforecast.org/neon4cast-catalog/aquatics-catalog.html",
-        "title" = "Organization Landing Page",
-        "type" = "text/html"
-      )
-      )),
-    "title" = "Ecological Forecasting Initiative - Aquatics Scores",
-    "extent" = list(
-      "spatial" = list(
-        'bbox' = list(list(-149.6106,
-                           18.1135,
-                           -66.7987,
-                           68.6698))
-      ),
-      "temporal" = list(
-        'interval' = list(list(
-          paste0(start_date,"T00:00:00Z"),
-          paste0(end_date,"T00:00:00Z"))
-        ))
-    ),
-    "table_columns" = stac4cast::build_table_columns(table_schema, table_description),
-    'assets' = list(
-      'data' = list(
-        "href"= "https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
-        "type"= "text/csv",
-        "roles" = list('data'),
-        "title"= "NEON Field Site Metadata"
-      )
-    )
-  )
-
-
-  dest <- "stac/aquatics/scores/"
-  json <- file.path(dest, "collection.json")
-
-  jsonlite::write_json(scores,
-                       json,
-                       pretty=TRUE,
-                       auto_unbox=TRUE)
-  stac4cast::stac_validate(json)
-}
-
-
-get_grouping <- function(s3_inv,
-                         theme,
-                         collapse=TRUE,
-                         endpoint="data.ecoforecast.org") {
-
-  groups <- arrow::open_dataset(s3_inv$path("neon4cast-forecasts")) |>
-    dplyr::filter(...1 == "parquet", ...2 == {theme}) |>
-    dplyr::select(model_id = ...3, reference_datetime = ...4, date = ...5) |>
-    dplyr::mutate(model_id = gsub("model_id=", "", model_id),
-                  reference_datetime =
-                    gsub("reference_datetime=", "", reference_datetime),
-                  date = gsub("date=", "", date)) |>
-    dplyr::collect()
-
-}
-
-
-## create item list based off of aquatic forecast model ids
 library(arrow)
 library(dplyr)
 
+source('R/stac_functions.R')
 
 ## CREATE table for column descriptions
-description_create <- data.frame(datetime = 'ISO 8601(ISO 2019)datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in asingle file. Forecast lead time is thus datetime-reference_datetime. Ina hindcast the reference_datetimewill be earlierthan the time thehindcast was actually produced (seepubDatein Section3). Datetimesare allowed to be earlier than thereference_datetimeif areanalysis/reforecast is run before the start of the forecast period. Thisvariable was calledstart_timebefore v0.5 of theEFI standard.',
-                                 site_id = 'For forecasts that are not on a spatial grid, use of a site dimension thatmaps to a more detailed geometry (points, polygons, etc.) is allowable.In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this couldbe handled by the CF Discrete Sampling Geometry data model.',
-                                 family = 'For ensembles: “ensemble.” Default value if unspecifiedFor probability distributions: Name of the statistical distributionassociated with the reported statistics. The “sample” distribution issynonymous with “ensemble.”For summary statistics: “summary.”If this dimension does not vary, it is permissible to specifyfamilyas avariable attribute if the file format being used supports this (e.g.,netCDF).',
-                                 parameter = 'ensemble member',
+description_create <- data.frame(reference_datetime ='ISO 8601(ISO 2019) datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in a single file. Forecast lead time is thus datetime-reference_datetime. In a hindcast the reference_date time will be earlier than the time the hindcast was actually produced (see pubDate in Section 3). Datetimes are allowed to be earlier than the reference_datetime if analysis/reforecast is run before the start of the forecast period. This variable was called start_time before v0.5 of the EFI standard.',
+                                 site_id = 'For forecasts that are not on a spatial grid, use of a site dimension that maps to a more detailed geometry (points, polygons, etc.) is allowable. In general this would be documented in the external metadata (e.g., alook-up table that provides lon and lat); however in netCDF this could be handled by the CF Discrete Sampling Geometry data model.',
+                                 datetime = 'ISO 8601(ISO 2019) datetime the forecast starts from (a.k.a. issue time); Only needed if more than one reference_datetime is stored in a single file. Forecast lead time is thus datetime-reference_datetime. In a hindcast the reference_date time will be earlier than the time the hindcast was actually produced (see pubDate in Section 3). Datetimes are allowed to be earlier than the reference_datetime if analysis/reforecast is run before the start of the forecast period. This variable was called start_time before v0.5 of the EFI standard.',
+                                 family = 'For ensembles: “ensemble.” Default value if unspecified For probability distributions: Name of the statistical distribution associated with the reported statistics. The “sample” distribution is synonymous with “ensemble.” For summary statistics: “summary.”If this dimension does not vary, it is permissible to specify family as a variable attribute if the file format being used supports this (e.g.,netCDF).',
                                  variable = 'aquatic forecast variable',
-                                 prediction = 'predicted forecast value',
-                                 date = 'ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod.',
+                                 pubDate = 'ISO 8601 (ISO 2019) datetime being predicted; follows CF convention http://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFI convention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify the start_datetime and end_datetime as two variables, instead of the single datetime. If this is not provided the datetime is assumed to be the MIDPOINT of the integration period.',
                                  observation = 'observational data',
                                  crps = 'crps forecast score',
                                  logs = 'logs forecast score',
                                  mean = 'mean forecast prediction for all ensemble members',
-                                 mediam = 'median forecast prediction for all ensemble members',
+                                 median = 'median forecast prediction for all ensemble members',
                                  sd = 'standard deviation of all enemble member forecasts',
                                  quantile97.5 = 'upper 97.5 percentile value of ensemble member forecasts',
                                  quantile02.5 = 'upper 2.5 percentile value of ensemble member forecasts',
                                  quantile90 = 'upper 90 percentile value of ensemble member forecasts',
                                  quantile10 = 'upper 10 percentile value of ensemble member forecasts',
-                                 model_id = 'unique identifier for the model used in the forecast',
-                                 date = 'ISO 8601(ISO 2019)datetime being predicted; follows CF conventionhttp://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFIconvention.For time-integrated variables (e.g., cumulative net primary productivity), one should specify thestart_datetimeandend_datetimeas two variables, instead of the singledatetime.If this is not providedthedatetimeis assumed to be the MIDPOINT of theintegrationperiod.'
+                                 date = 'ISO 8601 (ISO 2019) datetime being predicted; follows CF convention http://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFI convention. For time-integrated variables (e.g., cumulative net primary productivity), one should specify the start_datetime and end_datetime as two variables, instead of the single datetime. If this is not provided the datetime is assumed to be the MIDPOINT of the integration period.')
 
-)
 ## just read in example forecast to extract schema information -- ask about better ways of doing this
 theme <- 'aquatics'
 reference_date <- '2023-05-01'
@@ -155,14 +39,14 @@ theme_df <- arrow::open_dataset(s3_schema) %>%
   filter(reference_datetime == reference_date)
 
 ## identify model ids from bucket
-s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
+s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
 paths <- open_dataset(s3$path("neon4cast-scores")) |> collect()
 models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
 aquatic_models <- models_df |>
   tidyr::separate(...3, c('name','model.id'), "=")
 
 ## identify model ids from bucket -- used in generate model items function
-s3_inventory <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org")
+s3_inventory <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
 paths <- open_dataset(s3_inventory$path("neon4cast-scores")) |> collect()
 models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
 aquatic_models <- models_df |>
@@ -175,7 +59,20 @@ s3_df <- s3_df |> filter(model_id != 'null')
 forecast_max_date <- max(s3_df$date)
 forecast_min_date <- min(s3_df$date)
 
-build_scores(theme_df, description_create, forecast_min_date, forecast_max_date)
+build_description <- "The catalog contains scores for the NEON Ecological Forecasting aquatics theme.  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). You can access the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available. The code to access the entire dataset is provided as an asset. Given the size of the scores catalog, it can be time-consuming to access the data at the full dataset level. For quicker access to the scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model."
 
-
+build_forecast_scores(table_schema = theme_df,
+                      theme_id = theme,
+               table_description = description_create,
+               start_date = forecast_min_date,
+               end_date = forecast_max_date,
+               id_value = "aquatics-scores",
+               description_string = build_description,
+               about_string = 'https://projects.ecoforecast.org/neon4cast-docs/',
+               about_title = "NEON Ecological Forecasting Challenge Documentation",
+               theme_title = "Scores",
+               model_documentation ="https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
+               destination_path = "stac/aquatics/scores/",
+               description_path = 'stac/aquatics/scores/asset-description.Rmd',
+               aws_download_path = 'neon4cast-scores/parquet/aquatics')
 

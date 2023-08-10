@@ -31,6 +31,12 @@ vignettes/*.pdf
 *_cache/
 /cache/
 
+# directories for storing images locally
+/thumbnail_store/
+
+# file to store bucket sites
+stac/aquatics/forecasts/all_forecast_sites.csv
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md

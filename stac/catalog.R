@@ -1,5 +1,6 @@
 
-source("R/common.R")
+source("R/catalog-common.R")
+source('R/stac_functions.R')
 
 build_catalog <- function(){
 catalog <- list(
@@ -21,42 +22,48 @@ catalog <- list(
       "href" = 'catalog.json'
     ),
 
-    list(
-      "rel"= "child",
-      "type"= "application/json",
-      "title"= "NOAA Global Ensemble Forecast System",
-      "href" = 'noaa/collection.json'
-    ),
+    # list(
+    #   "rel"= "child",
+    #   "type"= "application/json",
+    #   "title"= "NOAA Global Ensemble Forecast System",
+    #   "href" = 'noaa/collection.json'
+    # ),
     list(
       "rel"= "child",
       "type"= "application/json",
       "title"= "Aquatics Forecast Challenge",
-      "href" = 'aquatics/collection.json'
-
-    ),
+      "href" = 'aquatics/collection.json'),
     list(
       "rel"= "child",
       "type"= "application/json",
-      "title"= "Beetles Forecast Challenge",
-      "href" = 'beetles/collection.json'
-
-      ),
-    list(
-      "rel"= "child",
-      "type"= "application/json",
-      "title"= "Terrestrial Forecast Challenge",
-      "href" = 'terrestrial/collection.json'
-
-    ),
-    list(
-      "rel"= "child",
-      "type"= "application/json",
-      "title"= "Phenology Forecast Challenge",
-      "href" = 'phenology/collection.json'
-
+      "title"= "NEON Site Information",
+      "href" = 'sites/collection.json')
     )
+
+    # ),
+    # list(
+    #   "rel"= "child",
+    #   "type"= "application/json",
+    #   "title"= "Beetles Forecast Challenge",
+    #   "href" = 'beetles/collection.json'
+    #
+    #   ),
+    # list(
+    #   "rel"= "child",
+    #   "type"= "application/json",
+    #   "title"= "Terrestrial Forecast Challenge",
+    #   "href" = 'terrestrial/collection.json'
+    #
+    # ),
+    # list(
+    #   "rel"= "child",
+    #   "type"= "application/json",
+    #   "title"= "Phenology Forecast Challenge",
+    #   "href" = 'phenology/collection.json'
+    #
+    # )
   )
-)
+#)
 
 dest <- "stac/"
 jsonlite::write_json(catalog, file.path(dest, "catalog.json"),

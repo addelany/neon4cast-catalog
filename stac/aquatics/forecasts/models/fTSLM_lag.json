@@ -37,9 +37,9 @@
     ]
   },
   "properties": {
-    "description": "# pending\n\nVariables: temperature, chla\nSites: ARIK, BARC, BIGC, BLDE, BLWA, CARI, COMO, CRAM, CUPE, FLNT, GUIL, HOPB, KING, LECO, LEWI, LIRO, MART, MAYF, MCDI, MCRA, OKSR, POSE, PRIN, PRLA, PRPO, REDB, SUGG, SYCA, TECR, TOMB, TOOK, WALK, WLOU, BLUE\nKeywords: \"Forecasting, NEON\"\n\nDescription: pending",
+    "description": "\nmodel info: pending\n\nSites: ARIK, BARC, BIGC, BLDE, BLUE, BLWA, CARI, COMO, CRAM, CUPE, FLNT, GUIL, HOPB, KING, LECO, LEWI, LIRO, MART, MAYF, MCDI, MCRA, OKSR, POSE, PRIN, PRLA, PRPO, REDB, SUGG, SYCA, TECR, TOMB, TOOK, WALK, WLOU\n\nVariables: chla, temperature",
     "start_datetime": "2022-10-21",
-    "end_datetime": "2023-07-22",
+    "end_datetime": "2023-08-18",
     "providers": [
       {
         "url": "pending",
@@ -61,9 +61,9 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
-      "Temperature",
-      "Oxygen",
-      "NEON"
+      "NEON",
+      "chla",
+      "temperature"
     ]
   },
   "collection": "forecast",

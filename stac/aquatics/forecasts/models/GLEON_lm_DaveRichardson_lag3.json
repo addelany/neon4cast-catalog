@@ -37,7 +37,7 @@
     ]
   },
   "properties": {
-    "description": "# pending\n\nVariables: temperature\nSites: BARC, CRAM, LIRO, PRLA, PRPO, SUGG, TOOK\nKeywords: \"Forecasting, NEON\"\n\nDescription: pending",
+    "description": "\nmodel info: pending\n\nSites: BARC, CRAM, LIRO, PRLA, PRPO, SUGG, TOOK\n\nVariables: temperature",
     "start_datetime": "2022-11-03",
     "end_datetime": "2022-12-06",
     "providers": [
@@ -61,12 +61,11 @@
     "license": "CC0-1.0",
     "keywords": [
       "Forecasting",
-      "Temperature",
-      "Oxygen",
-      "NEON"
+      "NEON",
+      "temperature"
     ]
   },
-  "collection": "forecast",
+  "collection": "forecasts",
   "links": [
     {
       "rel": "collection",
@@ -98,7 +97,7 @@
       "href": "s3://anonymous@bio230014-bucket01/neon4cast-forecasts/parquet/aquatics/model_id=GLEON_lm_DaveRichardson_lag3?endpoint_override=sdsc.osn.xsede.org",
       "type": "application/x-parquet",
       "title": "Database Access",
-      "description": "Use `arrow` for remote access to the database.\n\n### R\n\n```{r}\n# Copy URL from \"URL for Amazon S3\" button above and save as object named \"url_for_s3\" \n# Use in code below\n\nfcst <- arrow::open_dataset(url_for_s3)\ndf <- fcst |> dplyr::collect()\n\n```\n\nNow use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.\n"
+      "description": "Use `arrow` for remote access to the database. This will return all raw forecasts for the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Copy URL from \"URL for Amazon S3\" button above and save as object named \"url_for_s3\" \n# Use in code below\n\nall_forecasts <- arrow::open_dataset(url_for_s3)\ndf <- all_forecasts |> dplyr::collect()\n\n```\n\nNow use dplyr operations to summarise or subset (if necessary), followed by `dplyr::collect()` to bring this data into R as a `data.frame`.\n\n\n"
     }
   }
 }
