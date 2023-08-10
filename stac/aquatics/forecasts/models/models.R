@@ -120,8 +120,9 @@ info_extract <- arrow::s3_bucket("neon4cast-forecasts/parquet/", endpoint_overri
 
 forecast_sites <- c()
 
+test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
 ## loop over model ids and extract components if present in metadata table
-for (m in aquatic_models$model.id[1:2]){
+for (m in test_models){
   print(m)
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`

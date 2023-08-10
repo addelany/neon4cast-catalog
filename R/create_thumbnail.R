@@ -21,7 +21,9 @@ climatology_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/mode
   #        datetime %in% latest_forecast$datetime) |>
   collect()
 
-for (m_id in aquatic_models$model.id[1:2]){
+test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
+
+for (m_id in test_models){
   print(m_id)
 
   info_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
