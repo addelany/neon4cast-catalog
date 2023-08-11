@@ -38,7 +38,7 @@ catalog <- list(
       "type"= "application/json",
       "title"= "NEON Site Information",
       "href" = 'sites/collection.json')
-    )
+    ),
 
     # ),
     # list(
@@ -55,13 +55,13 @@ catalog <- list(
     #   "href" = 'terrestrial/collection.json'
     #
     # ),
-    # list(
-    #   "rel"= "child",
-    #   "type"= "application/json",
-    #   "title"= "Phenology Forecast Challenge",
-    #   "href" = 'phenology/collection.json'
-    #
-    # )
+    list(
+      "rel"= "child",
+      "type"= "application/json",
+      "title"= "Phenology Forecast Challenge",
+      "href" = 'phenology/collection.json'
+
+    )
   )
 #)
 
