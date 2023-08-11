@@ -6,7 +6,7 @@ library(RCurl)
 
 source('R/stac_functions.R')
 
-theme <- 'phenology'
+theme <- 'beetles'
 
 #get model ids
 s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
@@ -36,10 +36,10 @@ description_create <- data.frame(reference_datetime ='ISO 8601(ISO 2019) datetim
 
 ## just read in example forecast to extract schema information -- ask about better ways of doing this
 #theme <- 'phenology'
-reference_datetime <- '2023-05-01'
-site_id <- 'BART'
-model_id <- 'climatology'
-#variable_name <- 'temperature'
+reference_datetime <- '2022-08-22'
+site_id <- 'ABBY'
+model_id <- 'mean'
+variable_name <- 'temperature'
 
 s3_schema <- arrow::s3_bucket(
   bucket = glue::glue("neon4cast-scores/parquet/{theme}/",
@@ -49,6 +49,7 @@ s3_schema <- arrow::s3_bucket(
   anonymous = TRUE)
 theme_df <- arrow::open_dataset(s3_schema) %>%
   filter(site_id == site_id)
+
 
 
 ## READ IN MODEL METADATA
@@ -105,7 +106,7 @@ new_columns <- c('first.name.one',
 )
 
 neon_docs <- neon_docs |>
-  filter(Theme == 'Phenology') |>
+  filter(Theme == 'Beetles') |>
   select(`First Name`:`Email address`,
          `team-name`,
          `Team Member 2 - First Name` :`Team Member 10 - Email`,
@@ -154,9 +155,9 @@ for (m in theme_models$model.id[1:2]){
                 var_keys = model_var_site_info[[3]][[1]],
                 site_values = model_var_site_info[[2]],
                 model_documentation = neon_docs,
-                destination_path = "stac/phenology/scores/models",
-                description_path = "stac/phenology/scores/models/asset-description.Rmd",
-                aws_download_path = 'neon4cast-scores/parquet/phenology',
+                destination_path = "stac/beetles/scores/models",
+                description_path = "stac/beetles/scores/models/asset-description.Rmd",
+                aws_download_path = 'neon4cast-scores/beetles/phenology',
                 theme_title = "Scores",
                 collection_name = 'scores',
                 thumbnail_image_name = 'latest_scores.png',
@@ -175,9 +176,9 @@ for (m in theme_models$model.id[1:2]){
                 var_keys = model_var_site_info[[3]][[1]],
                 site_values = model_var_site_info[[2]],
                 model_documentation = neon_docs,
-                destination_path = "stac/phenology/scores/models/",
-                description_path = "stac/phenology/scores/models/asset-description.Rmd",
-                aws_download_path = 'neon4cast-scores/parquet/phenology',
+                destination_path = "stac/beetles/scores/models/",
+                description_path = "stac/beetles/scores/models/asset-description.Rmd",
+                aws_download_path = 'neon4cast-scores/parquet/beetles',
                 theme_title = "Scores",
                 collection_name = 'scores',
                 thumbnail_image_name = 'latest_scores.png',
@@ -191,4 +192,4 @@ for (m in theme_models$model.id[1:2]){
 scores_sites <- unique(scores_sites)
 scores_sites_df <- data.frame(site_id = scores_sites)
 
-write.csv(scores_sites_df, 'stac/phenology/scores/all_scores_sites.csv', row.names = FALSE)
+write.csv(scores_sites_df, 'stac/beetles/scores/all_scores_sites.csv', row.names = FALSE)
