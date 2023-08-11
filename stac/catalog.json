@@ -27,12 +27,12 @@
       "type": "application/json",
       "title": "NEON Site Information",
       "href": "sites/collection.json"
+    },
+    {
+      "rel": "child",
+      "type": "application/json",
+      "title": "Phenology Forecast Challenge",
+      "href": "phenology/collection.json"
     }
-  ],
-  "8": {
-    "rel": "child",
-    "type": "application/json",
-    "title": "Phenology Forecast Challenge",
-    "href": "phenology/collection.json"
-  }
+  ]
 }
