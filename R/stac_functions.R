@@ -141,7 +141,7 @@ build_model <- function(model_id,
         "description"= aws_asset_description
       )
       ),
-      pull_images('aquatics',model_id,thumbnail_image_name)
+      pull_images(theme_id,model_id,thumbnail_image_name)
     )
   )
 
@@ -207,7 +207,7 @@ generate_vars_sites <- function(m_id, theme){
 generate_model_items <- function(){
 
 
-  model_list <- aquatic_models$model.id
+  model_list <- theme_models$model.id
 
   x <- purrr::map(model_list, function(i)
     list(
@@ -240,13 +240,19 @@ pull_images <- function(theme, m_id, image_name){
   )
 
   ## check if image rendered successfully on bucket. If not remove from assets
+  item_remove <- c()
+
   if (image_name == 'latest_scores.png'){
     for (item in seq.int(1:length(image_assets))){
       url_validator = RCurl::url.exists(image_assets[[item]]$href)
       if(url_validator == FALSE){
         print(paste0('Removing ', image_assets[[item]]$title))
-        image_assets <- image_assets[-item]
+        item_remove <- append(item_remove,item)
+        #image_assets <- image_assets[-item]
       }
+    }
+    if (length(item_remove) > 0){
+      image_assets <- image_assets[-item_remove]
     }
   }
 
@@ -264,9 +270,11 @@ get_site_coords <- function(theme, bucket, m_id){
   if (is.null(m_id)){
 
     if (bucket == 'Forecasts'){
-      bucket_sites <- read_csv('stac/aquatics/forecasts/all_forecast_sites.csv')
-    } else{
-      bucket_sites <- read_csv('stac/aquatics/scores/all_scores_sites.csv')
+      bucket_sites <- read_csv(glue::glue('stac/{theme}/forecasts/all_forecast_sites.csv'))
+    } else if (bucket == 'Scores'){
+      bucket_sites <- read_csv(glue::glue('stac/{theme}/scores/all_scores_sites.csv'))
+    } else {
+      stop("Bucket name error. Must be 'Forecasts' or 'Scores'")
     }
 
     site_coords <- theme_sites |>

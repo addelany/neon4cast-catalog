@@ -1,4 +1,5 @@
-## AQUATICS
+# AQUATICS
+print('running aquatics')
 # forecast
 source('stac/aquatics/forecasts/models/models.R')
 source('stac/aquatics/forecasts/forecast.R')
@@ -7,7 +8,6 @@ source('stac/aquatics/forecasts/forecast.R')
 source('stac/aquatics/scores/models/models.R')
 source('stac/aquatics/scores/scores.R')
 
-# aquatics landing page
 source('stac/aquatics/aquatics.R')
 
 
@@ -26,5 +26,10 @@ source('stac/aquatics/aquatics.R')
 ## TICKS
 # Pending
 
+## SITES
+print('building NEON sites')
+source('stac/sites/sites.R')
+
 ### BUILD CATALOG JSON
+print('building NEON sites')
 source('stac/catalog.R')
