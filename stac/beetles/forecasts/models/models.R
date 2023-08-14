@@ -101,7 +101,7 @@ new_columns <- c('first.name.one',
 )
 
 neon_docs <- neon_docs |>
-  filter(Theme == 'Beetles') |>
+  filter(theme == 'Beetles') |>
   select(`First Name`:`Email address`,
          `team-name`,
          `Team Member 2 - First Name` :`Team Member 10 - Email`,

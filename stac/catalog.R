@@ -42,17 +42,16 @@ catalog <- list(
     "rel"= "child",
     "type"= "application/json",
     "title"= "Phenology Forecast Challenge",
-    "href" = 'phenology/collection.json')
+    "href" = 'phenology/collection.json'),
+  list(
+    "rel"= "child",
+    "type"= "application/json",
+    "title"= "Beetles Forecast Challenge",
+    "href" = 'beetles/collection.json'
+  )
   )
 )
     # ),
-    # list(
-    #   "rel"= "child",
-    #   "type"= "application/json",
-    #   "title"= "Beetles Forecast Challenge",
-    #   "href" = 'beetles/collection.json'
-    #
-    #   ),
     # list(
     #   "rel"= "child",
     #   "type"= "application/json",
