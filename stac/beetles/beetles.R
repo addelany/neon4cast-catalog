@@ -21,5 +21,5 @@ build_theme(start_date = theme_min_date,
             theme_description = build_description,
             theme_title = 'Beetles',
             destination_path = "stac/beetles/",
-            thumbnail_link = 'ttps://www.neonscience.org/sites/default/files/styles/max_width_1170px/public/image-content-images/Beetles_pinned.jpg',
+            thumbnail_link = 'https://www.neonscience.org/sites/default/files/styles/max_width_1170px/public/image-content-images/Beetles_pinned.jpg',
             thumbnail_title = 'Beetle Image')
