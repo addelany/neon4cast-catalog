@@ -121,9 +121,6 @@ for (m_id in theme_models$model.id[1:2]){
     mc_cp(scores_img_path, glue::glue("efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_scores.png"))
 
     print('--- done ---')
-
-
-    #mc_alias_set("efi", endpoint="data.ecoforecast.org", access='austin', secret='RokQD3E8mJUFpUbn') # needed only once per machine
   }
 
 }
