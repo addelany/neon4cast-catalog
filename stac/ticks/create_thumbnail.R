@@ -16,7 +16,7 @@ theme_models <- models_df |>
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 ## save climatology data
-climatology_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=climatology/"))) |>
+climatology_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=EFI_avg_null/"))) |>
   # filter(reference_datetime == latest_forecast_date,
   #        datetime %in% latest_forecast$datetime) |>
   collect()
@@ -27,7 +27,8 @@ for (m_id in theme_models$model.id[1:2]){
   print(m_id)
 
   info_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
-    collect()
+    collect() |>
+    drop_na(site_id)
 
   # latest_forecast_date <- max(info_df$reference_datetime)
   #
