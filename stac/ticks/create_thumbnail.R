@@ -3,7 +3,7 @@ library(tidyverse)
 library(ggplot2)
 library(minioclient)
 
-theme <- 'beetles'
+theme <- 'ticks'
 
 #get model ids
 s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
@@ -16,14 +16,7 @@ theme_models <- models_df |>
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 ## save climatology data
-#aquatics / phenology
-# baseline_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=climatology/"))) |>
-#   # filter(reference_datetime == latest_forecast_date,
-#   #        datetime %in% latest_forecast$datetime) |>
-#   collect()
-
-# beetles
-baseline_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=mean/"))) |>
+climatology_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=climatology/"))) |>
   # filter(reference_datetime == latest_forecast_date,
   #        datetime %in% latest_forecast$datetime) |>
   collect()
@@ -91,14 +84,14 @@ for (m_id in theme_models$model.id[1:2]){
       filter(max_horizon == max(max_horizon)) |>
       filter(reference_datetime == max(reference_datetime))
 
-    baseline_site_df <- baseline_df |>
+    clim_site_df <- climatology_df |>
       filter(site_id == site) |>
       filter(reference_datetime == latest_scores_site$reference_datetime) |>
       #filter(datetime %in% latest_scores_site$date) |>
       rename(clim_crps = crps) |>
       select(datetime,variable, clim_crps)
 
-    if (nrow(baseline_site_df) == 0){
+    if (nrow(clim_site_df) == 0){
       print(paste0('no climatology forecast for ',{site}, ' on ', {latest_scores_site$reference_datetime}))
       next
     }
@@ -106,7 +99,7 @@ for (m_id in theme_models$model.id[1:2]){
     latest_scores_df <- info_df |>
       filter(site_id == site,
              reference_datetime == latest_scores_site$reference_datetime) |>
-      right_join(baseline_site_df, by = c('datetime','variable'))
+      right_join(clim_site_df, by = c('datetime','variable'))
 
     # Scores plot
     scores_plot <- ggplot(data = latest_scores_df, aes(datetime, crps)) +
@@ -128,9 +121,6 @@ for (m_id in theme_models$model.id[1:2]){
     mc_cp(scores_img_path, glue::glue("efi/neon4cast-catalog/{theme}/{m_id}/{site}/latest_scores.png"))
 
     print('--- done ---')
-
-
-    #mc_alias_set("efi", endpoint="data.ecoforecast.org", access='austin', secret='RokQD3E8mJUFpUbn') # needed only once per machine
   }
 
 }

@@ -4,7 +4,7 @@
     "https://stac-extensions.github.io/table/v1.2.0/schema.json"
   ],
   "type": "Feature",
-  "id": "EFI_avg_null",
+  "id": "BU_Dem",
   "bbox": [
     -156.6194,
     17.9696,
@@ -16,9 +16,7 @@
     "coordinates": [
       [-78.0418, 39.0337],
       [-96.5631, 39.1008],
-      [-88.1612, 31.8539],
       [-84.2826, 35.9641],
-      [-81.9934, 29.6893],
       [-78.1395, 38.8929],
       [-76.56, 38.8901],
       [-87.3933, 32.9505],
@@ -26,13 +24,13 @@
     ]
   },
   "properties": {
-    "description": "\nmodel info: pending\n\nSites: BLAN, KONZ, LENO, ORNL, OSBS, SCBI, SERC, TALL, UKFS\n\nVariables: amblyomma_americanum",
-    "start_datetime": "2021-03-29",
-    "end_datetime": "2023-09-18",
+    "description": "\nmodel info: \n\nSites: BLAN, KONZ, ORNL, SCBI, SERC, TALL, UKFS\n\nVariables: amblyomma_americanum, ixodes_scapularis",
+    "start_datetime": "2019-03-04",
+    "end_datetime": "2019-10-28",
     "providers": [
       {
-        "url": "pending",
-        "name": "pending",
+        "url": "fosterj@bu.edu",
+        "name": "John Foster",
         "roles": [
           "producer",
           "processor",
@@ -51,7 +49,8 @@
     "keywords": [
       "Forecasting",
       "NEON",
-      "amblyomma_americanum"
+      "amblyomma_americanum",
+      "ixodes_scapularis"
     ],
     "table:columns": [
       {
@@ -153,17 +152,17 @@
     },
     {
       "rel": "self",
-      "href": "EFI_avg_null.json",
+      "href": "BU_Dem.json",
       "type": "application/json",
       "title": "Model Forecast"
     }
   ],
   "assets": {
     "1": {
-      "href": "s3://anonymous@bio230014-bucket01/neon4cast-scores/parquet/phenology/model_id=EFI_avg_null?endpoint_override=sdsc.osn.xsede.org",
+      "href": "s3://anonymous@bio230014-bucket01/neon4cast-scores/parquet/phenology/model_id=BU_Dem?endpoint_override=sdsc.osn.xsede.org",
       "type": "application/x-parquet",
       "title": "Database Access",
-      "description": "Use `arrow` for remote access to the database. This R code will return results for this model within the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Use code below\n\nall_results <- arrow::open_dataset(s3://anonymous@bio230014-bucket01/neon4cast-scores/parquet/phenology/model_id=EFI_avg_null?endpoint_override=sdsc.osn.xsede.org)\ndf <- all_results |> dplyr::collect()\n\n```\n       \n\nYou can use dplyr operations before calling `dplyr::collect()` to `summarise`, `select` columns, and/or `filter` rows prior to pulling the data into a local `data.frame`. Reducing the data that is pulled locally will speed up the data download speed and reduce your memory usage.\n\n\n"
+      "description": "Use `arrow` for remote access to the database. This R code will return results for this model within the NEON Ecological Forecasting Aquatics theme.\n\n### R\n\n```{r}\n# Use code below\n\nall_results <- arrow::open_dataset(s3://anonymous@bio230014-bucket01/neon4cast-scores/parquet/phenology/model_id=BU_Dem?endpoint_override=sdsc.osn.xsede.org)\ndf <- all_results |> dplyr::collect()\n\n```\n       \n\nYou can use dplyr operations before calling `dplyr::collect()` to `summarise`, `select` columns, and/or `filter` rows prior to pulling the data into a local `data.frame`. Reducing the data that is pulled locally will speed up the data download speed and reduce your memory usage.\n\n\n"
     }
   }
 }

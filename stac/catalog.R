@@ -48,6 +48,24 @@ catalog <- list(
     "type"= "application/json",
     "title"= "Beetles Forecast Challenge",
     "href" = 'beetles/collection.json'
+  ),
+  list(
+    "rel"= "child",
+    "type"= "application/json",
+    "title"= "Terrestrial Forecast Challenge (30min)",
+    "href" = 'terrestrial_30min/collection.json'
+  ),
+  list(
+    "rel"= "child",
+    "type"= "application/json",
+    "title"= "Terrestrial Forecast Challenge (Daily)",
+    "href" = 'terrestrial_daily/collection.json'
+  ),
+  list(
+    "rel"= "child",
+    "type"= "application/json",
+    "title"= "Ticks Forecast Challenge",
+    "href" = 'ticks/collection.json'
   )
   )
 )

@@ -3,7 +3,7 @@ library(tidyverse)
 library(ggplot2)
 library(minioclient)
 
-theme <- 'beetles'
+theme <- 'terrestrial_30min'
 
 #get model ids
 s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
@@ -17,16 +17,12 @@ info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override 
 
 ## save climatology data
 #aquatics / phenology
-# baseline_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=climatology/"))) |>
-#   # filter(reference_datetime == latest_forecast_date,
-#   #        datetime %in% latest_forecast$datetime) |>
-#   collect()
-
-# beetles
-baseline_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=mean/"))) |>
+baseline_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=climatology/"))) |>
+  filter(site_id == 'BART') |>
   # filter(reference_datetime == latest_forecast_date,
   #        datetime %in% latest_forecast$datetime) |>
   collect()
+
 
 #test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
 

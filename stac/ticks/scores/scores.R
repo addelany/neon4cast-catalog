@@ -21,11 +21,11 @@ description_create <- data.frame(reference_datetime ='ISO 8601(ISO 2019) datetim
                                  date = 'ISO 8601 (ISO 2019) datetime being predicted; follows CF convention http://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate. This variable was called time before v0.5of the EFI convention. For time-integrated variables (e.g., cumulative net primary productivity), one should specify the start_datetime and end_datetime as two variables, instead of the single datetime. If this is not provided the datetime is assumed to be the MIDPOINT of the integration period.')
 
 ## just read in example forecast to extract schema information -- ask about better ways of doing this
-theme <- 'phenology'
-reference_datetime <- '2023-05-01'
-site_id <- 'BARC'
-model_id <- 'cb_prophet'
-variable_name <- 'temperature'
+theme <- 'ticks'
+reference_datetime <- '2022-09-19'
+site_id <- 'SCBI'
+model_id <- 'EFI_avg_null'
+variable_name <- 'amblyomma_americanum'
 
 s3_schema <- arrow::s3_bucket(
   bucket = glue::glue("neon4cast-forecasts/parquet/{theme}/",
@@ -44,26 +44,25 @@ theme_models <- models_df |>
   tidyr::separate(...3, c('name','model.id'), "=")
 
 ## use s3_inventory to access min and max dates
-s3_df <- get_grouping(s3_inventory, "phenology")
+s3_df <- get_grouping(s3_inventory, "ticks")
 s3_df <- s3_df |> filter(model_id != 'null')
 
 forecast_max_date <- max(s3_df$date)
 forecast_min_date <- min(s3_df$date)
 
-build_description <- "The catalog contains scores for the NEON Ecological Forecasting aquatics theme.  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). You can access the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available. The code to access the entire dataset is provided as an asset. Given the size of the scores catalog, it can be time-consuming to access the data at the full dataset level. For quicker access to the scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model."
+build_description <- "The catalog contains scores for the NEON Ecological Forecasting ticks theme.  The scores are summaries of the forecasts (i.e., mean, median, confidence intervals), matched observations (if available), and scores (metrics of how well the model distribution compares to observations). You can access the scores at the top level of the dataset where all models, variables, and dates that forecasts were produced (reference_datetime) are available. The code to access the entire dataset is provided as an asset. Given the size of the scores catalog, it can be time-consuming to access the data at the full dataset level. For quicker access to the scores for a particular model (model_id), we also provide the code to access the data at the model_id level as an asset for each model."
 
 build_forecast_scores(table_schema = theme_df,
                       theme_id = theme,
                       table_description = description_create,
                       start_date = forecast_min_date,
                       end_date = forecast_max_date,
-                      id_value = "phenology-scores",
+                      id_value = "ticks-scores",
                       description_string = build_description,
                       about_string = 'https://projects.ecoforecast.org/neon4cast-docs/',
                       about_title = "NEON Ecological Forecasting Challenge Documentation",
                       theme_title = "Scores",
                       model_documentation ="https://raw.githubusercontent.com/eco4cast/neon4cast-targets/main/NEON_Field_Site_Metadata_20220412.csv",
-                      destination_path = "stac/phenology/scores/",
-                      description_path = 'stac/phenology/scores/asset-description.Rmd',
-                      aws_download_path = 'neon4cast-scores/parquet/phenology')
+                      destination_path = "stac/ticks/scores/",
+                      aws_download_path = 'neon4cast-scores/parquet/ticks')
 

@@ -186,6 +186,11 @@ generate_vars_sites <- function(m_id, theme){
     #filter(reference_datetime == "2023-06-18")|> #just grab one EM to limit processing
     collect()
 
+  if ('siteID' %in% names(info_df)){
+    info_df <- info_df |>
+      rename(site_id = siteID)
+  }
+
   vars_vector <- sort(unique(info_df$variable))
   sites_vector <- sort(unique(info_df$site_id))
 
@@ -288,9 +293,22 @@ get_site_coords <- function(theme, bucket, m_id){
     return(bbox_object)
 
   }else{
-    model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
-      collect() |>
-      distinct(site_id)
+    if (theme == 'ticks'){
+      model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
+      collect()
+      if('siteID' %in% names(model_sites)){
+        model_sites <- model_sites |>
+          rename(site_id = siteID) |>
+          distinct(site_id)
+      }else{
+        model_sites <- model_sites |>
+          distinct(site_id)
+      }
+    }else{
+      model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
+        collect() |>
+        distinct(site_id)
+    }
 
     site_coords <- theme_sites |>
       filter(field_site_id %in% model_sites$site_id) |>
@@ -315,7 +333,6 @@ build_forecast_scores <- function(table_schema,
                            theme_title,
                            model_documentation,
                            destination_path,
-                           description_path,
                            aws_download_path,
                            model_metadata_path
 ){
