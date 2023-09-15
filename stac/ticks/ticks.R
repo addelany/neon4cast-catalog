@@ -21,5 +21,5 @@ build_theme(start_date = theme_min_date,
             theme_description = build_description,
             theme_title = 'Ticks',
             destination_path = "stac/ticks/",
-            thumbnail_link = 'https://projects.ecoforecast.org/neon4cast-catalog/img/neon_buoy.jpg',
+            thumbnail_link = 'https://www.neonscience.org/sites/default/files/styles/max_2600x2600/public/image-content-images/tick-image.jpg',
             thumbnail_title = 'NEON Ticks')
