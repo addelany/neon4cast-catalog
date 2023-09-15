@@ -141,7 +141,7 @@ build_model <- function(model_id,
         "description"= aws_asset_description
       )
       ),
-      pull_images('aquatics',model_id,thumbnail_image_name)
+      pull_images(theme_id,model_id,thumbnail_image_name)
     )
   )
 
@@ -186,6 +186,11 @@ generate_vars_sites <- function(m_id, theme){
     #filter(reference_datetime == "2023-06-18")|> #just grab one EM to limit processing
     collect()
 
+  if ('siteID' %in% names(info_df)){
+    info_df <- info_df |>
+      rename(site_id = siteID)
+  }
+
   vars_vector <- sort(unique(info_df$variable))
   sites_vector <- sort(unique(info_df$site_id))
 
@@ -207,7 +212,7 @@ generate_vars_sites <- function(m_id, theme){
 generate_model_items <- function(){
 
 
-  model_list <- aquatic_models$model.id
+  model_list <- theme_models$model.id
 
   x <- purrr::map(model_list, function(i)
     list(
@@ -240,13 +245,19 @@ pull_images <- function(theme, m_id, image_name){
   )
 
   ## check if image rendered successfully on bucket. If not remove from assets
+  item_remove <- c()
+
   if (image_name == 'latest_scores.png'){
     for (item in seq.int(1:length(image_assets))){
       url_validator = RCurl::url.exists(image_assets[[item]]$href)
       if(url_validator == FALSE){
         print(paste0('Removing ', image_assets[[item]]$title))
-        image_assets <- image_assets[-item]
+        item_remove <- append(item_remove,item)
+        #image_assets <- image_assets[-item]
       }
+    }
+    if (length(item_remove) > 0){
+      image_assets <- image_assets[-item_remove]
     }
   }
 
@@ -264,9 +275,11 @@ get_site_coords <- function(theme, bucket, m_id){
   if (is.null(m_id)){
 
     if (bucket == 'Forecasts'){
-      bucket_sites <- read_csv('stac/aquatics/forecasts/all_forecast_sites.csv')
-    } else{
-      bucket_sites <- read_csv('stac/aquatics/scores/all_scores_sites.csv')
+      bucket_sites <- read_csv(glue::glue('stac/{theme}/forecasts/all_forecast_sites.csv'))
+    } else if (bucket == 'Scores'){
+      bucket_sites <- read_csv(glue::glue('stac/{theme}/scores/all_scores_sites.csv'))
+    } else {
+      stop("Bucket name error. Must be 'Forecasts' or 'Scores'")
     }
 
     site_coords <- theme_sites |>
@@ -280,9 +293,22 @@ get_site_coords <- function(theme, bucket, m_id){
     return(bbox_object)
 
   }else{
-    model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
-      collect() |>
-      distinct(site_id)
+    if (theme == 'ticks'){
+      model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
+      collect()
+      if('siteID' %in% names(model_sites)){
+        model_sites <- model_sites |>
+          rename(site_id = siteID) |>
+          distinct(site_id)
+      }else{
+        model_sites <- model_sites |>
+          distinct(site_id)
+      }
+    }else{
+      model_sites <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
+        collect() |>
+        distinct(site_id)
+    }
 
     site_coords <- theme_sites |>
       filter(field_site_id %in% model_sites$site_id) |>
@@ -307,7 +333,6 @@ build_forecast_scores <- function(table_schema,
                            theme_title,
                            model_documentation,
                            destination_path,
-                           description_path,
                            aws_download_path,
                            model_metadata_path
 ){
@@ -508,8 +533,8 @@ build_theme <- function(start_date,end_date, id_value, theme_description, theme_
       "https://stac-extensions.github.io/table/v1.2.0/schema.json"
     ),
     "publications" = list(
-      "doi" = "https://www.doi.org/10.22541/essoar.167079499.99891914/v1",
-      "citation"= "Thomas, R.Q., C. Boettiger, C.C. Carey, M.C. Dietze, L.R. Johnson, M.A. Kenney, J.S. Mclachlan, J.A. Peters, E.R. Sokol, J.F. Weltzin, A. Willson, W.M. Woelmer, and Challenge Contributors. The NEON Ecological Forecasting Challenge. Accepted at Frontiers in Ecology and Environment. Pre-print"
+      "doi" = "https://doi.org/10.1002/fee.2616",
+      "citation"= "Thomas, R.Q., C. Boettiger, C.C. Carey, M.C. Dietze, L.R. Johnson, M.A. Kenney, J.S. Mclachlan, J.A. Peters, E.R. Sokol, J.F. Weltzin, A. Willson, W.M. Woelmer, and Challenge Contributors. 2023. The NEON Ecological Forecasting Challenge. Frontiers in Ecology and Environment 21: 112-113."
     )
   )
 

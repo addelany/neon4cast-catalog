@@ -120,6 +120,7 @@ info_extract <- arrow::s3_bucket("neon4cast-forecasts/parquet/", endpoint_overri
 
 forecast_sites <- c()
 
+#test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
 ## loop over model ids and extract components if present in metadata table
 for (m in aquatic_models$model.id[1:2]){
   print(m)

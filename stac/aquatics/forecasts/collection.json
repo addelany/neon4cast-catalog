@@ -573,12 +573,12 @@
       "interval": [
         [
           "2017-08-27T00:00:00Z",
-          "2023-09-11T00:00:00Z"
+          "2023-09-12T00:00:00Z"
         ]
       ]
     }
   },
-  "table_columns": [
+  "table:columns": [
     {
       "name": "datetime",
       "type": "timestamp[us, tz=UTC]",

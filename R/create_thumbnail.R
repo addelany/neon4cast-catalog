@@ -3,25 +3,34 @@ library(tidyverse)
 library(ggplot2)
 library(minioclient)
 
+theme <- 'beetles'
+
 #get model ids
 s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
 paths <- open_dataset(s3$path("neon4cast-scores")) |> collect()
-models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
+models_df <- paths |> filter(...1 == "parquet", ...2 == theme) |> distinct(...3)
 
-aquatic_models <- models_df |>
+theme_models <- models_df |>
   tidyr::separate(...3, c('name','model.id'), "=")
 
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
-theme <- 'aquatics'
-
 ## save climatology data
-climatology_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=climatology/"))) |>
+#aquatics / phenology
+# baseline_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=climatology/"))) |>
+#   # filter(reference_datetime == latest_forecast_date,
+#   #        datetime %in% latest_forecast$datetime) |>
+#   collect()
+
+# beetles
+baseline_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id=mean/"))) |>
   # filter(reference_datetime == latest_forecast_date,
   #        datetime %in% latest_forecast$datetime) |>
   collect()
 
-for (m_id in aquatic_models$model.id[1:2]){
+#test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
+
+for (m_id in theme_models$model.id[1:2]){
   print(m_id)
 
   info_df <- arrow::open_dataset(info_extract$path(glue::glue("{theme}/model_id={m_id}/"))) |>
@@ -44,7 +53,7 @@ for (m_id in aquatic_models$model.id[1:2]){
              reference_datetime == max(reference_datetime))
 
     ## check if path for image exists locally
-    img_save_path <- file.path("thumbnail_store",m_id,site)
+    img_save_path <- file.path("thumbnail_store",m_id,theme,site)
 
     if (file.exists(img_save_path) == FALSE){
       print('creating new dir')
@@ -82,14 +91,14 @@ for (m_id in aquatic_models$model.id[1:2]){
       filter(max_horizon == max(max_horizon)) |>
       filter(reference_datetime == max(reference_datetime))
 
-    clim_site_df <- climatology_df |>
+    baseline_site_df <- baseline_df |>
       filter(site_id == site) |>
       filter(reference_datetime == latest_scores_site$reference_datetime) |>
       #filter(datetime %in% latest_scores_site$date) |>
       rename(clim_crps = crps) |>
       select(datetime,variable, clim_crps)
 
-    if (nrow(clim_site_df) == 0){
+    if (nrow(baseline_site_df) == 0){
       print(paste0('no climatology forecast for ',{site}, ' on ', {latest_scores_site$reference_datetime}))
       next
     }
@@ -97,7 +106,7 @@ for (m_id in aquatic_models$model.id[1:2]){
     latest_scores_df <- info_df |>
       filter(site_id == site,
              reference_datetime == latest_scores_site$reference_datetime) |>
-      right_join(clim_site_df, by = c('datetime','variable'))
+      right_join(baseline_site_df, by = c('datetime','variable'))
 
     # Scores plot
     scores_plot <- ggplot(data = latest_scores_df, aes(datetime, crps)) +
