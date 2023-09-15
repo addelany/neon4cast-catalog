@@ -115,7 +115,7 @@ neon_docs <- neon_docs |>
 s3_df <- get_grouping(s3, "aquatics")
 
 
-info_extract <- arrow::s3_bucket("neon4cast-forecasts/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
+info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 
 forecast_sites <- c()
