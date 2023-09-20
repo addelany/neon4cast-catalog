@@ -114,23 +114,27 @@ names(neon_docs) <- new_columns
 neon_docs <- neon_docs |>
   mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
-s3_df <- get_grouping(s3, "aquatics")
+s3_df <- get_grouping(inv_bucket = 'neon4cast-scores', theme = "aquatics")
 
 
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 scores_sites <- c()
 
-test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
+#test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
 
 ## loop over model ids and extract components if present in metadata table
-for (m in aquatic_models$model.id[1:2]){
+for (m in aquatic_models$model.id){
   print(m)
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`
   model_max_date <- model_date_range$`max(date)`
 
-  model_var_site_info <- generate_vars_sites(m_id = m, theme = 'aquatics')
+  model_start <- s3_df |> filter(model_id == m) |> dplyr::summarise(max(reference_datetime))
+  model_start <- model_start$`max(reference_datetime)`
+
+  model_var_site_info <- generate_vars_sites(m_id = m, theme = 'aquatics', max_date = model_start, bucket = NULL)
+  coordinate_info <- model_var_site_info[[4]]
   # print(model_var_site_info[[1]])
   # print(model_var_site_info[[2]])
 
@@ -159,7 +163,8 @@ for (m in aquatic_models$model.id[1:2]){
                 collection_name = 'scores',
                 thumbnail_image_name = 'latest_scores.png',
                 table_schema = theme_df,
-                table_description = description_create)
+                table_description = description_create,
+                coords_list = coordinate_info)
   } else{
 
     build_model(model_id = m,
@@ -180,7 +185,8 @@ for (m in aquatic_models$model.id[1:2]){
                 collection_name = 'scores',
                 thumbnail_image_name = 'latest_scores.png',
                 table_schema = theme_df,
-                table_description = description_create)
+                table_description = description_create,
+                coords_list = coordinate_info)
   }
 
   rm(model_var_site_info)

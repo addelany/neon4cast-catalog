@@ -12,6 +12,9 @@ source('R/stac_functions.R')
 #get model ids
 s3 <- s3_bucket("neon4cast-inventory", endpoint_override="data.ecoforecast.org", anonymous = TRUE)
 paths <- open_dataset(s3$path("neon4cast-forecasts")) |> collect()
+
+#paths <- open_dataset("s3://anonymous@neon4cast-inventory/neon4cast-forecasts?endpoint_override=data.ecoforecast.org") |> collect()
+
 models_df <- paths |> filter(...1 == "parquet", ...2 == "aquatics") |> distinct(...3)
 
 aquatic_models <- models_df |>
@@ -20,15 +23,15 @@ aquatic_models <- models_df |>
 
 ## just read in example forecast to extract schema information -- ask about better ways of doing this
 theme <- 'aquatics'
-reference_datetime <- '2023-05-01'
+ref_datetime <- '2023-05-01'
 site_id <- 'BARC'
-model_id <- 'flareGLM'
+mod_id <- 'flareGLM'
 variable_name <- 'temperature'
 
 s3_schema <- arrow::s3_bucket(
   bucket = glue::glue("neon4cast-forecasts/parquet/{theme}/",
-                      "model_id={model_id}/",
-                      "reference_datetime={reference_datetime}/"),
+                      "model_id={mod_id}/",
+                      "reference_datetime={ref_datetime}/"),
   endpoint_override = "data.ecoforecast.org",
   anonymous = TRUE)
 theme_df <- arrow::open_dataset(s3_schema) %>%
@@ -112,27 +115,33 @@ neon_docs <- neon_docs |>
   mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
 
-s3_df <- get_grouping(s3, "aquatics")
+s3_df <- get_grouping(inv_bucket = 'neon4cast-forecasts', theme = "aquatics")
 
-
-info_extract <- arrow::s3_bucket("neon4cast-forecasts/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
+info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
 
 
 forecast_sites <- c()
 
 #test_models <- c(aquatic_models$model.id[1:2], 'tg_arima')
 ## loop over model ids and extract components if present in metadata table
-for (m in aquatic_models$model.id[1:2]){
+#for (m in aquatic_models$model.id[1:10]){
+for (m in aquatic_models$model.id){
   print(m)
   model_date_range <- s3_df |> filter(model_id == m) |> dplyr::summarise(min(date),max(date))
   model_min_date <- model_date_range$`min(date)`
   model_max_date <- model_date_range$`max(date)`
 
-  model_var_site_info <- generate_vars_sites(m_id = m, theme = 'aquatics')
+  model_start <- s3_df |> filter(model_id == m) |> dplyr::summarise(max(reference_datetime))
+  model_start <- model_start$`max(reference_datetime)`
+
+  model_var_site_info <- generate_vars_sites(m_id = m, theme = 'aquatics', max_date = model_start, bucket = NULL)
+  coordinate_info <- model_var_site_info[[4]]
   # print(model_var_site_info[[1]])
   # print(model_var_site_info[[2]])
 
-  forecast_sites <- append(forecast_sites,  get_site_coords(theme = 'aquatics', bucket = NULL, m_id = m)[[2]])
+  # extract lat/lon site info
+  #forecast_sites <- append(forecast_sites,  get_site_coords(theme = 'aquatics', bucket = NULL, m_id = m, max_date = model_start)[[2]])
+  forecast_sites <- append(forecast_sites,  model_var_site_info[[5]])
 
   if (m %in% neon_docs$model.id){
     print('has metadata')
@@ -157,7 +166,8 @@ for (m in aquatic_models$model.id[1:2]){
                 collection_name = 'forecasts',
                 thumbnail_image_name = 'latest_forecast.png',
                 table_schema = theme_df,
-                table_description = description_create)
+                table_description = description_create,
+                coords_list = coordinate_info)
   } else{
 
     build_model(model_id = m,
@@ -178,13 +188,15 @@ for (m in aquatic_models$model.id[1:2]){
                 collection_name = 'forecasts',
                 thumbnail_image_name = 'latest_forecast.png',
                 table_schema = theme_df,
-                table_description = description_create)
+                table_description = description_create,
+                coords_list = coordinate_info)
   }
 
   rm(model_var_site_info)
 }
 
-forecast_sites <- unique(forecast_sites)
-forecast_sites_df <- data.frame(site_id = forecast_sites)
 
-write.csv(forecast_sites_df, 'stac/aquatics/forecasts/all_forecast_sites.csv', row.names = FALSE)
+# forecast_sites <- unique(forecast_sites)
+# forecast_sites_df <- data.frame(site_id = forecast_sites)
+#
+# write.csv(forecast_sites_df, 'stac/aquatics/forecasts/all_forecast_sites.csv', row.names = FALSE)
