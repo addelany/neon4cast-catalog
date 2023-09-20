@@ -114,7 +114,7 @@ names(neon_docs) <- new_columns
 neon_docs <- neon_docs |>
   mutate(model.description = ifelse(is.na(model.description),'',model.description))
 
-s3_df <- get_grouping(inv_bucket = 'neon4cast-scores', theme = "aquatics")
+s3_df <- get_grouping(inv_bucket = 'neon4cast-forecasts', theme = "aquatics")
 
 
 info_extract <- arrow::s3_bucket("neon4cast-scores/parquet/", endpoint_override = "data.ecoforecast.org", anonymous = TRUE)
@@ -138,7 +138,8 @@ for (m in aquatic_models$model.id){
   # print(model_var_site_info[[1]])
   # print(model_var_site_info[[2]])
 
-  scores_sites <- append(scores_sites,  get_site_coords(theme = 'aquatics', bucket = NULL, m_id = m)[[2]])
+  #scores_sites <- append(scores_sites,  get_site_coords(theme = 'aquatics', bucket = NULL, m_id = m)[[2]])
+  scores_sites <- append(scores_sites,  model_var_site_info[[5]])
 
   if (m %in% neon_docs$model.id){
     print('has metadata')
